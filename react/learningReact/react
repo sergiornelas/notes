@@ -1,0 +1,723 @@
+Min	Porcentaje TOTAL
+2430 -> 100%
+
+Pienso que tomaré hasta la sección 19 (Improving our Burger Project), además se agregará la sección 26, 27 y 28.
+Min	 Porcentaje
+1991 -> 100%
+1172 -> 58.86%
+
+(no he contado minutos desde que empecé la sección 26)
+{Avanzado al video 433: Passing... de la sección 26: React Hooks}	("hasta" fue el último video palomeado)
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ctrl + shift + f = buscar keywords en todo el proyecto!
+ctrl + shift + g = cuando tienes un repositorio en github, puedes ver las diferencias del código aqui
+ctrl + x = borrar línea
+ctrl + d = siguiente ocurrencia.
+rafce = create arrow functional component
+rce = create class component
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Why React?
+- UI State becomes difficult to handle with Vanilla JavaScript.
+- Focus on Business Logic, not on preventing your App from exploding.
+- Huge Ecosystem, active community, high performance.
+
+BABEL
+- Babel en la practica nos permite utilizar etiquetas html directamente dentro de JS (aunque realmente no lo interpreta como html syntax).
+- Es una herramienta que nos permite transformar código JS de última generación (o con funcionalidades extras) a JS que cualquier navegador o versión de Node.js entienda.
+- Al crear componentes, los navegadores y Node.js no entienden JSX, así que para que funcionen nuestro componentes necesitamos transformar nuestro código, para eso se usa Babel.
+
+⭐️ SETTING UPP REACT APLICATION (with all elemental packages needed (react, reactDOM, JSX, babel...)
+	https://github.com/facebook/create-react-app
+
+⭐️ JSX
+	- JSX is NOT HTML but it looks a lot like it. Differences can be seen when looking closely though (for example className in JSX vs class 
+	in "normal HTML").
+	- JSX is just syntactic sugar for JavaScript, allowing you to write HTMLish code instead of NESTED React.createElement(...) calls.
+	- It must have only ONE PARENT ELEMENT:
+	- Cada vez que te refieras a alguna variable o propiedad dentro de las etiquetas JSX, utilizarás CORCHETES {}
+	- Viene de la librería react
+		➡️ import React from 'react';
+
+⭐️ ReactDOM
+	Object
+	✡️ReactDOM.render()
+		+ Render something to the screen.
+		+ Only available on CLASS-based components.
+		+ This method (its a method from Component)  allows us to RENDER a JAVASCRIPT FUNCTION as a COMPONENT to REAL DOM.
+			1st parameter: Component.
+			2nd parameter: Place to render 1st.
+				➡️ ReactDOM.render(<Aplicacion />, document.getElementById("root"));
+		Si lo que buscas es renderear MULTIPLES COMPONENTES:
+			➡️ ReactDOM.render(<div><UserInput/><UserOutput/></div>, document.getElementById("root"));
+			Debes ENCERRARLO EN UN MISMO PARENT ELEMENT.
+		...
+		De hecho no renderea directamente al DOM, más bien es una sugestión sobre que HTML debe ser en el final, es por eso que
+		utilizamos shouldComponentUpdate() para prevenir innecesarios render calls.
+
+⭐️ React from 'react' library
+	✡️React.createElement (you don't use this):		//THIS IS WHAT JSX COMPILES!
+		It's a method at least three arguments:
+		1) Element we want to render to the DOM.
+		2) Configuration or CSS style.
+		3) Any amount of children (could be nested inside)
+		➡️ return React.createElement('div', {className: 'App'}, React.createElement('h1', null, 'Does this work now?'))
+
+⭐️ COMPONENT
+	- It HAS TO RETURN some HTML CODE (JSX) which can be rendered to the DOM to the screen.
+
+	- Its' a CLASS from the 'react' library:
+		+ Necesitas importar antes la librería:
+		➡️ import React from "react"
+
+	- In Class-based components you only have ONE STATE PROPERTY, setState automatically merges changes with the old state.
+	- In Functional components you can have multiple useState calls.
+	Si el State cambia, automaticamente ACTUALIZARÁ LOS VALORES (le dice a React que vuelva a leer el DOM) !!
+			
+	- DYNAMIC component content { }
+		+ Tienes que encerrar el código en CURLY BRACES:
+			➡️ return <p>I'm a Person and I am {Math.floor(Math.random() * 30)} years old!</p>;
+		+ No puedes definir Classes dentro {}
+		+ Puedes definir ONE LINE EXPRESSIONS INSIDE { }
+
+	En functional components props es un argumento de una función,mientras que en class-based es una PALABRA RESERVADA
+
+	- CHILDREN: Refering ALL CHILD elements between the opening and closing tab: <> child </>
+		➡️ ...
+		➡️ <p>{props.children}</p>
+
+	- IF CONDITIONALS RENDERING
+		➡️ state={showInfo: false}
+			//Aqui en este comentario va una funcion que cambia el state showInfo cuando se da click a un botón
+			render(){
+				return(
+					{this.state.showInfo ? (		//Check if a value is truthy using Ternary operation
+						<div>Show info! </div>
+					) : null}
+				)
+			}
+		
+		FORMA MÁS CLARA Y RECOMENDADA:
+		➡️ state={showInfo: false}
+			//Aqui en este comentario va una funcion que cambia el state showInfo cuando se da click a un botón
+			render(){
+				let persons = null;
+				if(this.state.showPersons){
+					persons=(<div>Hola!</div>)
+				return(
+					{persons}
+				)
+
+	- CUANDO QUIERAS TOMAR UNA REFERENCIA DE LAS PROPIEDADES STATE (CLASS BASED COMPONENTS)
+		➡️ state = {
+			    persons: [
+			      { name: "Max", age: 28 },
+			      { name: "Stephanie", age: 26 },
+			    ]
+		       }
+
+		Forma INCORRECTA:
+			➡️ const getPersons = this.state.persons;
+			// Objects and arrays are reference types, entonces cuando obtienes getPersons del state, obtienes EL STATE ORIGINAL!
+			// en lugar de obtener el STATE ACTUAL.
+			➡️ getPersons.splice(1, 1);
+			// Aqui estas MODIFICANDO el STATE ORIGINAL
+
+		Forma CORRECTA:
+			➡️ const getPersons = this.state.persons.slice();
+			// .slice() CREA UNA COPIA del array, para poder manipular este nuevo sin alterar el original.
+
+		Otra forma CORRECTA:
+			➡️ const getPersons = [...this.state.persons]
+			// Usando el SPREAD OPERATOR (creates a brand new array with the objects of the selected array)
+
+	- KEY, AVOIDING RE-RENDERING SAME INFO.
+		+ Allows React to KEEP TRACK OF THE INDIVIDUAL JSX ELEMENTS to find out which elements changed and which didn't, and only
+		RENDERS ELEMENTS THAT CHANGED.
+		+ Important when RENDERING LIST OF DATA.
+		+ React expects to find that key on the element which you render inside a list (for example when mapping (MAP()) array into a JSX
+		    ELEMENTS.
+		➡️ return (
+		              <Person
+		                name={person.name}
+        			age={person.age}
+		                key={person.id}	//<- THIS, is unique, you can't change the "key" keyword.
+		              />
+	               );
+
+	- HIGH ORDER COMPONENT
+		+ Component wrapping another component, injecting some functionality.
+
+	ERROR BOUNDARY
+	+ Nice tool for production to show custom error messages and not make the whole application fail.
+	+ The problematic component will be replaced by your costume error message.
+	Error boundary component it's usefull for handling any errors that inner component may throw
+		➡️ <ErrorBoundary key={person.id}><Person ... /></ErrorBoundary>	//KEY always has to be in the outer component.
+		Use Error boundary in a Component that may fail, not in the whole application.
+	
+⭐️ REACT EVENTS
+	✡️ onChange
+		Detects when the value of an INPUT element CHANGES.
+		Realiza lo mismo que oninput de JS (el efecto es inmediato).
+	
+	✡️ onClick
+		Se activa cuando se da click (lo mismo que en JS).
+	
+	✡️ onSubmit
+		Para los formularios.
+		<form onSubmit={this.orderHandler}>
+		...
+
+	✡️ onDoubleClick
+		Se actiiva cuando se da doble click.
+
+⭐️ GOOD PROJECT STRUCTURE
+	- It's a good practice to CREATE AS MANY STATELESS COMPONENTS as possible. Easier to mantain, and avoids spaghetti code.
+	- Components that manage state, shouldn't be involved with the UI render too much. Making that split makes you keep your application 		   MANAGEABLE. Because you have a predictable flow of data, you know where your state changes, and other components will be
+	   there to render a nice UI.
+	- The render method should be rather lean and contain not too much jsx.
+
+⭐️ ADDING CSS STYLE
+	USING STYLESHEETS:
+		Looks strange to import a CSS file into a JS file, but thanks to WEBPACK (built in tool used by react script package) you can do it!
+		Puedes separar en varios archivos CSS el estilo de los componentes deseados, lo que crea un proyecto organizado.
+			➡️ import './Person.css'
+
+	INLINE STYLING:
+		Es bueno para aplicarlo a algún elemento específico.
+		➡️ render() {
+				const style = {
+				      border: "1x solid blue",		//JS STRINGS INSIDE OBJECT
+				      padding: "8px",
+				    };
+				return(
+					<button style={style}> Hello </button>	//JSX made "style" attribute available.
+				)
+				// You can edit the style object properties on your convenience
+				style.padding = '12px'
+			}
+
+	DYNAMIC STYLING
+		CSS file
+		➡️ .red{
+			  color: red;
+			}
+
+			.bold{
+			  font-weight: bold;
+			}
+		App.js
+		➡️ let classes = ["red", "bold"].join(' ')
+			...
+			<p className={classes}> Hello </p>
+
+	RADIUM (REACT PACKAGE) (NOT recomended)
+		Allows to use INLINE STYLES WITH PSEUDO SELECTORS (hover cursor effect) AND MEDIA QUERIES (@media).
+		➡️ npm install --save radium
+			//--save es para actualizar el package.json
+		Importar paquete:
+			➡️ import Radium from 'radium';
+
+		Si estas utilizando MEDIA QUERIES, ANIMATIONS, you need to WRAP the ENTIRE APPLICATION
+			➡️ import Radium, {StyleRoot} from 'radium';
+			➡️ return (
+					<StyleRoot>
+						<div> Hola </div>
+						...
+					</StyleRoot>
+				)
+
+	Al exportar un componente en react (using ONLY PSEUDO-SELECTORS):
+		➡️ export default Radium(App);	//high order component (component wrapping your component, injecting some functionality)
+
+	Utilización
+		➡️ const style = {
+				backgroundColor: "green",
+			      ':hover':{
+					backgroundColor: 'lightgreen',
+			       }
+			// Si quieres hacer estilo dynamico, para referirte a los pseudo selectors:
+				style[':hover'] = {
+					backgroundColor: 'salmon',
+				}
+	        	};
+
+⭐️ STYLED COMPONENTS (NOT recomended)
+	Every time you create an element with this library, it RETURNS A REACT COMPONENT.
+	➡️ npm install --save styled-components
+	-----
+	➡️ import styled from 'styled-components'
+	
+	➡️ const StyledDiv = styled.div`
+			  width: 60%;
+			  margin: 16px auto;
+			  border: 1px solid #eee;
+
+			  @media (min-width: 500px){
+			    width: 450px;
+			  }
+			&:hover {		//whenever you use pseudo-selects, add &
+				background-color: lightgreen;
+			}
+	      `
+	➡️	... inside another component
+		return(
+			<StyleDiv>
+				...
+			</StyleDiv>
+		)
+	Lo malo de este estilo es que tienes que escribir CSS dentro de los scripts, lo que satura los files.js
+
+	REMEMBER, the ticks are regular Javascript ` ` that allows to write strings and js in the same row, and allows to use enter spaces.
+	REMEMBER that this components are REGULAR REACT COMPONENTS... so you can add DYNAMIC STYLING this way:
+	➡️ const StyledButton = styled.button`
+ 			background-color: ${props => props.alt ? 'red' : 'green'};	//if there is content in alt prop, turns red, if it's not turns green.
+			`
+	➡️ <StyledButton alt={this.state.showPersons}
+
+⭐️ CSS MODULES (recomended!)
+	Bc you run regular CSS files, you can run media queries as normal!!
+	El archivo que tiene las clases CSS que deseas "convertir" a metodos JS deben estar en un file con esta nomenclatura:
+		App.module.css
+	
+	Example:
+		In Post.css File
+			.Post {
+			    color: red;
+			}
+		In Post Component File
+			import classes from './Post.css';
+			 
+			const post = () => (
+			    <div className={classes.Post}>...</div>
+			);
+		Here, classes.Post  refers to an automatically generated Post  property on the imported "classes" object.
+		That property will in the end simply hold a value like Post__Post__ah5_1 .
+		So your .Post  class was automatically transformed to a different class (Post__Post__ah5_1 ) which is unique across the application.
+
+	DYNAMIC STYLING
+		➡️ import X from "./App.module.css";		
+		➡️ let btnClass = [X.Button];				//Toma las propiedades de .Button y .Button:hover. Las subclases (.Button.Red) NO.
+			... se realiza cierta condición, sale true
+			➡️ btnClass.push(X.Red); //se agregan las subclases .Button.Red y .Button.Red:hover
+		➡️ return (
+				<button className={btnClass.join(' ')}>	//CSS properties inside each array index transforms into a SINGLE STRING.
+			)
+
+⭐️ COMPONENT LIFECYCLE (CLASS-BASED)
+	Estas son los métodos que se ejecutan detrás de las sombras durante la ejecución de un componente clase, y podemos utilizar
+	estos métodos si queremos realizar tareas no estandarizadas. Dichos métodos se ejecutan en un orden.
+
+	- CREATION
+		+ The lifecycle it's in the class_basedComponentLifecycleCreation.jpg file
+		All it's clear, except FINAL STEP:
+
+			✡️componentDidMount()		//USEFULL
+			Invoked immediately after a component is mounted (inserted into the DOM tree)
+			Se ejecuta una vez finalizó el renderizado de los Child Components
+			Útil para cuando quieras trabajar con HTTP REQUESTS.
+			It's a great for causing side effects, but not for updating state since it triggers a re-render.
+			It's not re-executed each time, because it's not mounted and unmounted, it's REUSED.
+				EL PRIMER VALOR QUE OBTENGA SE QUEDARÁ CON ÉL.
+
+	- UPDATE (for props change)
+		+ When props or state change (which are two triggers you have for a component to be re-evaluated by react)
+		+ 1) ✡️getDerivedStateFromProps(props, state)	//You rarely need that, there is more elegant ways to use this
+			Initialize the state of the component that updates, based on updated props you are getting.
+
+			For example a form control which gets external properties and then you internally want to handle user input but initialize your 
+			state based on OUTSIDE CHANGES.
+
+		+ 2) ✡️shouldComponentUpdate(nextProps, nextState)	//USEFULL
+			Allows you to CANCEL the updating process.
+			You can decide whether or not React should continue evaluating and re-rendering the component (performance optimization).
+			Return true if it should to continue updating or false if it shouldn't.
+
+		+ 3) ✡️render()
+			React goes through the JSX code (Virtual DOM).
+				
+		+ 4) Update Child Components Props
+
+		+ 5) ✡️getSnapshotBeforeUpdate(prevProps, prevState)	//You rarely need that.
+			Takes the previous props and the previous state as input and returns a SNAPSHOT object which you can FREELY CONFIGURE.
+			Save some data before the update and then use it after the update.
+			
+		+ 6 ✡️componentDidUpdate(prevProps, prevState, snapshot)		//USEFULL
+			Signals that you are now done with the updating.
+			Use this as an opportunity to operate on the DOM when the component has been updated.
+			Se ejecuta una vez finalizó el renderizado de los Child Components
+			Útil para cuando quieras trabajar con HTTP REQUESTS.
+
+			Para evitar los INFINITE LOOP cuando se actualiza un estado:
+ 				You are calling an ajax call in componentDidUpdate, and you set the state on the callback, that will trigger another call and 
+				update which will call the ajax request again and callback will set state again and so on.
+			What you can do, is compare primitives values inside the two objects:
+				➡️ if(this.state.data.id != data.id) // id could be a string or a number for example.
+
+		✡️componentWillUnmount()
+			Puedes escribir código que se necesite correr justo antes de que algún componente es REMOVIDO
+
+⭐️ PURECOMPONENTS
+	The Pure Component is similar to a Component where PureComponent has it's own implementation of shouldComponentUpdate and 
+	it only compares shallow props and state and you cannot implement your own shouldComponentUpdate in it.
+
+	- If you have a scenario where you check all the props of a given component for changes, if you are checking ALL PROPERTIES
+	- It's a normal component that already implements shouldComponentUpdate (allows you to CANCEL the updating process) with a 
+	   complete props check, so that checks for any changes in any prop of that component.
+	- Don't run lifecycle hooks
+		➡️ import React, { PureComponent } from "react";
+		➡️ class Persons extends PureComponent {
+			...
+
+⭐️ VIRTUAL DOM
+	- React basically keeps two copies of the DOM. It has the old virtual DOM and then the re-rendered one (when render() it's called).
+	- Faster than "real" DOM. It's  a DOM representation in Javascript.
+	- React compares the old virtual DOM to the new one and it checks if there are any differences. If it can detect differences, it reaches
+	   out to the real DOM and updates it. It doesn't re-render the real DOM entirely, it only changes it in the places where differences 
+	   were detected.
+		For example if a button text changed, it will only update that text and not re-render the whole button.
+	- If no difference  were found, then it doesn't touch the real DOM. Render did execute, the comparison was made and that
+	   is why shouldComponentUpgrade might make sense to prevent this.
+	
+⭐️ RENDERING MULTIPLE PARENT JSX ELEMENTS IN RETURN
+	You have to store the elements inside an array:
+		➡️ return [
+				<p>Sergio key="i1"</p>,
+				<p>Lopez key="i2"</p>,
+				<p>Ornelas key="i3"</p>,
+			]
+	You have to put an unique KEY into each element.
+
+⭐️ CHILDREN PROPERTY FOR WRAPPING.
+	Special property that simply outputs whatever gets entered between the opening and closing tag.
+	It's the ENTIRE CONTENT between opening and closing tag.
+	Metes todo el contenido JSX EN UN COMPONENTE APARTE PARA RENDEREARLO EN OTRO FILE.
+		➡️ const aux = props => props.children;	//children it's a React reserved keyword
+		➡️ export default aux;
+		--------
+		➡️ ...
+		➡️ render() {
+			    console.log("[Person.js] rendering...");
+			    return (
+			      <Aux>
+					<p>Sergio key="i1"</p>,		//Ahora no tendremos problema con tener más de 1 parent element.
+					<p>Lopez key="i2"</p>,
+					<p>Ornelas key="i3"</p>
+			    </Aux>
+			);
+		    }
+
+⭐️ FRAGMENT
+	En lugar de usar children property para wrapping jsx elements, usa simplemente FRAGMENT:
+		➡️ import React, { Fragment } from "react";
+		➡️ ...
+		➡️ return (
+			      <Fragment>
+					<p>Sergio key="i1"</p>
+					<p>Lopez key="i2"</p>
+			      </Fragment>
+			);
+	Under the hood does exactly the same thing as aux components does (children property).
+
+⭐️ HIGH ORDER COMPONENTS
+	Functional component where won't manage any state with hooks.
+	Super simple:
+		➡️ const aux = (props) => props.children;
+		➡️ export default aux;
+		-----------
+		➡️ import Aux from '../../hoc/Aux'
+		➡️ const layout = (props) => {
+			    <Aux>
+					<p>Sergio</p>
+					<p>Lopez</p>	
+			    </Aux>
+			};
+
+	They add something extra to the component: styles, html code, or some extra JS logic.
+	Another example for a HOC that you could create would be a component that SETS UP A DIV THAT CONTAINS A CLASS OR SETS
+	UP A CLASS.
+		➡️ <div className={classes.App}>		//Example
+
+	Its sets up a class on a div that wraps the component
+		➡️ import React from "react";
+		➡️ const withClass = (props) => {
+				return(
+			  		<div className={props.classes}>{props.children}</div>;
+				)
+			};
+		➡️ export default withClass;
+		------------
+		➡️ import classes from "./App.module.css";
+		➡️ ...
+		➡️ return (
+			      <WithClass classes={classes.App}>
+					<p>Sergio</p>
+					<p>Lopez </p>
+				</WithClass>
+			);
+
+	It's a convention to name high order components with a With at the beginning: WithClass.js
+
+	ANOTHER WAY TO CREATE HOC:
+		Using a COMPONENT FUNCTION INSIDE A REGULAR FUNCTION:
+		---------------	withClass.js
+		➡️ const withClass = (WrappedComponent, className) => {
+				  return props => ( 	//functional component
+				 	   <div className={className}>
+						      <WrappedComponent/>
+					    </div>
+				  ); 
+			};
+		➡️ export default withClass;
+		---------------	Aux.js
+		➡️ const aux = props => props.children;
+		➡️ export default aux;
+		--------------- App.js
+		➡️ ...
+		➡️ import withClass from '../hoc/withClass';  //its a regular function, that's why you use "with" instead of "With"
+		➡️ import Aux from '../hoc/Aux';
+		➡️ return (
+			      <Aux>
+					<p>Sergio</p>
+					<p>Lopez </p>
+				</Aux>
+			);
+		➡️ ...
+		➡️ export default withClass(App, classes.App);
+
+	WHICH APPROACH SHOULD YOU USE? It depends
+	If it's a High Order Component that add some behind the scenes logic, some JS code that handles errors or sends analytics data
+	or anything like that, such HOC maybe should be used or should be written in the last style (Component function inside regular 
+	function), to really make it clear that they're NOT SO MUCH INVOLVED IN THE JSX CODE that gets rendered but in the logic that runs.
+
+⭐️ PASSING UNKNOWN PROPS (...)
+	- In the Component function inside Regular function de arriba, faltó añadir los props del Componente, solo esta el estilo. Entonces
+	   para pasar el resto de props:
+		➡️ const withClass = (WrappedComponent, className) => {
+				  return props => (
+				 	   <div className={className}>
+						      <WrappedComponent {...props}/>	//SPREAD OPERATOR..
+					    </div>
+				  ); 
+			};
+	
+⭐️ GETTING THE PREVIOUS STATE
+	- Better way to updating the state (instead of using just this.state) when you're DEPENDING ON OLD STATE
+	- React guarantees you that this will be the actual previous state. Algunas veces cuando tienes aplicaciones más complejas
+	   el this.state puro no te garantiza que el previous state que esperas que sea no es.
+	- Se utiliza como ejemplo el caso de que necesitamos un CONTADOR cada vez que se actualice un state, utilizamos esta función:
+		➡️ this.setState((prevState, props) => {
+			      return {
+					persons: persons,
+					changeCounter: prevState.changeCounter + 1
+			      };
+			});
+
+⭐️ PROPTYPES FOR VALIDATION
+	➡️ npm install --save prop-types
+	- Improve the way we set up props.
+	- Provide some instructions on which props these components accepts, and type of prop (int, string)
+	- More clear about which props your component uses
+	- Thow an error or a warning if you try to passing incorrect props.
+	- Works on functional and class-based components
+
+	➡️ import PropTypes from 'prop-types';
+	➡️ ...
+	➡️ Person.propTypes = {						//Después del componente va el propType.
+			  click: PropTypes.func,
+			  name: PropTypes.string.isRequired	//Si no se pasas el name, obtendrás un error.
+			  age: PropTypes.number,
+		};
+
+⭐️ REFERENCIAS (only in class-based components)
+	- Selecciona un elemento JSX específico, utilizando una nueva propiedad de la clase con el nombre que tú quieras.
+	➡️ componentDidMount(){				//Recuerda que esto se ejecuta una vez terminó el render()		
+			    this.inputElementx.focus();	//Almacenamos el valor de la propiedad aqui para utilizarla como queramos:
+		  }										// En este caso .focus es un método JS que se ve seleccionado el elemento al cargar la página.
+
+	➡️ ...
+	➡️ <input
+			  ref={( inputEl ) => { this.inputElementx = inputEl } } 	// Se almacena la propiedad  de la clase InputElement referenciando
+			  type="text"											    	// este elemento input JSX. 
+			  value={this.props.name}
+		/>
+	
+	- ref is a special keyword
+
+	OTRA FORMA DE CREAR UNA REFERENCIA A TRAVÉS DE UNA PROPIEDAD DE LA CLASS-COMPONENT (más moderna).
+	✡️.createRef()
+	✡️ current
+		➡️ class Person extends Component {
+				  constructor(props){
+					super(props);									//ALWAYS ADD SUPER FIRST INSIDE CONSTRUCTOR.
+				   	 this.inputElementRef = React.createRef();	//Esta propiedad es igual a una referencia seleccionada.
+				  }
+				  componentDidMount(){							//Recuerda que esto se ejecuta una vez terminó el render()
+			                 this.inputElementRef.current.focus();		//current = current element stored in this reference
+		                  }
+			...
+			return(
+				...
+				<input
+					ref={this.inputElementRef}						//inputElementRef will allow you access to the element on which this  
+					type="text"										//ref assigment was placed
+				/>
+			)
+			
+⭐️ CONTEXT (Avoid prop chain redundancy).
+	✡️createContext()
+	✡️ Provider
+	✡️Consumer
+	CREATE CONTEXT
+	- When you need certain state in multiple components and you DON'T WANT to PASS that STATE ACROSS MULTIPLE COMPONENTS,
+	   just to get it from component A at the top to component D at the very bottom, when the components B and C in between don't
+	   really care about it.
+		----------------------------------------------------------------- auth-context.js
+		➡️ const authContext = React.createContext( { 
+				  authenticated: false,
+			 } );
+			export default authContext;
+
+	SETTING UP THE CONTEXT
+	- It's a JS object that can be passed between React components without using props (just behind the scenes).
+	- It should wrap all the parts of your application that need access to this context:
+		----------------------------------------------------------------- App.js
+		➡️ import AuthContext from "../context/auth-context";
+		       ...
+		       return(
+				<AuthContext.Provider value={{authenticated: this.state.authenticated}}>	//HERE
+					  {this.state.showCockpit ? (
+						    <Cockpit
+						      title={this.props.appTitle}
+						      showPersons={this.state.showPersons}
+						      login={this.loginHandler}
+						    />
+					  ) : null}
+					  {persons}
+				</AuthContext.Provider>
+          		)
+	- The default value will apply when you don't set any other value (authenticated: false).
+	- This will not cause a re-render cycle.
+
+	CONSUME CONTEXT
+	- You set the CONSUMER in the place where you want to access the context data:
+		----------------------------------------------------------------- Person.js
+		➡️ import AuthContext from "../../../context/auth-context";
+		       render() {
+   			      return (
+				      	<AuthContext.Consumer>		//HERE, you just don't wrap, you wrap a function where you get the context argument.
+						  {(context) =>				// and then this function returns the JSX code.
+						    	context.authenticated ? <p>Authenticated!</p> : <p>Please log in</p>
+						  }
+					</AuthContext.Consumer>
+					...
+
+	CONSUME CONTEXT MORE ELEGANTLY (class-based components) (Recomended)
+	✡️ contextType
+	✡️ context
+		➡️ import AuthContext from "../../../context/auth-context";
+			...
+		       static contextType = AuthContext;		//summon AuthContext into a static property 
+			...
+			return (
+		        <Aux>
+				{this.context.authenticated ? (		//context it's a React reserved word
+					  <p>Authenticated!</p>
+				) : (
+					  <p>Please log in</p>
+				)}
+				...
+
+⭐️ IMPORTING IMAGES
+	➡️ import burgerLogo from '../../assets/images/burger-logo.png'
+		...
+	➡️ <img src={burgerLogo}/>	//this will refer to a string in the end to the path where webpack stored the optimized image.
+
+⭐️ SETTING STYLE THROUGH PROPS
+	➡️...
+		<Logo height="80%"/>													//X.js
+		-----------------------------	
+		<div className={classes.Logo} style={{height: props.height}}>		//Logo.js
+
+⭐️ USING SETSTATE INTO THIS.STATE
+	BE CAREFUL:
+		➡️ state = {
+				available: false,
+  			};
+			...
+		➡️ componentMethod = () => {
+    				this.setState({ available: !this.state.available });		//INTENTAR TOGGLE EL STATE VALUE.
+			};
+		Esto puede llevar muchos problemas porque debido a la naturaleza asyncrona de setState, esto puede llevar a resultados
+		no deseados. Instead use the FUNCTION FORM:
+		➡️ 	componentMethod = () => {
+				this.setState((prevState) => {
+					return {available: !prevState.available };
+				});
+			};
+		THIS IS THE CLEAN WAY TO SETTING THE STATE WHEN IT DEPENDS ON THE OLD STATE.
+
+⭐️ REDUX (Because State Management Can Be Hard)
+	It's a library often used in react projects though to make state management easier.
+	It's about having a clearly defined process of how your state may change.
+
+	CYCLE:
+	1) COMPONENT dispatches:
+	
+	2) ACTIONS
+		Predefined information package (possibly with payload) for example: "addIngredient", "removeIngredient"
+		Holds a payload:
+			We need to also pass the information which ingredient.
+		Doesn't directly reach the store, it's just a messenger (de eso se encarga Reducer).
+		Action reaches the reducer.
+
+	3) REDUCER
+		Its directly connected to the store.
+		Function which receives action and update State (pure, sync functions, no side-effects!).
+		Can be multiple, combined reducers.
+		HAS TO EXECUTE SYNCRONOUS ONLY (no side effects, no HTTP request...)
+
+	4) CENTRAL STORE
+		Store entire application state
+
+	5) SUBSCRIPTION (automatic)
+		Get the updated state back into our component.
+		The store triggers all subscriptions whenever the state changes in the store.
+		Here the COMPONENT finally receives that update automatically.
+
+	...Continuará
+	
+✡️ .defaultProps
+	Cuando el componente no recibe los props, se asignan unos por default.
+		➡️ Component.defaultProps = { title: "Default title" }
+
+⭐️ REACT ICONS
+	➡️ npm i react-icons	//console
+	------------
+	➡️ import { FaTimes } from 'react-icons/fa'
+	...
+	return(
+		...
+		<FaTimes/>
+	)
+
+⭐️ INCORPORATING CSS CHAIN SELECTORS IN REACT RENDERING CONDITIONS:
+	➡️ .task {
+			background: #f4f4f4;
+		}
+
+		.task.reminder {
+			border-left: 5px solid green;
+		}
+	------------
+	➡️ <div 
+			className={`task ${task.reminder ? "reminder" : null}`}
+		>
+		...
+	 
+⭐️ PASS REACT APP TO PRODUCTION (BUILD FOLDER)
+	➡️ npm run build	//console, create build folder
+	➡️ sudo npm i -g serve
+	➡️ serve -s build -p 8000	//production build of react
+

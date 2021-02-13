@@ -1,0 +1,252 @@
+/*ESTRUCTURA DE DATOS*/
+
+Nodo
+	+---------+---+	
+	|Info     |Ref|->
+	+---------+---+	
+
+	Elemento de una lista. Se compone de:
+		[Información] Cada elemento de una lista.
+		[Referencia] Enlace o siguiente. Link to the next node
+
+Memoria estática
+	- Cuando defines un arreglo[3], se define el tamaño
+	desde el principio, por lo cuál no puede ser dinámico
+	puesto que su tamaño ha sido establecido y no puede
+	cambiar.
+	- Cuando borras un elemento el espacio de memoria de esa posi
+	ción seguirá siendo utilizada por un NULL
+		
+Lista Enlazada
+	 Dynamic data structure
+		- Crece de acuerdo a la cantidad de elementos que
+		nosotros le estemos ingresando.
+		- Tú decides en qué momento eliminas o agregas
+		más elementos  y no hay necesidad de estar reservando
+		memoria.
+
+Linked Lists
+	Having a link to the next element
+	Disadvantage
+		Slow to get # element
+	Advantage
+		Insert and delete can be quick
+
+/*Clasificación de las listas enlazadas*/
+Listas Simplemente enlazadas
+	-Al siguiente nodo
+Listas Doblemente enlazadas
+	-Al siguiente nodo
+	-Al anterior nodo
+Lista Circular Simplemente Enlazada
+	-Al siguiente nodo
+	-El último nodo se enlaza con el primero	
+Lista Circular Doblemente Enlazada
+	-Al siguiente nodo
+	-El último nodo se enlaza con el primero y el primero con el
+		último
+/*Puntero o Apuntador*/
+Es una variable que hace referencia a una región de la memoria.
+Son las flechas de las listas enlazadas.
+
+Estructura de creación de nodo en código:
+	Nodo nuevo     =    new    Nodo(4)
+//     nodo  (puntero) =   nuevo   nodo con dato 4
+
+nuevo	+---------+---+	
+------>	|    4    | . |
+	+---------+---+	
+
+/*JAVA CONCEPTOS*/
+La clase principal (donde esta el main) SIEMPRE debe ser pública.
+
+Métodos
+	-Nos permiten que las clases interactuén entre si formando
+	una unidad 
+	-El método es una función que le pertenece a una clase
+
+Objeto = instancia de clase
+
+
+Constructor
+	-Ayuda a la inicialización de los atributos de la clase
+	-No devuelven ningún valor, SON LOS ÙNICOS MÈTODOS QUE NO
+		SE LES PONE EL TIPO DE VALOR DE RETORNO (void)
+	-Deben declarase como públicos
+	-Es el método que se crea primero casi siempre
+	-Les da a las clases un estado inicial
+	-Puede recibir parámetros
+
+Modularización = Dividir un gran programa en partes (clases)
+
+NUNCA SE DEBE PODER MANIPULAR LAS VARIABLES DE UN OBJETO. SOLO TIENEN
+QUE PODERSE MANIPULAR UTILIZANDO LOS MÉTODOS CORRESPONDIENTES (SETTERS)
+DE ESA FORMA TE ASEGURAS QUE LA MANIPULACIÓN ES CORRECTA. DE ESA
+FORMA SE EVITA LA "VIOLACIÓN" DE DATOS. Dicho eso entramos al
+concepto de:
+
+Encapsulación = Cada clase tenga sus propias funcionalidades
+	que no se compartan para evitar una violación de datos.
+	-Para ello se utiliza private
+		private int ruedas;
+	-Con esto no puedes modificar una propiedad o variable
+	desde una clase diferente.
+	-Las formas que tienen de comunicarse las clases entre si, es 
+	a tráves de métodos.
+	
+Getters/Setters
+	Sirven para acceder a las propiedades encapsuladas (private)
+	de los objetos.
+	-Setters o definidores, encargados de definir el valor de una
+	propiedad. Métodos que se utilizan para establecer el valor 
+	de unas variables que pueden variar mucho su valor
+	Su función es modificar el valor de las propiedades de los 
+	objetos. (MODIFICAMOS). 
+		Nos MODIFIQUE el dato: (no devuelve)
+		public void establece_color(){
+			color = "azul";
+		}	
+
+	-Getters o captadores, captar o proporcionar el valor de esa
+	propiedad. Métodos que nos sirven para acceder a valores
+	privados o encapsulados de otras clases. (OBTENEMOS)
+		Nos DEVUELVA el dato:
+		public String dime_largo(){
+			return "El largo del coche es " + largo;
+		}
+	Es posible tener un setter y getter en un mismo
+	método. Puede establecer un valor y puede obtenerlo. Aunque
+	no se recomienda hacerlo.
+
+Paso de parámetros
+	A la vez que llamas a un método Setter le pasas
+	obligatoriamente un parámetro
+	
+Return
+	Cuando una función o un método devuelve un valor
+	específico.
+	
+/*JAVA LÉXICO*/
+
+Persona p1 = new Persona();
+Clase / objeto = nuevo / método constructor
+
+equals
+	Comparar dos cadenas de caractéres, a ver si son iguales
+	o no. NO se comparan las cadenas de carácteres con un =, ==
+equals
+	Ignora mayúsculas
+
+Crear lista / Tipo Entero / Nombre de lista
+        List <Integer> Numeros;
+
+Inicializar lista para trabajar en ella        
+        Numeros = new ArrayList<>();
+
+Imprimir elemento de una lugar específico del arreglo
+	System.out.println(Numeros.get(1));
+
+Comprobar si esta un elemento específico dentro de todo el arreglo
+	System.out.println(Nombres.contains("ornelas"));
+		> True
+.lenght
+	define como parámetro el largo de la clase
+
+this
+	-Hace referencia a los atributos de la clase actual.
+	-Se utiliza si coincide el nombre de la variable que da
+	propiedad a la clase con el nombre del argumento que se
+	le dará al método (constructor, setter, getter, general).
+throws
+	is used to explicitly throw an exception from a method or any block of code.
+try
+	allows you to define a block of code to be tested for errors while it is being executed.
+catch
+	allows you to define a block of code to be executed, if an error occurs in the try block.
+	Ejecuta una acción si detecta un error
+static int
+	static int i;
+	int j;
+	If you create 2 objects of the Test class, both objects
+	will "share" the i variable. But each object will have
+	its own j variable.
+
+Object
+	Tipo de variable que puede almacenar int, string, lo que sea
+
+toString()
+	Returns a string that "textually represents" this object.
+
+final
+	Constante.
+	Hacer que una variable quedé inalterable. Si se llega
+	a modificar su valor ya sea a través de un métoodo o
+	directamente, mandará error. Ejemplo: 
+	Asignar un nombre a una persona pero ese nombre que quede
+	inalterable puesto que un individuo no puede cambiarse el
+	nombre asi porque asi.
+
+static
+	Se puede aplicar tanto a variables, como a métodos.
+	Ejemplo:
+	Un objeto NO tenga su COPIA de ID  y en su lugar COMPARTAN
+	todos los objetos pertenecientes a la clase Empleado la
+	variable ID. No cada uno su copia. De esta forma podemos
+	incrementar esa variable id de uno en uno y que cada objeto
+	tome ese valor.
+
+	Solo exista UNA copia ÚNICA de una variable
+	Una variable static PERTENECE A LA CLASE, NO PERTENECE A
+	NINGÚN OBJETO.
+	Para llamar una variable estatica hay que utilizar el nombre
+	de la clase.
+.next();
+	Returns the next one word String value
+	Lee hasta que encuentra un espacio
+	(para de leer en el primer espacio)
+	-hace que el objeto pase a referenciar al siguiente elemento de la lista.
+	-create an input from the console and get the next thing you type
+	-Se rompe con el espacio
+
+.nextInt();
+	Asegurarse que el input es un Integer
+	
+hasNext(): devuelve true si el objeto no es el último de la colección (the object has next).
+	Will check to see if you actually have something to grab before you make a scan .
+		Puedes usar .hasNextInteger
+			checa si el dato de entrada es un integer o no
+	If it has anything inside you wil continue on. If not return false
+	Creates an input for the person but it doesn't actually scan the item in.
+
+.hasNextInt();
+	Won't actually scan that value it's just going to look at it and check
+		to see if it is an integer or not -> will return true or false
+nextLine();
+	Lee toda la línea (para de leer en el salto de línea)
+	Se rompe cuando das enter
+skip();
+	Se brinca los caracteres ingresados en el parámetro
+
+use.Delimiter("\\.");
+	Utilizas el punto para romper el scan. Ignora todo lo que sale después del punto
+	Puedes utilizar otro símbolo lo que tú quieras!! <end>
+.useDelimiter("\\.|\\n");
+	Se rompe cuadno utilizas punto o cuando presionas ENTER
+
+SE NECESITA import java.util.Arrays;
+.sort()
+	Ordena un arreglo numéricamente y alphabeticamente
+.sort(arr, 1, 5);
+	// Sort subarray from index 1 to 4
+// Sorts arr[] in descending order 
+Arrays.sort(arr, Collections.reverseOrder());
+
+
+
+/**/
+Construcción de objetos
+Constantes
+Static
+Override de constructores
+
+Ejercicios de java usando arreglos

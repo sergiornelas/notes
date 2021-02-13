@@ -1,0 +1,434 @@
+functions of python ------------------------------------------------------------------
+	raw_input() for python 2.x
+	input() for python 3.x
+		Enter data input mode.
+			>> input("enter number ")
+			>> enters number 10
+			<< 10 //Immediately prints the input. raw_input prints '10'
+		Enter data into a variable
+			>> variable = input("Enter a number ")
+	type(<var>)
+		reveals type of variable
+	str(<anything>)
+		converts anything into a string.
+	len(<anything>)
+		show length of anything inside (number of chars/elements), list (except  			numbers)
+	<list>.append(<var>)
+		inserts a variable into at the end of a list
+	s.lower()
+		converts all string in lower case
+	sum()
+		Sum all elements
+	keys()
+		Select keys from a dictionary
+	.strip()
+		white space are removed
+		.strip('sti')
+			remove 'sti' string
+	.split(",")
+		produces a list where each item is each element before comma (delimiter)
+	.write()
+		writes in a file
+	.capitalize()
+		Convert first letter in mayus.
+	.upper()
+		Convert all letters mayus
+	.lower()
+		Convert all letter lower
+	.replace('world', 'everyone')
+		Replaces the word 'world' to 'everyone'
+	.count(<parameter>)
+		Count the number of times the parameter exists.	
+
+Strings "" ---------------------------------------------------------------------------
+	// Concatenate strings
+		>> "Hello" + "World"
+		<< 'HelloWorld'
+	// Concatenate string + variable
+		>> name = "Jessica"
+		>> "Hello" + name
+		<< 'Hello Jessica'
+	// Include string delimiter inside the string:
+		'It\'s a wrap'
+	// Concatenate string with integers, and printing out.
+ 		>> print('Hello I am ' + name + ' and I am ' + str(age))
+	// Arguments by position
+		>> print('{1}, {2}, {0}'.format('a', 'b', 'c'))
+		<< b, c, a
+	// Arguments by name
+		>> print('My name is {name} and I am {age}'.format(name='Brad', age='37'))
+	// Arguments by name shortcut version (only in python 3.6+)
+		>> name, age = ('Brad', '37')
+		>> print(f'My name is {name} and I am {age}')
+		<< My name is Brad and I am 37
+	// Strings are lists
+		>> string = "example"
+		>> for c in string:
+			print "one letter: " + c
+		<< one letter: e
+		<< one letter: x
+		...
+lists [] -----------------------------------------------------------------------------
+	// Declare a list
+		>> your_list = ["a", "b", "c"]
+		>> your_list
+		<< ['a', 'b', 'c']
+	// Verify if a specific element is inside	
+		>> "a" in your_list
+		<< True
+	// Show specific element	
+		>> your_list[0]
+		<< a
+	// Reasign elements
+		>> your_list[0] = "Jimmy"
+		>> your_list
+		<< ['Jimmy', 'b', 'c']
+	// Print the last element
+		>> your_list[-1]
+		<< 'c'
+	// Select a specific char of a string 
+		>> my_name = "Jessica"
+		>> my_name[0]
+		<< 'J'
+	// Insert an element at the end
+		>> fruits.append("cherries")
+	// Insert into a specific position
+		>> fruits.insert(2, "Strawberries")		
+	// Delete an element from the list
+		>> fruits.remove("Grapes")
+	// Delete into a specific position
+		>> fruits.pop(2)
+	// Reverse list
+		>> fruits.reverse()
+	// Another way to reverse lists
+		>> list[::-1]
+	// Sort list alphabetically
+		>> fruits.sort()
+	// Use each element (keyword)
+		>> for element in your_list:
+		>> ...	print (element)
+		>> ... <tap enter>
+		<< a, b, c
+	// Check if each element accomplish certain parameter
+		>> names = ['Alice','Bob','Cassie','Diane','Ellen']
+		>> for name in names:
+		>> ...	if name[0] in "AEIOU":
+		>> ...		print(name + " starts with a vowel")
+		>> ... <tap enter>
+		<< Alice starts with a vowel
+		<< Ellen starts with a vowel
+	// Add list element into a another list ('Alberto' is added to the list)
+		>> vocales=[]
+		>> for name in names:
+		>> ...	if name[0] in "AEIOU":
+		>> ...		vocales.append(name)
+		>> ... <tap enter>
+		>> vocales
+		<< ['Alberto']
+	// Storage the total sum of elements
+		>> prices = [1.5, 2.35, 5.99, 16.49]
+		>> sum(prices)
+		<< 26.33
+	// eliminate duplicates
+		>> c = [1, 1, 2, 3, 4]
+		>> c = list(dict.fromkeys(c))
+		>> print(c)
+		<< [1, 2, 3, 4]
+	// list comprehension
+		// imprime los números pares de la lista a
+		>> a = [1, 4, 9, 16, 25, 36, 49, 64, 81, 100]
+		>> b = []
+		>> for element in a:    
+		>> 	if element % 2 == 0:
+		>> 		b.append(element)
+		// pero todo ese bloque for se puede comprimir a una sola linea:
+		>> b = [element for element in a if element %2 == 0]
+Tuple () -----------------------------------------------------------------------------
+	- Collection which is ordered and unchangable. Allows duplicate members.
+	// Declare
+		>> fruit_tuple = ('Apple', 'Orange', 'Mango')
+
+Set {} -------------------------------------------------------------------------------
+	- Collection which is unordered and unindexed. No duplicate members.
+	// Declare
+		>> fruit_set  = {'Apple', 'Orange' , 'Mango'}
+	// Declare an empy set
+		>> a = {} //creates a dictionary
+		>> a = set()
+	// Check if an element is inside of set
+		>> print('Apple' in fruit_set)
+		<< True
+	// Add to set
+		>> fruit_set.add('Grape')
+	// Remove to set
+		>> fruit_set.remove('Grape')
+	// Clear set
+		>> fruit_set.clear()
+		>> print(fruit_set)
+		<< set()
+	// Delete set
+		>> del
+
+Dictionaries {:} ---------------------------------------------------------------------
+	- Key-value relationship, doesn't care about order. Changeable and indexed.
+	- No duplicate members	
+
+	// Declare
+		>> ice_cream = {"Alice": "chocolate", "Bob": "strawberry"}
+	// Show a value from a key
+		>> ice_cream["Alice"]
+		<< 'chocolate'
+	// Adding key and value ("Eve" doesn't exist)
+		>> ice_cream["Eve"] = "rum raisin"
+	// Check if a value belongs to a key
+		>> "Eve" in ice_cream
+		<< True
+	// Select the keys
+		dictionary.keys()
+	// Get items
+		dictionary.items()
+	// Make copy
+		dictionary2 = dictionary.copy()
+	// List of dict
+		>> people = [
+			{'name': 'Martha', 'age': 40},
+			{'name': 'Bob', 'age': 20},
+		]
+		>> print(people[1]['name'])
+		<< Bob
+
+Modules -----------------------------------------------------------------------------
+	- Similar to libraries concept. Contains functions.
+	// random module
+		// select random number in a range
+			>> import random
+			>> random.randint(1, 6)
+			<< 4
+		// Choice a random key of a list
+			>> cards = ["jack", "queen", "king", "ace"]
+			>> random.choice(cards)
+			<< 'king'
+	// sys module
+		// gives access to command line arguments
+	// datetime module
+		// Useful when manipulating dates
+			>> import datetime
+			>> today = datetime.date.today()
+			>> print(today)
+			<< 2020-10-05
+		// Using only datetime functions that we need (avoiding override memory)
+			>> import datetime
+			>> from datetime import date
+			>> today = date.today()
+			>> print(today)
+			<< 2020-10-05			
+
+for loops ---------------------------------------------------------------------------
+	- Useful for iterating a list and looping for a fixed number of times.
+		>> for person in people:	
+			if person == 'Janet':
+				continue //ignore the if statement and continue the loop
+				//Janet aren't going to be printed.
+			print('Current person: ', person)
+		// Use range for using a length of a list as limit.
+			>> for i in range(len(people)):
+				print('Current person: ', people[i])
+		// loops 5 times
+			>> for x in range(6):
+				print(x)
+			<< 0, 1, 2,... 5
+		// Use range repeating 10 times the loop
+			>> for i in range(0, 10):
+
+while loops -------------------------------------------------------------------------
+	- So long as the condition is true.
+	// Declare
+		>> counter = 0
+		>> while counter < 5:
+	        >> 	print("Hello " + str(counter))
+	        >> 	counter = counter + 1
+		<< Hello 0
+		<< Hello 1...
+
+	// Use of break + use of 'True'
+		>> while True: //Repeats forever because true is always true	
+		>> 	print("Hello " + str(counter))
+		>> 	counter = counter + 1
+		>> 	if counter >= 5:
+		>> 		break
+		<< Hello 0
+		<< Hello 1...
+
+Files --------------------------------------------------------------------------------
+	// open a file (if the file doesn't exist, it creates it)
+		>> myFile = open('myfile.txt', 'w')
+	// methods that get some info
+		>> print('Name: ', myFile.name) //.name: method that get file name.
+		>> print('is Closed: ', myFile.closed) //.closed: method that close files.
+		>> print('Opening mode: ', myFile.mode) //.mode: method that gets opening mode.
+	// write to file
+		>> myFile.write('I love Python') // .write: method that write inside files.
+		>> myFile.close() //.close: method that stop file manipulation
+	// append to file (write in a file without overriding the current info)
+		>> myFile = open('myfile.txt','a')
+	// read from file
+		>> myFile = open('myfile.txt', 'r+')
+		>> text = myFile.read(10) //Get the first 10 characters from the file.
+		>> print(text)
+		<< I love pyt
+	// select a line
+		line
+	// prints every line of a file without extra break line
+		>> f = open("countries.txt", "r")
+		>> for line in f:
+			line = line.strip()
+			print(line)
+		>> f.close()
+
+functions ----------------------------------------------------------------------------
+	// declare a function
+		def <name>(<arguments>):
+			<actions>
+	// function with parameter
+		>> def sayHello(name):
+			print('Hello' + name)
+		>> sayHello('Sam')
+		<< Hello Sam
+	// function with a default parameter, in case a parameter is missing
+		>> def sayHello(name = 'Sam'):
+	// function with return value
+		>> def getSum(num1, num2):
+			total = num1 + num2
+			return total
+		>> print(getSum(4,5))
+		<< 9	
+	// function with parameter and return
+		def sum(numbers):
+			total = 0
+			for number in numbers:
+				total = total + number
+			return total
+	// lambda: single line function declared with no name, which can have any
+	   number of arguments, but it can only have one expression.
+		// declare a lambda
+			>> getSum = lambda num1, num2 : num1 + num2
+			>> print(getSum(9, 2))
+			<< 11
+
+Class ------------------------------------------------------------------------------
+	// declare a class
+		>> class User:
+	// constructor (inside the class)
+		>> def __init__(self, name, email, age): //'self' = 'this' in Java
+			self.name = name
+			self.email = email
+			self.age = age
+	// initialize objects
+		>> brad = User('Brad Traversy', 'brad@gmailcom', 37)
+		>> janet = User('Janet Williams', 'janet@gmail.com', 27)
+	// showing info
+		>> print(brad.name)
+		<< Brad Traversy
+	// Edit property
+		>> brad.age = 38
+	// method with return (inside the class)
+		>> def greeting(self):
+			return f'My name is {self.name} and I am {self.age}'
+	// call method inside a clas
+		>> print(janet.greeting())
+
+JSON --------------------------------------------------------------------------------
+	- How we can parse JSON into a Python dictionary
+	>> import json //module that works on json
+	
+	// sample json
+		>> userJSON = '{"first_name": "John", "last_name": "Doe", "age": 30}'
+	// parse JSON to dictionary
+		>> user = json.loads(userJSON) //loads(): parse it into a dictionary
+		>> print(user)
+		<< {'first_name': 'John', 'last_name': 'Doe', 'age': 30}
+		>> print(user['first_name'])
+		<< John
+	// parse dictionary to JSON
+		>> carJSON = json.dumps(car)
+
+Syntax / Curiosities / Interesting --------------------------------------------------
+	in python 3 you use print with parenthesis:
+		>> print x -> print (x)
+	convert int to string
+		>> x = str(x)	
+	// input (python 3.x)
+		input("Insert value " + var)
+	#
+		Comentarios
+	\n
+		enter
+	// In python logical operators are: (and, or, not) instead of: (&&, ||, !=)
+	// Interesting if else statement
+		>> x, y = (6, 10)
+		>> if x > y:
+			print(f'{x} is greater than {y}')
+		>> else:
+			print(f'{x} is less than {y}')
+	// Interesting if not statement
+		>> if not (x == y):
+			print(f'{x} is not equal to {y}')
+		<< returns True or False (nothing)
+	// Interesting if not statement (is x var in numbers[] list)
+		>> if x in numbers:
+	// Multilines in one print (whitespace, tabs, newlines are preserved)
+		>> print("""Lorem ipsum...
+		...
+		...""")		
+	>> "H" in "Hello"
+		<< True
+	>> "X" not in "Hello"
+		<< True	
+	>> if 6 > 5:
+		...	print("Six is greater than 5")
+		... <tap enter>
+		Six is greater than 5
+	>> sister = 15
+		>> brother = 15
+		>> if sister > brother:
+		...	print("sister is older")
+		...elif sister == brother:
+		...	print ("Same age!")
+		<< same age!
+	>> x = 1
+		>> x > 0 and x < 2
+		<< True
+	>> 2+2
+		<< 4
+	>> "A" * 40
+		<< "AAAAAAAAAAAAAAAAAAAA..."
+	>> 0 == 0
+		<< True
+	// Repeat the loop 5 times
+		>> for i in [1,2,3,4,5]:...
+
+	Installations
+	
+	// Si python3.8 no existe en root pero si en usuario normal:
+		// Dentro de la terminal usuario normal
+			>> which python3.8
+				<< /usr/local/bin/python3.8 #copias eso
+		// Dentro de la terminal root
+			>> vi .bashrc
+				#si coincide el python3.8 con el path de which de arriba
+				#pega esto justo debajo del fi
+				PATH="/usr/local/bin:$PATH"
+				>> :wq #salva y sal
+			>> source .bashrc
+			>> python3.8 --version
+			<< Python 3.8.1
+		LISTO!
+
+	// Verificar si esta instalado
+		>> python3.8
+			>> import django
+			>> print(django.get_version())
+			<< 3.0.2
+
+		>> python3.8 -m django --version
+		<< 3.0.2

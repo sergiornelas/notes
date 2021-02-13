@@ -1,0 +1,17 @@
+ git add *.html
+		add any html file
+git rm --cached <file>
+	Le quita el addfile (step 2) a un archivo del repositorio.
+
+git branch "name"
+	Cuando estas trabajando en un proyecto que tiene varias tareas, y se dividen
+	esas tareas en ramas (branches).
+
+git checkout "name"
+	Se intercambia al contenido de un repositorio.
+	- git checkout master
+		Se va a la branch principal del proyecto.
+git merge "name"
+	Se fusionan las branches
+git remote
+	Para verificar que en el repositorio exista algo

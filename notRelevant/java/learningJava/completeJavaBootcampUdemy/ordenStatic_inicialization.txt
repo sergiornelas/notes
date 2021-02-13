@@ -1,0 +1,7 @@
+1) Compilador identifica sin problemas el main
+2) Se cargan las clases
+	3) Se cargan la declaración de variable, asignando valor nulo o 0.
+	4) Se cargan los bloques de inicialización STATIC, respetando el orden de invocación
+5) Se instancia un objeto
+	6) Se cargan la declaración de variable, asignando valor nulo o 0.
+	7) Se cargan los bloques de inicialización, respetando el orden de invocación

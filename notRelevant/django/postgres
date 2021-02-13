@@ -1,0 +1,146 @@
+POSTGRES INSTALLATION AND STUFF
+
+instalar postgres
+	sudo apt-get install postgresql postgresql-contrib
+
+sudo su
+	entrar con root
+
+su - postgres
+	entrar con el super user postgres
+	#nota: la primera vez te pide ponerle contraseña al super user postgres
+
+sudo apt install pgadmin3
+	instalar pgadmin3 (herramienta de gestión)
+
+psql
+	inicializar postgres en la consola
+	ver la version de tu postgres
+
+\password postgres
+	cambiar la contraseña al usuario postgres
+
+\q
+	salir de postgres cuando se vea asi: postgres=#
+\l
+	visualizar las databses.
+
+---------------
+entrar a la consola postgres con el usuario postgres
+	sudo -u postgres psql
+
+
+correo y contraseña de postgres
+	postgres@localhost_
+	pass: 1234
+	pass nueva: plzthanx
+
+---------------
+CONNECTING DJANGO WITH POSTGRES
+
+Install these two packages:
+	pip install psycopg2
+	pip install psycopg2-binary
+
+Change settings.py:
+	DATABASES = {
+		'default': {
+			'ENGINE': 'django.db.backends.postgresql',
+	        	'NAME': 'btredb',
+		        'USER': 'postgres', #your user
+	        	'PASSWORD': 'plzthanx', #your pass
+		        'HOST': 'localhost' #your host
+		}
+	}
+Una vez ingresaste las credenciales de arriba correctamente, creas migraciones:
+	python manage.py migrate
+
+---------------
+CREATING LISTING MODEL
+	First, you need to define the database structure, then: Go to the app you want to create data:
+	Go to listings app (listing folder), open models.py. Every time you create an app, it creates
+	models.py file. Insert this:
+		class Listing(models.Model):
+			#ID is created automatically.
+			realtor = models.ForeignKey(Realtor, on_delete=models.DO_NOTHING)
+				#first parameter: name of the other model that we are relating
+				(Realtor).
+				#second parameter: what to do when you delete the realtor (if you have
+				a realtor attached to a listing, and you delete the realtor what do
+				you want to happen to the listing? In this case, we don't want, so we
+				add '=models.DO_NOTHING')
+				YOU NEED TO INCLUDE the model at the top of the file (FORÁNEO):
+					from realtors.models import Realtor
+			title = models.CharField(max_length=200)
+				charfield = basic text field
+			description = models.TextField(blank=True)
+				'blank=True' = this field is optional
+			price = models.IntegerField()
+				just an integer
+			bathrooms = models.DecimalField(max_digits=2, decimal_places=1)
+				baños = 1.5
+			garage = models.IntegerField(default=0)
+				Has a default value of 0
+			photo_main = models.ImageField(upload_to='photos/%Y/%m/%d/')
+				Where this get uploaded to. In this case we define the folder that we
+				want inside of the media folder (media folder created automatically 
+				by django). We call the new folder 'photos', and we want each photo
+				going to a folder structure of the date (year, month, day).
+				YOU HAVE TO INSTALL PILLOW: 'pip install Pillow'
+			photo_2 = models.ImageField(upload_to='photos/%Y/%m/%d/', blank=True)
+				The same from above, but this case is optional (blank=True)
+			is_published = models.BooleanField(default=True)
+				Boolean value
+			list_date = models.DateTimeField(default=datetime.now, blank=True)
+				default will be the current day in time
+				YOU NEED THE module datetime: 'from datetime import datetime'
+			If we want a main field to be displayed, in this will be title:
+				(inside of the class (no tab)):
+					def __str__(self):
+					        return self.title
+			table that is gonna display each element of the table
+				you have to pick a field to be kind of the main field
+				to be displayed
+				Works when is a foreign key too (media folder & adding data 5:15)!
+					def __str__(self):
+						return self.title
+
+---------------
+MAKE MIGRATIONS
+
+python manage.py makemigrations
+	create a file that we can run, to then update the database. The file is gonna be created
+	inside migrations folder into current django app.
+python manage.py sqlmigrate <appname> 0001
+	(optional)
+	show sql language of creation the model (don't do anything)
+python manage.py migrate
+	Insert data to the tables of database!
+
+---------------
+CREATE A SUPER USER FOR LOGIN INTO DJANGO ADMIN
+	python manage.py createsuperuser
+		#username: brad
+		#email address: brad@gmail.com
+		#password: 123456
+
+---------------
+CUSTOMIZE ADMIN STUFF FOR AN APP
+	Show models sample into admin area (site administration)
+	Go to <appfolder> / admin.py
+		from .models import <model class name> (hasta arriba del archivo)
+			from .models import Listing
+		then:
+			admin.site.register(<model class name>)
+				#admin.site.register(Listing)
+	Ahora, puedes llenar la tabla listing desde la interfaz de admin.
+
+---------------
+ME TRABÉ AQUI:
+Cuando quieras rehacer la base de datos:
+- Asegúrate de borrar los archivos de migrations (excepto __init__.py). Usa refresh para asegurar!
+- Los campos de llaves foráneas no se pueden borrar 
+
+
+
+MEDIA FOLDER & ADDING DATA

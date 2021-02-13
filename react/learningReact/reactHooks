@@ -1,0 +1,220 @@
+REACT HOOKS
+	+ HOOKS: Javascript functions which can only be used from inside Functional Components or other Hooks
+	+ Hooks are highly re-usable
+	+ Have NOTHING to do with Lifecycle Methods
+	+ Allow you to managing state, side effects (http requests) & more.
+	+ You can build custom hooks to share stateful or stateless logic across multiple components.
+	+ You have to use the hooks on the ROOT LEVEL IN YOUR COMPONENT, you CAN'T USE A HOOK in some NESTED FUNCTION for examp.
+	
+	⚛️ USESTATE: Manipular el State properties
+		➡️ import React, { useState } from "react";
+		+ Can be initialized with a default state and that state can be anything (object, array, number...)
+		    A diferencia de las class based que solo podían recibir objetos { }
+
+		Regresa un ARRAY con dos elementos:
+			[0] CURRENT STATE VALUE. Whenever the state updates, the whole component will rebuild, but the state survives.
+			[1] FUNCTIONS that allows to UPDATE the CURRENT STATE (SETTER), and re-render the component (return). 
+			DOES NOT MERGE OR APPEND WHATEVER YOU PASSED TO IT WITH THE OLD STATE, INSTEAD IT REPLACES THE OLD STATE WITH 
+			IT.
+			Whenever you are UPDATING the STATE with new values, you have to manually make sure YOU INCLUDE ALL OLD STATE DATA:
+		
+		NEW STATE VALUE DEPENDS on the PREVIOUS STATE VALUE? 
+			Para solucionar eso:
+				En el video del Indio, recuerdas que metías input firstName y lastName, y estos valores se borraban al deseleccionar el input 
+				field?
+				Se debe a que los valores que cambies con esta función NO SE SETTEAN, TIENES QUE HACERLO MANUALMENTE:
+					➡️ onChange={(e) => setName({ ...name, firstName: e.target.value })}		//observa el ...spread operator		
+				
+			You can PASS a FUNCTION to the setter function:
+				Si estas utilizando un array en un setter ([1]), y quieres que haga merge con cada elemento del array tienes que utilizar
+				SPREAD OPERATOR:
+					➡️ const [items, setItems] = useState( [ ] )
+					➡️ const addItem = () => {
+							setItems( [ ... items, {	//...items make a copy of all the the items in the array. To that list simply append another 
+													//    object.
+								id: items.length,	// that way you are not overwriting the original array
+							} ] )
+						}
+
+			This function (*) will actually tell react that we want to GET THE LATEST STATE that we set EVEN IF IT HASN'T BEEN FULLY
+			COMMITED YET FOR THIS RENDER CYCLE. We are using the LATEST STATE WE SET WITH AN UPDATING FUNCTION NO MATTER IF
+			REACT ALREADY RECREATE IT THE FUNCTION OR NOT.
+			> En pocas palabras: ES UNA GARANTÍA PARA QUE PUEDAS OBTENER THE LATEST STATE TODO EL TIEMPO:
+				➡️ <input																		//antes
+					     onChange={(event) =>{									onChange={(event) =>
+							const newTitle = event.target.value;					//
+							inputState[1]*(prevInputState => ({					inputState[1]({
+								title: newTitle,										title: event.target.value,
+								amount: prevInputState.amount						amount: inputState[0].amount
+							}))}															})
+					      }															}
+					/>
+
+		➡️ const [count, setCount] = useState(0)
+			setCount method accepts 2 kinds of arguments. 
+			1. Actual new value which is supposed to be set into the count parameter. So we use it like setCount(3) in case you want to set 				the count as 3.
+			2. Another argument is a function body. And that function body gets current count value (it is termed as prevCount in the 
+			context because you are about to update the count but actually it is the current value at that instance). So you can break it 
+			down as :
+				setCountFn = (prevCount) => prevCount + 10
+				onClick={setCount(setCountFn)} //Pass the handler method
+		
+		ARRAY DESTRUCTURING
+			➡️ const inputState = useState({ title: "", amount: "" });
+				...
+			➡️ value={inputState[0].title}
+			------ A ESTO: --------
+			➡️ const [ inputState, setInputState ] = useState({ title: "", amount: "" });
+				...
+			➡️ value={inputState.title}
+
+	⚛️ USEEFFECT()
+		- Second most important React hook you can use, next to useState().
+		- Manage side effects (typically HTTP requests).
+		- This will execute for AFTER & EVERY RENDER CYCLE of the component, RUNS FOR EVERY UPDATE (EVEN THE FIRST RELOAD).
+		- It's COMPONENTDIDMOUNT and COMPONENTDIDUPDATE combined in one effect.
+		- Used like this (with [ ] as a second argument), acts like COMPONENTDIDMOUNT: It runs ONLY ONCE (AFTER THE FIRST RENDER).
+		
+		Syntax:
+			useEffect(function,[dependencies])		//only when dependencies change, the function will run.
+ 			
+		- If you have different effects that depend on different data, you can use useEffect MORE THAN ONCE, ITS OKAY.
+		
+		, [ ] }	->	Execute when the component RENDERS THE FIRST TIME: this tells React this effect has no dependencies.
+
+		Using useEffect for CLEANUP work (same effect as COMPONENTWILLUNMOUNT) (cuando un componente se elimina del DOM):
+			➡️ useEffect(() => {
+					// Http request...
+					setTimeout(() => {
+					      alert('Saved data to cloud!');
+					 }, 1000);
+					 return () => {		//Añades un RETURN antes de cerrar useEffect.
+						console.log('[Cockpit.js] cleanup work in useEffect');	
+					 }
+				 }, []);
+			return() RUNS BEFORE the main useEffect function runs, but AFTER the (first) render cycle.
+		
+		FUNCTIONS AS A DEPENDENCY FOR USEEFFECT CHANGE
+			Puede sonar raro que las funciones puedan "cambiar", pero no olvides que en JS las funciones son objetos y se comportan
+			como otro valor.
+			➡️ 	 }, [ function ]);
+		
+		MULTIPLE DEPENDENCIES FOR USEEFFECT CHANGE
+			➡️ }, [enteredFilter, onLoadIngredients])
+			//This will activate if onLoadIngredients change OR enteredFilter
+
+	⚛️ USECONTEXT (Avoid prop chain redundancy) (simplest hook to use).
+			Provides a way to pass data through the component tree without having to pass props down manually at every level.
+			CONSUME CONTEXT MORE ELEGANTLY (functional components) (Recomended)
+			This allows you to get access to your context anywhere in your functional component function body.
+
+			➡️ import React, { useContext } from "react";
+				import AuthContext from '../../context/auth-context'
+				...
+				const authContext = useContext(AuthContext);
+				...
+				return(
+					<button onClick={authContext.login}>{authContext.name}</button>
+				)
+				//checa el ejemplo en youtube/src/components/useContext
+
+	⚛️ USEREDUCER
+		It's an alternative to useState.
+		useState is built using useReducer, it's a more primitive hook compared to useState.
+
+		It's similar to javascript .reduce():
+			//JavaScript															//React
+			+ array.reduce(reducer, initialValue)								+ useReducer(reducer, initialState)
+			+ singleValue = reducer(accumulator, itemValue)				+ newState = reducer(currentState, action)
+			< reduce method returns a single value							< useReducer returns a pair of values: [newState, dispatch]
+
+		//Continuará:
+https://www.youtube.com/watch?v=IHJ-TO_1nME&list=PLC3y8-rFHvwisvxhZ135pogtX7_Oe3Q3A&index=19&ab_channel=Codevolution
+
+		Use useState if you have:
+			A) JavaScript primitives as state
+			B) Simple state transitions
+			C) Business logic within your component
+			D) Different properties that don't change in any correlated way and can be managed by multiple useState hooks
+			E) State co-located to your component
+			F) A small application (but the lines are blurry here)
+
+		Use useReducer if you have:
+			A) JavaScript objects or arrays as state
+			B) Complex state transitions
+			C) Complicated business logic more suitable for a reducer function
+			D) Different properties tied together that should be managed in one state object
+			E) The need to update state deep down in your component tree
+			F) A medium-sized application (NB: the lines are blurry here)
+			G) Need for an easier time testing it
+			H) Need for a more predictable and maintainable state architecture
+
+	⚛️ USECALLBACK
+		Allows you to wrap your functions Catches the function for you so that it survives re-render cycles. Wrapped function
+		is not recreated so it will not change. When you pass the function on a prop and the component re-render, the wrapped
+		function will be the same function as on the previous render cycle.
+
+		Avoids infinite loops 
+		Syntax:
+			➡️ const X = useCallback(Y => {...actions(Y)}, [ ] )
+
+	⚛️ REACT.MEMO()
+		ONLY RE-RENDERS when the PROPS that depends on CHANGED, and not always when the parent component changed.
+		➡️ const IngredientForm = React.memo(props => {
+			...
+		
+		Similar to shouldComponentUpdate.
+
+		PREVENTS UNNECESSARY RE-RENDERING.
+			➡️ ...
+			       export default React.memo(Cockpit);
+		Store a snapshot of this component and  it will re-render it only if ITS INPUT CHANGES.
+
+		Is it a good idea to optimize every class component (shouldComponentUpdate) and every functional (react.memo(...) )?
+		No.
+		If you are pretty sure that in all or almost all cases where your parent updates, you will need to update too, then you should 
+		not add shouldComponentUpdate or React memo because you will just execute some extra logic and just slows down
+		the application a tiny bit.
+
+	⚛️ USEREF
+		useRef HOOK allows using references in funct. comp.
+		➡️ import React, { useEffect, useRef } from "react";
+		➡️ const Cockpit = (props) => {
+				const toggleBtnRef = useRef(null);	
+				//toggleBtnRef.current.click()		No se podría poner aqui porque estas llamando click() justo después de que
+				//										inicializaste la referencia, aún no se ha asignado el valor desde <button>
+
+																//Por eso decidimos meter toggleBtnRef.current.click dentro de useEffect()
+				useEffect() => {								//useEffect RUNS AFTER EVERY RENDER CYCLE (ya tendríamos el value desde 
+																//button).
+					toggleBtnRef.current.click()			//The click() method simulates a mouse-click on an element (Vanilla JS).
+					return () => {
+					      console.log('sup');
+	    				}
+				}, [ ] );
+				...
+				return(
+					<button ref={toggleBtnRef} className={btnClass}
+						Hello world!
+					</button>
+				) }
+
+--------------------------------------------
+ LEARNED SUMMARY:
+
+- When dealing with objects or arrays, always make sure to spread your state variable and then
+	call the setter function.
+
+- useEffect(() se ejecuta cada cambio del render, incluido cuando la página carga.		//componentDidUpdate
+- useEffect(()..., [dependency]) se ejecuta cuando se actualiza la dependencia.			//componentDidUpdate
+- useEffect(()..., []) se ejecuta solo cuando la página carga.									//componentDidMount
+- useEffect(()... return()=>{...}}) Se ejecuta cuando un componente se elimina del DOM	//componentWillUnmount
+
+Semántica:
+	useState - state ([x, y] = useState('') )
+	useEffect - side effects (componentDidMount, etc)
+	useContext - context API (pasar props a componentes lejanos)
+	useReducer - reducers
+
+--------------------------------------------
+

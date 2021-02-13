@@ -1,0 +1,210 @@
+images:
+docker run ubuntu
+		Ubuntu actualizado
+
+docker run hello-world
+	Hello world
+
+docker run jenkins
+	run jenkins
+		https://172.17.0.2:8080
+		In the terminal, appears the password for jenkins login, esta entre las tres filas de estrellas debajo de Jenkins initial setup is req...
+
+	docker run -p 8080:8080 jenkins
+		Para conectar el port a tu port. 
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+run
+	Start a container from an image {docker run ubuntu}
+		If already exist:
+			run  a instance of ubuntu os image on the docker host
+		Else:
+			Go out from docker hub and pull the image down (just the first time).
+
+	>> docker run ubuntu
+		With this command the container doesn't actually  stay alive. This is because we haven't actually asked to run any script, command 			or service. Since it has nothing to do, as soon as we run it, it exits inmediatly.
+		Docker containers are meant to run services or applications, it there isn't anything running docker stops the container.
+
+	-it
+		Automatically be logged into the docker container when its runned
+		>> docker run -it centos bash
+		PARA ENTRAR AL BASH DEL CONTENEDOR
+
+	-d (detached)
+		Run in the background, once is executed get back to the terminal.
+		>> docker run -d centos sleep 10
+
+	Tag
+		It's an extension, you can use to looking for a specific container version:
+			docker run ubuntu:17.04
+
+	-i (input)
+		By default doesn't listen to standard input, you must map the standard input of your host to docker container using -i.
+		The docker container now listen the standard input of docker host.
+
+	-p (port)
+		 map the port of the USER (local host) to DOCKER CONTAINER port. Conecta dos puertos (user y docker container) para que se 			puedan comunicar entre si.
+			>> docker run -p 80:5000 mmumshad/simple-webapp
+
+		- inspect
+			To find out the internal IPAddress of the container.
+				>> docker inspect a09e7af8424b
+
+	-v (volume mapping)
+		You can migrate data from database container  to another container. Your data will be stored in the external volume, even if
+		you delete the first container.
+			>> docker run -v /opt/datadir:/var/lib/mysql mysql
+					                new data store       database container origin.
+
+docker ps
+	List all running containers only.
+
+	-a
+		Check additional info, including history and exited containers {docker ps -a}
+
+stop
+	Stop a container, you must provide a container_id or the name(check it with ps)
+	>> docker stop silly_sammet
+	<< silly_sammet
+		Aqui puedes parar los contenedores que corriste utilizando sleep.
+
+images
+	Show list of images {docker images}
+
+rm
+	Remove a container (using id or name).
+		>> docker rm silly_sammet
+		<< silly_sammet
+	You can use the first 1 ,2 or + characters of the container_id, and remove multiple containers in the same line:
+		>> docker rm 345 e0a 773
+		<< 345
+		<< e0a
+		<< 773
+
+rmi
+	Remove an image {docker rmi ubuntu}
+		To remove an image, you must ensure that no containers are runnning, you must stop and delete all
+		dependent containers to be able to delete the underlying base image.
+
+pull
+	Download an image and keep it without running {docker pull ubuntu}
+
+APPEND A COMMAND
+docker run Ubuntu sleep 1000
+	When the container starts, it runs the sleep command and goes into sleep 1000 seconds
+
+exec
+	Execute a command on a container that is already running {docker exec <id>/<name> <action>}
+		>> docker exec gifted_kare cat /etc/hosts
+
+		Execute change directory (cd) into a docker command:
+			>> docker exec gifted_kare /bin/sh -c 'cd /sys && ls'
+
+		>> docker exec -it [container-id] sh
+			ENTRAR AL CONTENEDOR DEL AGENTE QUE NO TIENE BASH
+		>> docker exec -it [container_id/name] mysql -uroot -p
+			INGRESAR AL CONTENEDOR DE LA DATABASE
+
+attach (the opposite of run -d)
+	Attach your terminal's standard input, output and error (or any combination of the three) to a running container using the container's
+	ID or name. This allows you to view its ongoing output or to control it interactively, as though the commands were running directly in 	your terminal.
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+DOCKERIZING a flask application
+Inside the image
+1)  history
+		pull the commands on a note.txt you needed to run the image.
+			- apt-get update
+			- apt-get install -y  python
+			- apt-get install python-pip
+			- pip install flask
+			Create/Copy application code to /opt/app.py
+			...
+Exit the image (>> exit)
+2) Create a file (>> mkdir my-simple-webapp)
+3) Create a docker file (cat > Dockerfile)
+	FROM ubuntu
+	RUN apt-get update
+	...
+	COPY app.py /opt/app.py (this assume that you have app.py in the local directory , o si no a soon as you finish the docker file that's what 		wanna do	next).
+
+4) Before you try to build it you need you application code (app.py) in the same directory
+5) >> docker build . (dot)
+5.5) >> docker build . -t my-simple-webapp
+	Since all is already built, this just go to a rea l quick because it doesn't have to rebuild
+6)  >> docker run my-simple-webapp
+
+PUSHING TO DOCKER HUB FOR PUBLIC
+1) docker build . t <dockeruserName>/my-simple-webapp
+2) docker login
+	username, pass
+3) docker push my-simple-webapp
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+DOCKER COMPOSE
+YAML
+	Use to represent data, like JSON. Its like a Python dictionary: key & value:
+		Fruit:
+			-	Banana:
+					Calories: 105
+					Fat: 0.4 g
+						Carbs: 27 g
+	
+			-	Grape:
+					Calories: 62
+					Fat: 0.3 g
+					Carbs: 16 g
+	
+	Dictionary - Unordered collection
+	List - Ordered collection
+	# comment.
+
+services:
+	web:
+		image: "mmumshad/simple-webapp"
+		ports:
+			- "80:5000" (80 -> docker host, 5000 -> docker container)
+	database:
+		image: "mysql"
+		volumes:
+			- /opt/data:/var/lib/mysql #donde se almacenará los datos.
+
+docker-compose up
+	can provide you a running web application stack.
+
+docker-compose stop
+	stop containers
+
+docker-compose start
+	Start containers that you stopped with docker-compose stop
+
+docker-compose restart
+	Restarts all stopped and running services
+	If you make changes to your docker-compose.yml configuration these changes are not reflected after running this command.
+
+docker-compose down
+	bring down everything, and remove the containers enterily.
+
+
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+DOCKER SWARM
+docker swarm init (manager)
+docker swarm join (worker or nodes)
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+DOCKER NETWORK
+
+>> docker network ls
+	check the networks
+
+EXTRA COMMANDS
+	docker run -it ubuntu bash
+		Stay alive and work on it, runs bash when the container starts, with -it map the standard input.
+		Permaneces dentro del bash del image ubuntu.
+docker run -it ubuntu bash

@@ -1,0 +1,250 @@
+REACT ROUTING
+	It's not created by facebook, by this is the real standard for react applications.
+	➡️ npm install --save react-router-dom
+	➡️ import { BrowserRouter } from 'react-router-dom';		//(in app/index.js)
+
+	-  ROUTE
+		➡️ import { Route } from 'react-router-dom';
+		...
+		➡️<a href="/sergio">Home</a></li>
+		➡️ return(
+			...
+				<Route path="/sergio" exact render={() => <h1>Home</h1>}/>		
+			)
+			// path=El path en el url (/sergio) en el que debes estar para que se rendereé <Route/>
+			// exact = Debe estar en el path exacto. Si no tiene esto, con solo el url empieza con "/", de igual manera se renderea <Route/>
+			// render = El contenido que se renderea cuando se está en el path asignado.
+		
+		Si deseas renderar un componente:
+			➡️ <Route path="/" exact component={Posts} />
+
+		ROUTE enviará un objeto como prop SOLAMENTE al componente al que se dirige el link {Posts}
+		(los componentes hijos dentro del componente al que se dirige Route no, eso se resuelve con Withrouter)
+
+	------------------
+	{
+		history:{
+			push(function)
+				Va hacia una nueva página. Basically switch the page and push a new page onto that stack of pages.
+			replace(function)
+				Hace lo mismo que Redirect
+			goBack(function)
+				Va hacia una página atrás.
+		},
+
+		location:{	//Represent where the app is now, where you want it to go, or even where it was.
+			pathname(string)
+				 '/somewhere'
+			search(string)
+				'?some=search-string'
+		},
+		
+		match:{	// Nearest route which was matched. Contains information about how a <Route path> matched the URL
+			url (string)
+				URL actual.
+				The matched portion of the URL. Useful for building nested <Link>s
+				 It's the URL which was responsible for loading the component.
+			path (string)
+				The path pattern used to match. Useful for building nested <Route>s
+			params(object)
+				Accedes al valor del url dinámico /courses/:courseId
+		}
+	}
+	------------------
+
+	- LINK
+		➡️ import { Route, Link } from 'react-router-dom';
+		...
+		➡️ <li><Link to="/">Home</Link></li>	//puede tomar un string para dirigirte a tal path
+		➡️ <li><Link to={{
+				pathname: "/new-post",
+				hash: '#submit',					//o puede tomar un objeto, el cual tiene propiedades definidas.
+				search: '?quick-submit=true'
+		      }}>New Post</Link></li>
+
+		➡️ <Route path="/" exact component={Posts} />
+		➡️ <Route path="/new-post" component={NewPost} />
+		LA VENTAJA DE LINK ES QUE NO RENDEREA LA PÁGINA, REACT RENDEREA SOLAMENTE COMPONENTES.
+
+	- WITHROUTER
+		ANTENITAS para que los componentes dentro del componente que renderea <Route> reciba también los props (history, match...).
+		It's a nice way of making that component route aware, and it will get the props containg information for the
+		NEAREST LOADED ROUTE. 
+		It's a high order component el cuál te ayuda a mostrar propiedades history, location y match a todos los componentes hijos.
+		Añade estos props a otros componentes (which you wrap with it).
+
+		➡️ import { withRouter } from 'react-router-dom';
+		...
+		➡️ export default withRouter(post);
+		Puedes necesitarlo para:
+			+ Calling push on the history prop
+			+ Getting information about the loaded route.
+		
+		Solo funciona cuando el wrapped component es con { } y no con ( ).
+	
+	- ABSOLUTE VS RELATIVE PATHS
+		Absolute path is always appended to your domain. Means that it's always appended right after your domain.
+			➡️ pathname: "/new-post",
+		Relative path it's the path you are currently on and appends this at the end:
+			➡️ pathname: this.props.match.url + "/new-post",
+	
+	- NAVLINK (Link with style)
+		It's pretty similar to Link but it has some extra props which allow to define some STYLING active link.
+		✡️ active
+		.Blog a {
+		    	text-decoration: none;
+		    	color: black;
+		}
+		.Blog a.active {		/* active es el atributo que se agrega por NavLink (recordando que en el fondo NavLink es finalmente
+									un <a> tag con el atributo class="active": <a href="/new-post" class = "active">Home</a>
+									active es true cuando te encuentras en el link.
+								*/
+		    	color: #fa923f;
+		}
+		--------------------
+		➡️ import { Route, NavLink } from 'react-router-dom';
+		...
+		➡️	<div className="Blog">
+				...
+		 		<li><NavLink to="/">Home</NavLink></li>
+				...
+			</div>
+
+		✡️ activeClassName (set up classes)
+		En lugar de usar active class por default, puedes añadir tus propias classes con activeClassName
+			➡️ <NavLink to="/" exact activeClassName="my-active">
+		Ahora en NavLink tiene como class="my-active"
+			<a href="/new-post" class = "my-active">Home</a>
+
+		✡️ activeStyle
+		Es realizar inline styling dentro de NavLink
+			<NavLink activeStyle={{
+				    color: '#fa923f',
+				    textDecoration: 'underline'
+		                 }}>Home</NavLink>
+
+		Solo se activa cuando se encuentra "active". Si agregas la propiedad exact a <NavLink>, solo se activará activeStyle cuando
+		el usuario se encuentra en el url exacto que señala la propiedad -to="/"-
+
+	- PASSING ROUTE PARAMETERS (/ID)
+		Para darle a entender a <Route> que vamos a utilizar un path dinámico, utilizamos DOS PUNTOS y después lo que quieras (id):
+			➡️ ...
+			➡️ <Route path="/" exact component={Posts} /> 
+			-----------------
+			➡️ ...
+			➡️ <Link to={'/'+post.id} key={post.id}>
+			            <Post
+				</Link>
+			-----------------
+			➡️ ...
+			➡️ <h1>{props.title}</h1>
+			➡️ <div className="Author">{props.author}</div>
+
+	- SWITCH
+		➡️ import { Route, Switch } from "react-router-dom";
+		Cuando tienes multiples <Routes> compartiendo el mismo path, y no tienen el parametro exact, por ejemplo:
+				➡️ <Route path="/new-post" component={NewPost} />
+				➡️ <Route path="/:id" exact component={FullPost} />
+
+				En este caso, cuando estes dentro del Route /new-post, también se ejecutará el componente {FullPost}, puesto
+				que ambos comparten al misma ruta "/(base)".
+				Se soluciona cambiando la ruta de FullPost así: "/post/:id", pero en caso de que no podamos usar esa solución:
+
+		➡️ <Switch>
+				<Route path="/new-post" component={NewPost} />
+				<Route path="/:id" exact component={FullPost} />
+			</Switch>
+				THE FIRST ROUTE THAT MATCHES A GIVEN PATH WILL BE LOADED, AND THEREAFTER IT WILL JUST STOP ANALYZING THE
+				ROUTES. THE ORDER OF ROUTE PATHS IS IMPORTANT, REMEMBER!
+
+	- NESTED ROUTES
+		You can use the Router component where ever you want in your application as long as the page the component where you are
+		using it is wrapped by that <BrowserRouter> (in app.js).
+		
+		Where you want to load a certain component or content inside of another component which is also loaded via routing
+			➡️ <Route path="/" component={Posts} />  // Blog.js 	(no exact keywork)
+			-------------------------------------------
+			➡️	<Route path={this.props.match.url + '/:id'} exact component={FullPost} />		//Posts.js
+
+		OJO. Si estas dependiendo de componentDidMount() para obtener algun state o prop cada vez que llamas a ese componente, 
+		utilizar nestedRoutes tendrá un conflicto porque componentDidMount() ya se ejecutó una vez y no se vuelve a ejecutar 
+		nuevamente.
+		Entonces los props/state ya no se actualizarán. (Lección 209).
+
+	- REDIRECT
+		➡️ import { Route, NavLink, Redirect } from "react-router-dom";
+		Cuando quieres llegar al mismo url utilizando diferentes paths
+			En lugar de hacer esto:
+				➡️ <Route path="/posts" component={Posts} />  
+				➡️ <Route path="/" component={Posts} />  
+			Usas esto:
+				➡️ <Redirect from ="/" to="/posts" />
+
+		When the Redirect component is rendered and when whenever something is rendered, it redirects to posts:
+			------Formulario.js
+			➡️ render () {
+					return (
+					    <div>
+						<Redirect to="/otherPage" />
+						...		//este contenido de abajo (el formulario) no se renderizará puesto que Redirect nos llevará a la url /otherPage.
+			
+		Si usas Redirect y vas a la página anterior (back en el navegador), no se irá a la página anterior porque Redirect remplaza la página
+		actual en el stack, it doesn't push a new one.
+
+		Muy útil para cuando utilizes un formulario y presiones botón <submit> te diriga a otra página.
+			➡️ state = {
+					submitted: false
+				    }
+			...
+			➡️ axios.post("/urlAPI", dataPost)
+				.then(response => {
+					 this.setState({submitted: true});
+				})
+			
+			➡️ render(){
+					let redirect = null;
+					if(this.state.submitted){
+						    redirect = <Redirect to="/posts" />;
+					}
+				}
+
+			➡️ return (
+				 <div>
+				        {redirect}
+				        <h1>Llena formulario</h1>
+						...
+			O simplemente puedes usar el history prop...
+	
+	- GUARDS
+		Cuando quieres que el usuario pueda regresar a una página solo si hizo el login.
+		➡️ state = {
+			    auth:false
+			  }
+			...
+			{this.state.auth ? <Route path="/new-post" component={NewPost} /> : null}
+			
+	- LOADING ROUTES LAZILY (rendimiento).
+		Cuando quieres cargar componentes una vez que los necesites (asyncrono).
+
+	- USELOCATION
+		Allows us to look at the route that you are currently on.
+		➡️ import { useLocation } from 'react-router-dom'
+		...	
+		➡️ const location = useLocation()
+		...
+		➡️ {location.pathname === '/' && (<Button/>)		//Solo aparece el botón si esta dentro de la ruta "/"
+		
+	ASIGNACIÓN SUMMARY
+		- Wrappear la aplicación en <BrowserRouter> desde index.js
+		- En NavLink, .active class se activa cuando te encuentras dentro del link
+		- <Route path="/courses"...
+		   <Route path="/courses/course"...
+				Se mostrarán los dos porque ambos comparten el mismo path (/courses). Funciona como un prefix (as long as it has the path)
+				Solución 1):
+					Agregar exact al primer <Route> (exactamente /courses, no más, no menos)
+				Solución 2):
+					<Switch>
+						<Rutas más específicas (/courses/course)>
+						<Rutas más generales (/courses)>	(orden es importante).
+		- For routing error 404 components, deben estar hasta el final de <Switch>
+

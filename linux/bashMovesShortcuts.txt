@@ -1,0 +1,32 @@
+CTRL + P -> Previous action (up key).
+CTRL + N -> Newer action (down key).
+
+//////////////////////////////////////////////////////////
+
+CTRL + A -> MOVE al inicio de la LINEA.
+CTRL + E -> MOVE al End de la LINEA.
+
+alt + B -> MOVE PALABRA POR PALABRA Backward del comando.
+alt + F -> MOVE PALABRA POR PALABRA Forward del comando.
+
+CTRL + B -> MOVE ONE CHARACTER Back.
+CTRL + F -> MOVE ONE CHARACTER Forward.
+
+//////////////////////////////////////////////////////////
+
+CTRL + U -> BORRA antes del comando toda la LINEA.
+CTRL + K -> BORRA después del comando toda la LINEA.
+
+CTRL + W -> BORRA PALABRA POR PALABRA atrás del comando.
+alt + D -> BORRA PALABRA POR PALABRA después del comando.
+
+//////////////////////////////////////////////////////////
+
+CTRL + - -> Ctrl Z de Windows.
+CTRL + Y -> Pega el último comando borrado.
+CTRL + R -> Historial de comandos.
+	CTRL + J -> Finaliza búsqueda de historial.
+CTRL + XX -> Regresa una posición anterior del comando,
+	puedes repetir el comando para regresar a donde
+	estabas.
+CTRL + D -> Cerrar terminal.

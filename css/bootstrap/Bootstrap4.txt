@@ -1,0 +1,128 @@
+BOOTSTRAP 4.X
+CLASSES
+  COLOR AND AESTHETICS
+	COLOR UPDATES: Colors looks brighter and there is new
+		classes: "bg-dark" and "bg-light"
+	class="text-primary"
+		Texto color azul.
+	class="text-danger"
+		Texto color rojo.
+	class="text-info"
+		Texto color turquesa.
+	class="text-success"
+		Texto color verde.
+	class="bg-dark"
+		Pinta el contenido en un negro elegante
+	class="bg-light"
+		Pinta el contenido en un blanco elegante
+	class="blockquote text-right"
+		Mueve el texto a la derecha
+	class="display-1"
+		Texto y fuente elegantes
+	class="rounded-top"
+		Redondea el borde de arriba
+	class="display-3"
+		Fuente bonita letra grande
+	class="lead"
+		Changes to decent fontsize and font
+	
+  NAVBARS 4.x	
+	class="navbar-light"
+		NAVBAR DEFAULT NEW NAME
+	class="navbar-dark"
+		It makes the TEXT of a navbar light, because
+		if you want a dark navbar you need white light text
+	class="bg-dark"
+		Navbar black elegant. You can use other colors
+		through css
+
+  RESPONSIVE UTILITIES
+	class="d-inline"
+		Lo mismo en css con float. Que los blockelements
+		no den un espacio de nueva línea
+	class="d-block"
+		Convierte un span* a blockelement (no salta línea)
+
+////////////////////////////////////////////////////////////////
+HTML++
+	<Blockquote>
+		Encierra un texto para poder citarlo.
+
+In bootstrap 4.x the root font is 16 px
+In bootstrap 4.x change the main font size factor from px to em
+	1rem = 16px
+	2rem = 32px
+NOW EVERYTHING IS IN TOUCH, IT'S ALL RELATIVE AND IT SCALES.
+Todo el texto esta conectado uno al otro. (al menos que ESPECÍ
+FIQUES CLARO ESTA (id, class, etc))
+TOGETHER.
+	Si cambias el fontsize de un elemento, SE CAMBIA
+	el de toda la página.
+lorem60 + tab
+	adds 60 characters of lorem ipsum!!
+////////////////////////////////////////////////////////////////
+NEW FEATURES: !!
+	Spacing Utilities:
+	-Borders
+	-Border Color
+	-Border-radius
+		Border corners, rounded-circle
+	SYNTAX:
+	        Margin/Padding   t/b/l/r/x/y   #rem
+
+	Padding
+		p-0
+			Zero padding
+		p-3
+			1rem padding
+		p-5
+			3rem padding
+		pt-5
+			only top add 5 3rem padding
+		py-5
+			add top and bottom 3rem padding
+	Margin
+		m-0
+			Zero margin
+		m-1
+			1rem margin every side
+		my-5
+			Add 5rem margin only top and bottom
+////////////////////////////////////////////////////////////////
+RESPONSIVE
+	SYNTAX:
+		{property}{sides}-{breakpoint}-{size}
+	p-sm-5
+		padding all sizes small and above 5rem
+				(sm, md, lg, xl)
+	p-0
+		padding 0 by default (including extrasmall)
+		if you don't specify a breakpoint it defaults
+		to everything including x or small
+	p-sm-2
+		padding all sizes small and above 2rem
+	pl-sm-5
+		padding left small and above 5rem
+	mx-5
+		margin / right and left / extra-large and above / 5rem
+
+////////////////////////////////////////////////////////////////
+NAVBARS 4.x
+	You can give it a background color of your own
+	We HAVE to specify where it's supposed to expand
+		TIENES QUE HACERLO SI QUIERES QUE OCURRA
+
+////////////////////////////////////////////////////////////////
+RESPONSIVE UTILITIES
+	d-{value}
+		display
+	SYNTAX:
+		d-{breakpoint}-{value} for sm,md,lg and xl
+	d-lg-none
+		display after large and above to none (desaparece)
+	d-lg-block
+		display after large and above to block (appear)
+	d-none d-lg-block d-xl-none
+		by default no display, display after large and
+		above to block (appear), display after extra
+		large to none (dissapear).

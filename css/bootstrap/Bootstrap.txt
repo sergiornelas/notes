@@ -1,0 +1,264 @@
+CLASES BOOTSTRAP
+	class="container"
+		-Anytime we use Bootstrap grid, it needs to be inside
+		of a container.
+		-Mete el contenido en un div, una caja practica
+		con esquinas redondeadas.
+		-También se utiliza para CENTRAR un cierto contenido.
+			Todo lo que se encuentre DENTRO del container.
+	class="container-fluid"
+		Lo mismo que container, solo que el contenido del
+		container no se centra, no spacing
+	class="jumbotron"
+		Texto para llamar la atención, con un fondo color gris
+	class="thumbnail"
+		-Comprime el contenido en un GRID!!
+		-Almacena el contenido en un container. 
+		-Se utiliza en imágenes. Crea un contorno estético
+  	class="glyphicon glyphicon-picture"
+		-Agrega una imagen de cámara
+		-Éstos íconos se interpretan como texto, es decir
+		puedes cambiar su color con "color" en css.
+		-Si quieres cambiar el tamaño, cambia el
+		tamaño de la fuente (font-size)
+	class="active"
+		Aparece en la página el contenido seleccionado.
+		Se utiliza para poner la pestaña "home" encedida.
+
+	BUTTONS	
+	class="btn"
+		Se crea un botón bonito gris con esquinas redondas
+	class="btn-default"
+		Se crea un botón blanco cuadrado simple
+	class="btn btn-default"
+		Se crea un botón blanco bonito con esquinas redondas
+	class="btn-lg"
+		Button large
+	
+  FORMULARIO	
+	class="form-group"
+		
+	class="form-control"
+		Hace un input text muy bonito
+	class="btn-lg btn btn-info"
+		Se estan utilizando 3 clases al mismo tiempo:
+			btn
+				Crea un botón color blanco
+			btn-info
+				Agrega el color azul estándar
+			btn-lg
+				Hace el texto y el botón más grande
+			btn-success
+				Color verde
+			btn-danger
+				Color rojo
+	class="form-group"
+	class="form-control"
+		Estas dos hacen que lusca bonito un input dentro de un
+		formulario- Form group agrega buen espaciado entre los
+			inputs
+	class="help-block"
+		Muestra un texto suave discreto para cuando dar instru
+		cciones del llenado del formulario al usuario.
+	class="form-inline"
+		Formulario de una sola linea (name, email, send button)
+		con input text muy proporcionados que no llenan la pag.
+  NAV BAR
+	class="navbar navbar-default"
+		-Contenedor.
+		-Se crea un navbar con parámetros estándar
+	class="navbar navbar-inverse"
+		Navbar de color negro
+	class="navbar-header"
+		Encabezado del navbar
+	class="navbar-nav"
+		Elementos en la izquierda.
+	class="navbar-right"
+		En la barra de navegación, elementos hasta la derecha.
+
+	class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+		Colapsará, significa que cuando el contenido de un
+		navbar se sobrepasa la ventana (cuando hacemos pequeña
+		la ventana, estemos en tamaño móvil) se OCULTA el
+		contenido
+	class="navbar-fixed-top"
+		La navbar cuando haces scroll down, el navbar
+		se mantiene ahí estática, no desaparece.
+	
+  HAMBURGUER BUTTON
+	<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+		<span class="sr-only">Toggle navigation</span>
+	        		<span class="icon-bar"></span>
+	        		<span class="icon-bar"></span>
+	        		<span class="icon-bar"></span>
+		</button>
+			(necesitas cambiar el id del contenido que
+			quieres colapsar)
+  GRID SYSTEM
+	Remember to declarate a class="thumbnail"
+	This is the first class you have to declarate:
+	class="row"
+		Crea una fila en el grid
+	class="lg-"
+		Crea una columna grande tamaño 6 (de 12)
+	Devices
+		col-xs- Phones
+		col-sm- Tablets
+		col-md- Desktops
+		col-lg- Large Desktops
+			col-md-2
+				Cuando estemos en medium size
+				se tomará a 2 filas todo el contenido.
+			Si atribuyes un tamaño grid al tamaño
+			medium, automáticamente afectará el tamaño
+			large, sin necesidad de declarar esa clase large.
+	
+///////////////////////////////
+CSS+
+	Cuando quieras declarar un id en css se hace de la sig. forma:
+		id="bs-nav-demo"
+	Se utiliza así:
+		"#bs-nav-demo"
+	<style type="text/css">... </style>
+		Cuando quieras utilizar css dentro de html
+	background: url(__);
+		Cuando quieras poner una imagen en el background
+	background-size: cover;
+		-Se expande TODA la imagen en el background.
+		-Cubre el ancho y el largo. No cambia el aspect
+		ratio (la imagen no se adapta al contenido)
+		-Toma en cuenta el tamaño del body, no de toda la
+		página HTML, al igual que el atributo background-position: center;
+	h1, h3{
+	color: white;
+	}
+		Afecta a dos grupos al mismo tiempo
+	em
+		Al parecer solo funciona con el font-size
+	html{} !!!
+		Afecta TODO el contenido del html. Se utiliza
+		cuando queremos utilizar TODO el contenido, más allá
+		todavía que el body, porque el body aveces se empequeñece
+		y no abarca el 100% de la página cuando usamos ciertos
+		atributos.
+			html{
+				height: 100%;
+			}
+	text-shadow: 0px 4px 3px red;
+		Agrega una sombra roja muy practica
+	text-shadow: 0px 4px 3px red,
+		0px 8px 13px  orange;
+		Agrega DOBLE sombra, una roja y una naranja!
+	text-shadow: 0px 4px 3px rgba(0,0,0,0.4),
+		0px 8px 13px rgba(0,0,0,0.1),
+		0px 18px 23px rgba(0,0,0,0.1);
+		SOMBREADO MUY ELEGANTE, PUEDES UTILIZARLO.	
+
+///////////////////////////////
+ETIQUETAS HTML
+<style>
+	Define el estilo, estética para un archivo HTML
+	Se declara en el head, hasta ARRIBA
+		<head>
+		<style>
+		h1 {color:red;}
+		p {color:blue;}
+		</style>
+		</head>		
+<label>
+	Si el usuario da click al texto de label, habilita
+	el control.
+		<label for="exampleInputEmail1">Email address</label>
+
+		1) Usuario da click en el texto "Email"
+		2) La barra input se activa, proporcionando
+		control al usuario de la barra, como si le hubiera
+		dado click a la barra.
+<nav>
+	Define una colección de links de navegación
+	El encabezado del 90% de las páginas
+
+<i>
+	icon
+Mobile responsive website:
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	Must be inside <head> element, above the <title> tag.
+
+///////////////////////////////
+ATRIBUTOS HTML
+	disabled
+		Deshabilita un botón.
+	for
+		Especifica cual elemento del formulario un label
+		se esta refiriendo (id):
+		<label for="exampleInputEmail1">Email address</label>
+		<input type="email" class="form-control"
+		id="exampleInputEmail1" placeholder="Email">
+	#		
+		<a href="#">
+		Se crea un link a la "nada" o homepage
+
+///////////////////////////////
+CAMBIAR LA INFORMACIÓN DE LA LIBRERÍA BOOTSTRAP (OVERRIDE THE STYLES)
+<style type="text/css">
+	.btn-danger{
+		background: orange;
+	}
+			Aquí podemos cambiarle el estilo a una clase
+			dentro de la librería Bootstrap.
+				(se cambio el color a orange)
+
+///////////////////////////////
+3 FORMAS DE CREAR UN BOTÓN
+	1) HTML PURO
+		<button>hola</button>
+	2) HTML + CSS en el momento
+		<button type="button" style="color: red; font: bold 14px Arial;">holahola</button>
+	3) HTML + Bootstrap
+		<button class="btn btn-success btn-xs">CLICK ME! </button>
+
+///////////////////////////////
+JQUERY (ESTE DEBE IR ANTES QUE EL JS FILE)
+	<script src="http://code.jquery.com/jquery-3.3.1.js" crossorigin="anonymous"></script>
+	Se necesita para las navbar y los DROPDOWN MENUS y la 
+	HAMBURGUER, se necesitan las dos lineas (jquery y js file).
+
+///////////////////////////////
+JAVASCRIPT FILE:
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+///////////////////////////////
+GRID SYSTEM
+	Skeleton of application. Cuadrícula. Puede estar dividido
+	en 12 diferentes columnas, podemos seleccionar cuántos de esas
+	12 unidades de cada elemento debe tomarse.
+	
+	Puedes subdividir el contenido de una cuadricula, AGREGANDO
+	UN ROW dentro del grid
+		<div class="col-md-3 col-sm-6 pink">
+			<div class="row">
+				<div class="col-lg-6 orange">FIRST HALF</div>
+				<div class="col-lg-6 orange">OTHER HALF</div>
+			</div>
+		</div>
+
+///////////////////////////////
+SPECIFICITY+
+	¡Battle of styles with bootstrap!
+	Cuando quieras que funcione los atributos de cierta clase
+	creada en css, debes de checar en el navegador web/ctrl + shit
+	+i qué clases se encuentran arriba de la clase hija, y debes
+	cambiar los atributos de esa clase padre y agregar los de la
+	clase hija. SI EMPIEZAS DECLARANDO LA CLASE HIJA Y DESPÚES LA
+	PADRE, NO FUNCIONARÁ
+		
+		   Clase padre     clase hija (comes second)
+		----------------+-----------------------------
+		.navbar-inverse .navbar-brand{
+		color: white;
+		}
+
+///////////////////////////////
+JQUERY JAVASCRIPT SCRIPTS
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>

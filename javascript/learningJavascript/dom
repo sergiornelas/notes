@@ -1,0 +1,307 @@
+----------------------------WORKING WITH THE DOM----------------------------
+ ⭐️ 1) DOM (Document Object Model):
+	Functionality that browsers have for let javascript interact with the rendered html code.
+	The OBJECT representation of the JS code into the rendered html.
+
+	JAVASCRIPT IS A 'HOSTED LANGUAGE'. THE BROWSER AS HOST ENVIRONMENT EXPOSES THIS DOM API TO YOUR JS CODE 
+	AUTOMATICALLY.
+
+	WINDOW
+		➡️ window
+			Devuelve todo el window object (top most important OBJECT), se muestran los core API que el browser tiene:
+				alert: La FUNCIÓN que emerge el pop up al cargar la página.
+
+				document: OBJETO que controla el codigo html de la página.
+					➡️ console.dir(document)
+						Se muestran las propiedades que tiene el objeto document.
+							- document.documentElement -> your entire <html> rendered content
+							- document.body -> Selects the <body> element node.
+			
+				~TIP: Es valido escribir window.alert(), pero en automático los navegadores convierten el alert(), añadiendo el "window."
+				automáticamente si la función no se encuentra en ningún lugar. El navegador siempre revisa en window object
+				si estas llamando llamando o accesando algo.
+
+ ⭐️ 2) NODOS
+	Javascript CREA OBJETOS que se almacenan en la memoria con los elementos que estén en tu html code.
+	Esa unión entre el objeto JS y el elemento HTML se le llama nodos. Sirven para comunicar JS scripts a HTML.
+		Entire document								--->		Document node
+			<html>											--->		HTML node
+				<head>												--->		HEAD node
+					  <title>DOM Interaction</title>					--->		TITLE node
+				</head>
+				<body>												--->		BODY node
+					<p>hello</p>											--->		P node
+				</body>
+			</html>
+
+	Si observas estan ordenados en jerarquía o árbol, the browser keeps track of the parent-child relations.
+
+	ELEMENT NODES:
+	HTML tags are "element nodes" (or just elements):
+		- Existen métodos que pueden interactuar con esos elementos.
+		- Los métodos y propiedades que existen dependen en el tipo del elemento. (<input> / <p> existen diferentes métodos entre ellos)
+		- Pueden ser seleccionados de diferentes maneras (via Javascript)
+		- Pueden ser creados y removidos! (via Javascript)
+
+	TEXT NODES:
+	No solo existen nodos con las etiquetas de HTML, también crea nodos en texto simple, incluso con las tabulaciones y espacios:
+		<head>												--->		HEAD node
+																	--->		|__ node //la tabulación que hay en antes de <title>
+		____<title>DOM Interaction</title>						--->		TITLE node
+	- También el contenido dentro de los elementos (<p>hola</p> -> "hola") se crearán OBJETOS text nodes.
+	- Element nodes y text nodes tienen diferentes propiedades y métodos.
+	
+	En Google Chrome:
+		- No se muestran los text nodes de empty spaces en Google Chrome, para que sea human readible
+
+ ⭐️ 3) DOM NODE QUERY METHODS
+	Tienen que escanear la página completa, después ejecuta las acciones, lo que es muy demandante en recursos.
+	BASE METHODS (parecido al selector de CSS):
+		✡️.querySelector
+			Retorna el PRIMER ELEMENTO que cumpla con el criterio dado. Puede ser invocada sobre el document o sobre algún elemento. 				En caso de usarse sobre un elemento, las búsqueda se limita a los hijos de ese elemento.
+			Puede seleccionar a través de la clase o id del elemento. Si existen multiples elementos con la misma clase, selecciona first one. 
+				➡️ document.querySelector("#main-title")
+				⬅️ <h1 id="main-title"> Hello </h1>
+				➡️ document.querySelector('ul li:last-of-type'); //aqui indicamos que nos muestre el último
+				⬅️ <li class="list-item">Item 3</li>
+			
+			Otra forma de cambiar las propiedades es directamente desde el objeto DOCUMENT, utilizando las funciones que ya tiene
+			(body, title, etc..):
+				➡️ const z = document.head.querySelector('title')
+				➡️ z.textContent = "Nuevo titulo"
+
+			Seleccionar ETIQUETAS html utilizando querySelector:
+				➡️ const w = document.querySelector('h1')
+
+			Seleccionar etiqueta y seleccionar alguna ETIQUETA QUE ESTÉ EN SU INTERIOR
+				➡️ const x = document.querySelector('header button')
+
+		✡️.querySelectorAll
+			Retorna todos los elementos que cumplan con el criterio dado. Al igual que querySelector puede ser invocada sobre el 
+			document o sobre algún elemento. Siempre retorna un NodeList, el cual no es una array con todas las de la ley (map,reduce,etc)
+				➡️ const allList = document.querySelectorAll(".list-item")
+				⬅️ NodeList []
+				//para acceder a los elementos individuales del NodeList -> allList[0], o puedes usar un for loop
+
+	ELEMENT METHODS:
+		✡️.document.getElementById   &&   ✡️.document.getElementById   &&   ✡️.document.getElementById
+			➡️ document.getElementById('') -> Devuelve el elemento deseado por ID.
+			➡️ document.getElementByClassName('') -> Devuelve el/los elementos deseados y los almacena en un HTMLCollection
+																(similar a un array, pero no es estrictamente un array).
+			➡️ document.getElementByTagName('') -> Lo mismo que el className, solo que ahora selecciona la etiqueta deseada.
+
+	PUEDES JUNTAR ELEMENT Y BASE METHODS EN EL MISMO:
+		➡️ const X = document.getElementById("sergio");
+		➡️ const Y = X.querySelector('.btn--passive') //element with class="btn btn--passive"
+
+ ⭐️ 4) EXPLORING AND CHANGING DOM PROPERTIES
+	Métodos que podemos utilizar para editar las propiedades del elemento directamente con JS:
+		<p id="welcome" class="text-default">Welcome!</p>
+		➡️ const p = document.getElementById("welcome");
+			➡️ p.id //<< welcome
+			➡️ p.className //<< text-default
+			➡️ p.textContent //<< Welcome!
+			➡️ p.className = "new-class" //se cambia el nombre de la clase (SI YA TENÍA ALGUNAS CLASES, ESTAS SE REEMPLAZARÁN.
+			➡️ p.style.backgroundColor = "green"								 //CAMBIA EL ESTILO DESDE JAVASCRIPT!!
+
+		Mostrar todo el contenido de la etiqueta <body>, incluyendo etiquetas hijas.
+			➡️ const x = document.body
+			➡️ console.log(x)
+
+ ⭐️ 5) ATTRIBUTES VS PROPERTIES
+	Atributos (HTML): Los atributos que están dentro de la etiqueta HTML: id="", class="", name="", value="", etc.
+	Propiedades (JS): Valores almacenados en el OBJECTS que fue creado basado en tu código HTML.
+		<p id="welcome" class="text-default">Welcome!</p> //atributos: id="welcome", class = "text-default"...
+		➡️ const p = document.getElementById("welcome");        //propiedades: p.id = welcome, p.class = text-default, p.textContent...
+
+	- Esta sincronización en vivo se realiza a través de los NODOS.
+	- Si actualizas el atributo, la propiedad del objeto se actualizará
+	- Si actualizas la propiedad value, el atributo value NO se actualizará, mientras que otras propiedades si pueden actualizar el atributo:
+		(id, class...)
+	- Puedes actualizar el atributo desde JS así: var.setAttribute('attribute' /*id, class, value...*/, 'new content')
+
+ ⭐️ 6) TRAVERSING THE DOM
+	Moving to elements. It's faster for the browser using his traversing instead of querySelectors.
+		<body>
+		  	<header>
+		   	 	<h1 id="main-title">Dive into the DOM!</h1>
+		 	</header>
+			<ul id="lista">
+			 	<li class="list-item">Item 1</li>
+			    	<li class="list-item">Item 2</li>
+               	    	   	<li class="list-item">Item 3</li>
+		  	</ul>
+		        <input type="text" value="default text">
+	       </body>
+
+		Child
+			Direct child node or element (lo que esta justo adentro)
+			Seleccionamos todos los hijos:
+			➡️ const ul = document.querySelector('ul');
+			
+			✡️.childen
+				➡️ ul.children //(ALL CHILD ELEMENTS)
+				⬅️ HTMLCollection(3)0: li.list-item 1: li.list-item 2: li.list-item
+				➡️ ul.children[1]
+				⬅️ <li class="list-item">Item 2</li>
+
+			✡️.childNodes
+				➡️ ul.childNodes //(ALL CHILD NODES, (INCLUDING TEXTS))
+				⬅️ NodeList(7) [text, li.list-item, text, li.list-item, text, li.list-item, text]
+					0: text, 1: li.list-item, 2: text, 3: li.list-item, 4: text, 5: li.list-item, 6: text
+
+			✡️.firstElementChild
+				➡️ ul.firstElementChild (FIRST ELEMENT)
+				⬅️ <li class="list-item">Item 1</li>
+
+			✡️.lastChild
+				➡️ ul.lastChild (LAST CHILD NODE, (INCLUDING TEXTS))
+				⬅️ #text
+	
+		Parent
+			Direct parent node or element (lo que esta justo afuera)
+			Each node can have only ONE parent (for obvious reasons)
+			➡️ const liFirst = document.querySelector('li')
+
+			✡️.parentNode
+				➡️ liFirst.parentNode //(NEAREST PARENT NODE)
+				⬅️ <ul id="lista">
+
+			✡️.parentElement
+				➡️ liFirst.parentElement //(NEAREST PARENT ELEMENT)
+				⬅️ <ul id="lista">
+				// In almost all cases parentNode it's the same that parentElement, because only element nodes can have child nodes.
+				// Text nodes can not have child nodes.
+
+		Ancestor
+			Direct or indirect parent node/element (todo lo que esta afuera)
+			➡️ const liFirst = document.querySelector('li')
+
+			✡️.closest
+				➡️ liFirst.closest('body') //(TAKE ANY ANCESTOR)
+				⬅️ <body>...</body>
+
+		Sibling
+			Elementos hermanos (en el mismo nivel de la jerarquía)
+			✡️.parentElement
+				➡️ const ul = li.parentElement
+
+			✡️.previousElementSibling 
+				➡️ ul.previousElementSibling //(NEAREST PREVIOUS SIBILING ELEMENT)
+				⬅️ <header>...</header>
+
+			✡️.previousSibling
+				➡️ ul.previousSibling //(NEAREST PREVIOUS SIBILING NODE (INCLUDING TEXT)
+				⬅️ #text
+
+			✡️.nextElementSibling
+				➡️ ul.nextElementSibling //(NEAREST NEXT SIBILING ELEMENT)
+				⬅️ <input type="text" value="default text">
+
+		You can nest traversal:
+			➡️ const ul = document.body.firstElementChild.nextElementSibling;
+
+ ⭐️ 7) STYLING DOM ELEMENTS
+	Via style property
+		- Directly target individual CSS styles (on the element)
+		- Controls styles as inline styles on the element (overwrite any other styles assigned).
+		- Even if they are based on CSS properties, they have adjusted names (eg. background-color -> backgroundColor)
+			➡️ p.style.backgroundColor = "green"
+	
+	Via className
+		- Directly set the CSS classes assigned to the element
+		- Set/Control all classes at once
+		- You can also control the id or other properties
+			HTML:
+			<section class="red-bg">
+			...
+			</section>
+
+			JS:
+			➡️ const section = document.querySelector("section");
+			➡️ section.className = ""; //In <section class attribute replaces to an empty string (clean all style classes in this case)
+
+	Via classList
+		- Conveniently add, remove or toggle CSS classes
+		- Fine-grained control over classes that are added
+		- Can be used with className (with care)
+			➡️ section.classList.contains('')  //check if a class is set
+			➡️ section.classList.add('') //add a new class
+			➡️ section.classList.remove('') //remove a class
+			➡️ section.classList.replace('') //replace a class
+			➡️ section.classList.toggle('') //palanca. Activa o desactiva una clase (si esta la remueve, si no esta la pone)
+
+➡️ const list = document.querySelector('ul')
+➡️ list.innerText = list.innerText + '<li>Item 4 </li>'
+
+ ⭐️ 8) CREATING & INSERTING ELEMENTS
+	HTML string
+		//YOU DON'T HAVE DIRECT ACCESS to the newly render content
+			✡️.innerHTML (REMPLAZA etiquetas HTML a través de un string):
+				➡️ section.innerHTML = '<h2> A new title!</h2>';
+				
+				➡️ X.innerHTML = `
+				    <div class="movie-element">
+				      <img src="${imageUrl}" alt="${title}">
+				    </div>
+				    <div class="movie-element__info">
+				      <h2>${title}</h2>
+				      <p>${rating}/5 stars</p>
+				    </div>
+				  `;
+				//You don't have direct access to the newly render content!
+
+			✡️.insertAdjacentHTML() (AGREGA etiquetas HTML según el parámetro desesado)* 
+				➡️ div.insertAdjacentHTML('beforeend', '<p>Something went wrong!</p>')
+				*beforebegin*
+				<p>
+					  *afterbegin*
+					  foo
+					  *beforeend*
+				</p>
+				*afterend*
+
+		//You HAVE DIRECT ACCESS to the newly render content
+			✡️.createElement()
+				You HAVE DIRECT ACCESS to the newly render content
+				➡️ const X = document.createElement('li');
+
+			✡️.appendChild()  //Only accepts node objects (including text), accepts one single value {SAFE}
+				➡️ list.appendChild(X)
+
+			✡️.append() 
+				➡️ list.append('Some text') //you can add DOMStrings and string as a TEXT NODE
+												//you can add  MULTIPLE NODES separate by comma as multiple arguments
+			✡️.prepend()
+				Same as append(), but insert in the first element
+
+			✡️.before() //inserts in the currently last item
+				/*--------------
+				INSERTING AN ELEMENT MORE THAN ONCE WILL MOVE IT AND NOT COPY IT.
+				If you have an element selected, either because you selected it in the dom with QUERYSELECTOR or because you created it 
+				with CREATEELEMENT() and that element is already part of the dom (it is already rendered), then insert it somewhere 
+				else, this is not copied or anything like that, instead the existing element is detached from the place where it was and moved 
+				to the new place (because: <OBJECTS ARE REFERENCE VALUES>) its' because we ALWAYS WORK WITH THE SAME OBJECT,
+				so of course it's detached from the existing place and moved to the new one.
+				If you want a new one, you have to create a new one with document create element.
+				---------------*/
+
+			✡️.after() / insertAdjacentElement (safari) {SAFE}
+				//inserts it after the selected element
+
+			✡️.cloneNode()
+				- Cuando quieres insertar un node sin moverlo (objects are reference values), sino realmente copiarlo y pegarlo en otro sitio.
+				Este método lo copia y crea uno nuevo (manteniendo sus propiedades).
+				- It takes one optional argument (default: false), simply determines whether a deep clone: all childs and descendent should
+				be done, or note. 
+
+			✡️.replaceWith()
+				Replace with a new one element
+
+			✡️.remove() / parentElement.removeChild(element) (internet Explorer)
+				Remove selected element (a single element). (If you want to remove more than one element use .innerHTML = '')
+
+ ⭐️ 9) NodeList vs HTMLCollection
+	If you add a new element to Nodelist, this will be not reflected in the DOM (querySelection*).
+	HTMLCollection are receptive to new additions (getElementsBy*).
+

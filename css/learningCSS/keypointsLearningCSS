@@ -1,0 +1,31 @@
+Understanding Background Images & Images
+	1) background properties:
+		image, color, position, size, origin, clip, repeat, attachment.
+	2) background Shorthand
+		Escribir propiedades del background en una sola línea.
+	3) filter property (hipster)
+		blur, grayscale, contrast
+	4) Gradients (fosforiloco)
+		lineal and radial
+	5) Multiple backgrounds
+		only one solid color, using transparency can create cool effects
+	6) <img> vs background-image
+		img is better for accessibility but way more difficult to style.
+
+Sizes & Units
+	1) units
+		px, %, rem & em, vh & vw, auto
+	2) the containing block
+		El % value varía dependiendo el { property: value } aplicado.
+	3) { height:100% } issue
+		Aveces esto no funciona, puedes resolverlo de varias formas.
+	4) min/max-width
+		Crear limitaciones a los elementos, sirve mucho para la responsividad.
+	5) em & rem
+		Tamaños que siempre dependen del font-size.
+
+Making our Website Responsive
+	1) Viewport <metatag>
+		Convert hardware pixels to software pixels
+	2) media queries
+		@media

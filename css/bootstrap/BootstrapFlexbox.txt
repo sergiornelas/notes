@@ -1,0 +1,86 @@
+BOOTSTRAP 4.X
+FLEXBOX
+  ATTRIBUTES
+	Flex direction: The start it's on the left side. The end is
+	on the right side.
+	d-flex
+		The content streches to fill the element
+	justify-content-end
+		Mueve el contenido hasta la derecha del elemento
+	justify-content-center
+		Mueve el contenido al centro del elemento
+	justify-content-between
+		Toma todo el espacio disponible y la coloca entre
+		los items.
+	justify-content-around
+		Toma el espacio y lo distribuye entre y alrededor
+		de ellos para que haya un espacio entre ellos.
+
+	Cross direction: By default top to bottom
+	align-items-start
+		Align the content up top
+	align-items-end
+		Align the content bottom
+	align-items-center
+		Align the content to center
+	lead
+		Gives space. Make the text stand out a bit more.
+  GRID + FLEXBOX
+	justify-content-end
+		Mueve el contenido hasta la derecha del elemento
+	justify-content-between
+		Deja un espacio vacío entre el contenido
+	justify-content-around
+		Deja un espacio vacío entre el contenido y en los extremos
+	THE DEFAULT ALIGN ITEM'S VALUE IS STRETCH!!!
+	align-items-start
+		Con esto no se estira el contenido, se alinea.
+	align-self-start
+		Con esto se aline el contenido de UN solo elemento
+		del contenido
+    DIRECTION
+	start align-items-end
+		Coloca los objetos al comienzo (izquierda) y al final
+		(hasta abajo) del elemento
+	flex-row-reverse
+		Invierte el orden de los elementos a right to left
+			Tambien se invierte el orden de la declaración
+			de los objetos no solo la posición.
+	flex-column-reverse
+		Ordena los elementos en columnas (verticalmente)
+		Pero ahora va de abajo hacia arriba
+	justify-content-end
+		Coloca los objetos hasta abajo (de nuestro axis)
+		Comienza la operación al final (de nuestro axis)
+	justify-content-center
+		Coloca los objetos en el centro (de nuestro axis)
+	align-items-start
+		Coloca los objetos en el comienzo (de nuestro axis)
+	flex-md-row
+		Cuando se encuentre el elemento en una ventana de ta-
+		maño medio, arregla los objetos en filas.
+  NAVBARS
+	Comparing to bootstrap 3, now are built with flexbox.
+	Has a default display flex, now we have all those utilities
+	that we can use to space things out.
+	align-items-center
+		Centra elementos de una nav vertical al centro del
+		navegador.
+	nav-tabs
+		El nav tendrá una interfaz similiar a las pestañas
+		de Google.
+	mt-5
+		Margin top 5
+  GRID
+	Extrasmall is now the default
+	m-0
+		Margin 0
+	col
+		Solo col si no le agregas parámetros simplemente va a
+		llenar el elemento el grid system.
+	col-6
+		El elemento SIEMPRE llena el grid system 6 bloques
+  HTML++
+	<section>
+		Similar to div. Is a section of content
+	

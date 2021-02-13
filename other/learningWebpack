@@ -1,0 +1,37 @@
+WEBPACK
+	- Bundle and optimizer
+		Toma todos tus archivos que necesitas en tu aplicación y empaquetarlas
+	 -Bundler that allows you to optimize your files and you hook in various plugins and so-called loaders to transform you file, for example 
+		transpile next generation javascript to current generation javascript.
+	 -Analyzes connections & bundles / Optimizes everything
+
+	HOW IT WORKS
+		- entry (e.g. app.js)
+			El archivo de entrada en el que webpack localiza todo el grafo de dependencias 
+			Busca todos los imports o requires que contenga
+		Webpack trata todos los assets como modulos.
+		Maneja todo tipo de archivo, lo que se conoce como LOADERS: LOADERS PARA JS, LOADERS PARA IMAGENES, PARA CSS.
+			Puedes usar un loader de SASS que convierta el archivo a CSS.
+		Webpack solo entiende de Javascript, son los Loaders los que extienden la funcionalidad para manejar otra clase de archivos.
+
+		Cargado perezoso
+			Descargar el código solo hasta que es necesario
+
+		Comandos tutorial en youtube:
+		npm init -y							//iniciar proyecto de node, con todo "yes" por defecto
+		npm i webpack						//instalar webpack en tu proyecto
+		npm i webpack-cli					//Otro modulo que necesitas para trabajar con webpack (ejecutar webpack desde consola).
+		npx ...									//permite ejecutar modulos que se han instalado en el proyecto 
+												//	(poder usar 'webpack' keyword en la consola)										
+		npx webpack app.js -o output.js	//ahora puedes leer import, export en tus archivos de js
+		
+		Comandos tutorial en youtube KEANU REEVES:
+			npm init -y
+			npm install --dev webpack webpack-cli
+			npx webpack						//el entry file.js debe estar dentro de una carpeta /src
+												//crea el folder /dist, el cual tiene todo el código importado.
+			npm run build					//antes de ejecutarlo, en package.json agregar en "scripts": "build": "webpack"
+			npm i @babel/core @babel/preset-env babel-loader	//install babel
+			npm run build
+			npm install --dev webpack-dev-server
+			npm start

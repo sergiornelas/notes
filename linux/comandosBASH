@@ -1,0 +1,35 @@
+touch .<file><extension>
+	creates a hidden file
+rm -rf <file>
+	(recursive force). Delete a folder and all childs directories that contains.
+cd --
+	Return to user directory (documents, desktop...)
+mv <file><extension> <fileNewName><extension>
+	Cambia el nombre del archivo
+find -name "*main"
+	Busca dentro del sitio que te encuentras en todos los subdirectorios y todo
+	archivos que contengan la palabra "main"
+nautilus <path>
+	abre el gui de una carpeta
+cat file | xclip
+	copia al portapapeles el resultado de ese cat
+
+zip -r folder.zip folder
+
+unzip folder.zip
+
+----------usaa-------------
+netstat -pna | grep 7918
+
+kill -9 `sudo lsof -t -i:7916` &&
+kill -9 `sudo lsof -t -i:7918` &&
+kill -9 `sudo lsof -t -i:8443` &&
+kill -9 `sudo lsof -t -i:20080` &&
+kill -9 `sudo lsof -t -i:20081`
+
+7916:7916
+      - 20080:20080
+      - 20081:20081
+
+Flush changes: $ sudo systemctl daemon-reload
+Restart Docker: $ sudo systemctl restart docker

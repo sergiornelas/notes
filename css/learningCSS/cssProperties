@@ -1,0 +1,239 @@
+=======================================================================================================================
+																		CSS PROPERTIES
+=======================================================================================================================
+
+background	//El fondo del tag.
+	-clip:	//Habilita definir si el fondo se extiende por debajo de un borde potencial, o no. No depende de una imagen.
+			//Importante para bordes en puntos, donde puedes ver contenido debajo de ese borde punteado.
+
+		border-box;	//La imagen ahora se ve por debajo del border punteado (border: dashed black;)
+
+		padding-box;	//El borde ahora no esta por encima de la imagen.
+
+		content-box; //Acorta el contenido o la imagen antes del padding del border (se ve espacio en blanco alrededor).
+
+	-color:	//Color del fondo. No depende de una imagen. Solo puedes agregar un solo color.
+
+	-image:	//Para ingresar una o varias imágenes de fondo.
+
+		url("image.jpg") //Agrega imagen de fondo.
+
+		linear-gradient(); //Estos fondos de colores difuminados también son tratados como imágenes.
+
+		radial-gradient(); //Fondo de color difuminado ahora radial.
+
+	-----------SOLO APLICAN UNA VEZ HAYAS PUESTO IMAGEN: --------------------------------------------
+	-attachment: //Rara vez se usa. Habilita la conducta del scroll de la imagen de fondo. Solo aplica una vez hayas puesto img.
+
+		scroll;	//La imagen se mantiene en su lugar y el contenido se scrolleará.
+
+		fixed;	//La imagen no se corregirá al contendor, sino al viewport.
+
+	-origin:	//Habilita gestionar el área de fondo de la imagen de fondo. Solo aplica una vez hayas puesto img.
+
+		border-box;	//La imagen ahora se ve por debajo del border punteado (border: dashed black;)
+
+		content-box;	//El contenedor ahora solo abarca la imagen sin los bordes y padding (se ven espacios blancos a los lados).
+
+		padding-box;	//El contenedor incluye padding, pero no el borde.
+
+	-position://Mueve la posición de la imagen. El primer valor define x-axis y el segundo y-axis. Solo aplica una vez hayas puesto img.
+				//Si utilizas un valor en porcentaje %, definirá cómo se distribuyen las partes de la imagen que no caben en el contenedor.
+				//Si utilizas dos valores en porcentaje %,el segundo define qué porcentaje del espacio excedido debe ir hacia arriba.
+				//El valor default es 50%. La parte que excede el contenedor de la imagen, 50% se cortará arriba y 50% abajo.
+				//Si utilizas 0% 100%, todo lo que sobra de la imagen se cortará desde arriba y nada cortará abajo.
+
+		center;   //Es lo mismo que poner 50% 50% (se cortará la mitad de lo que sobra de la imagen arriba y abajo).
+
+		left top; //No corta lo que sobra de la imagen en el lado izquierdo y la parte superior de la imagen se alinea al contenedor.
+				    //Es lo mismo que 0% 0%
+
+		left 10% bottom 20%; //Lo que sobra de la imagen, en la izquierda corta 10%, en la parte inferior corta 20%.
+
+		top right; //(w3schools), image in the top right corner.
+
+	-repeat:	//Gestiona si una imagen se repite como mosaico o no: no-repeat;
+
+		repeat-x;	//Solo aparece en x-axis (fila horizontal).
+
+	-size://Una vez establecida la imagen, aqui se modifica el tamaño de la imagen.
+			//Si la imagen es más pequeña que el espacio entonces la imagen aparecerá multiples veces (mosaico) hasta cubrir todo.
+
+		300px 100px;	//Tomará x-axis y y-axis.
+
+		auto 100%;	//Puedes utilizar auto para que la imagen aparezca en su tamaño natural.
+
+		cover;			//Se asegura de cubrir todo el contenedor, aunque corta la imagen.
+
+		contain;		//Se asegura que la imagen completa es visible, pero no se asegura que el contenedor sea cubrido.
+	
+clear:			//Indicates which sides of an element's box(es) may not be adjacent to an earlier floating box.
+	both			//Clear left and right floats.
+
+color:			//El color del texto.
+
+cursor:			//Agrega propiedades al colocar el cursor sobre el tag.
+	pointer		//El cursor muestra la manita, enfatizando que es clickeable el tag.
+
+display:			//Forma en que aparecerá el tag en la página. Nos permite cambiar la conducta default que tienen los tags.
+	block			//Convierte un inline tag a block tag.
+
+	none			//No se muestra el tag en la página (se descarta en el document flow). Util para conjugarlo con JS.
+
+	inline-block	//Mixes the behaviour of both inline and block level tags:
+					//Tags go inline (next to each other) but they still behave like block level tags when it comes setting margins, paddings...
+
+filter:			//Allows to change the visual appearance of an element by applying a filter.
+	blur(10px);	//Hace que el tag se vea borroso.
+
+	grayscale(40%)	//Porcentage what defines how much you want to turn it to grey.
+
+float:			//Overwrite the default positioning and tell the browser to push an element to the left or the right of the page.
+	right			//Moves element to the right, take out of the document flow.
+
+font				//La fuente del texto.
+	-family		//Selecciona la fuente desada del texto.
+
+	-inherit		//Aplica los valores heredados. En lugar de usar browser default fonts utiliza los que agregamos en nuestra página.
+
+	-size			//Tamaño de la letra.
+
+	-weight		//Hacer "negritas" el texto.
+
+list-style:		//Pivotes de una lista.
+	 none			//Sin pivotes en cada elemento de la lista.
+
+max-width:	//Define un valor máximo para el ancho. Siempre usalo en combinación con { width : x } para que funcione.
+
+min-width:	//Define un valor mínimo que puede alcanzar el ancho de un elemento. Antes tiene que haber { width : x } declarado.
+
+outline:			//Un borde superficial alrededor del tag (no se refiere al border del box, este es uno con valores distintos).
+
+text
+	-align:			//Para alinear el texto de un tag a tu gusto.
+
+	-decoration:	//Modifica cierta decoración al texto (tachado, subrayado...). none para quitar el subrayado de anchor tag.
+
+	-indent:		//Agrega una tabulación al principio de la linea, como se aprecia en los libros. Puedes usar px.
+
+	-shadow:		//Sombreado del texto. (1px 1px 2px black -> offset-x | offset-y | blur-radius | color).
+
+	-transform:	//Convertir el texto seleccionado.
+
+		uppercase	//A mayúsculas.
+
+		capitalize	//inicial con mayúscula ().
+
+vertical-align:	//Alinear contenido de un tag con otro tag. (Hay que agregar esta regla en ambos tag para que se igualen verticalmente).
+					//Util para cuando quieras cubrir pequeños espacios en blanco.
+	middle		//Se alinea enmedio.
+
+visibility:			//Visibilidad del tag.
+	hidden		//Tag is invisible, but it's not removed from document flow (a diferencia de display: none).
+
+======BOX MODEL PROPERTIES===========================================================================================
+This properties can't be assigned on inline tags
+
+border:			//Borde del tag.
+	-bottom/...	//Añade estilo a lados especificos.
+
+	-color			//Color del borde.
+
+	-radius		//Redondea las esquinas. Si pones 50% se crea un círculo perfecto.
+
+	-style			//Estilo del borde (dashed, solid).
+
+	-width		//Anchura del borde.
+
+	none			//La unica forma de quitar los bordes de los input
+
+box-shadow:		//Añade sombra al tag
+	2px 3px 1px 3px green
+					//2px para X-axis, 3px para Y-axis, 1px para borrosidad, 3px para repartir sombra más allá de los bordes, color verde.
+
+	inset			//Se agrega sombra al interior del tag. Da un aspecto de profundidad.
+
+box-sizing:		//Gestiona si el comportamiento de un box si permite sobrepasar el canvas (content), o se ajusta a él (border).
+	content-box	//Comportamiento por defecto. El contenido mismo del elemento.
+
+	border-box	//La caja del tag. El estilo afecta a la caja entera del tag, no solo el contenido de la caja:
+					//(Incluye el padding y border, y no incluye el margin).
+
+height:			//Altura del tag (afecta el contenido dentro del tag, no el box).
+
+margin:			//Separación afuera del tag.
+	auto			//Will automatically fill the available space to the left and right equally to center the element.
+					//Solo funciona horizontalmente en block level elements con un width asignado explicitamente.
+
+padding:			//Espacio entre el contenido interno y el borde del tag.
+
+width:				//Anchura del tag (afecta el contenido dentro del tag, no el box).
+	30%			//El ancho del tag será de 30% respecto al total del tag padre inmediato.
+
+======PSEUDO CLASSES==================================================================================================
+
+:active			//Cuando el tag recibe alguna acción concreta (click, enter...).
+
+:focus			//Está preparado para recibir acciones al haber dado click o seleccionar usando tabulación.
+
+:hover			//Al colocar el cursor en el tag, realiza alguna acción.
+
+:last-of-type	//Selecciona el último tag de ese tipo en la página.
+
+:not(element)//Selects all elements that DOESN'T have the argument inside parenthesis.
+
+======PSEUDO ELEMENTS================================================================================================
+
+::after			//Insert some text after the content of each element:
+	{content}		//Content that will be added. Por ejemplo: {content: "Sergio;"}
+
+::before		//Insert some text before the content of each element:
+	{content}		//Content that will be added. Por ejemplo: {content: "Sergio;"}
+
+::first-letter	//Al primer carácter del tag, realiza alguna acción.
+
+======POSITIONING ELEMENTS============================================================================================
+
+position:			//Cambiar el posicionamiento de un elemento (X, Y y Z). Funciona igual tanto con inline elements como block elements.
+
+1	static			//Default value. Sigue el document flow. El elemento respeta su posición respecto del elemento padre y sus hermanos 
+        (Default)		//que determina el orden en el que se imprime en la pantalla.
+
+2	relative		//Libera al elemento de su POSICIÓN ORIGINAL y combinado con top, bottom, left y right, nos permite desplazarlo 
+  (Element itself)	//respecto a ella. La posición del resto de elementos no es afectada.
+					//<Keeps the element in the document flow>
+
+3	absolute		//Igual que relative, pero los atributos top/bottom/left/right lo posicionarán respecto del PRIMER ELEMENTO PADRE con 
+  (Another elem.)	//un valor de position DIFERENTE a static o initial, o en caso de no existir se posicionará respecto al elemento HTML.
+  (or HTML elem.)	//El espacio liberado pasa a ser ocupado por el resto de elementos hermanos.
+					//La anchura y altura del tag que tenga esta declaración se encogerá hasta cubrir solo el contenido.
+					//<Take the element out of the document flow>
+
+4	fixed			//Idéntico a absolute excepto que el elemento se posiciona siempre respecto del :ROOT, por lo que no es afectado por 
+      (Viewport)		//ningún scroll, ni siquiera el del documento. Bueno para NAV BAR.
+					//Si varios elementos hermanos tienen fixed, la aparición de éstos se definirá conforme al orden que fueron declarados
+					//en HTML.
+					//<Take the element out of the document flow>
+
+	sticky			//Combinación de relative y fixed. Bajas el scroll y el elemento se queda arriba. Necesita de un top/right declaración.
+  (Viewport and	//The element stops being fixed as soon as it reaches the end of its parent element.
+  another elem.)
+
+overflow:			//Acciones que tomar cuando los hijos del elemento se desbordan del canvas.
+	auto			//Similar to scroll, but it adds scrollbars only when necessary.
+	
+	hidden		//It will hide part of the element that it's outside of the parent. Si esta completamente desbordado pues no aparecerá.
+					//Si el parent es body, entonces debes poner la regla overflow: hidden; en html { } y body { }.
+	
+	scroll			//Si se desborda el elemento aparecerá scroll bar.
+
+top/right... :		//Necesita position: no static para aplicar. Agrega margen-espacio utilizando la propiedad deseada.
+
+z-index:			//Necesita position: no static para aplicar. Move an element above or below every element on the page.
+					//Útil cuando existen varios elementos hermanos utilizando position: diferente de static.
+					//El elemento no puede ser movido below or above del parent element en el que se encuentra (stacking context).
+
+	auto			//Valor por default que tiene cada el elemento en el website, equivale a 0.
+
+	-1				//El elemento se coloca por debajo del resto de elementos. Útil para background images. Puedes cambiar el número.
+

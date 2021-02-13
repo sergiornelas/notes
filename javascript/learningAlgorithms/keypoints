@@ -1,0 +1,37 @@
+OBJECT STRUCTURE
+➡️ const logEntry = {
+		name: Sergio,
+		operation: 'ADD'
+	};
+		//name: Sergio = PROPERTY
+		//name		   = KEY (o PROPERTY NAME) -> es un string
+		//Sergio 		   = VALUE				      	        -> puede ser cualquier cosa
+
+FACEPALM MOMENT
+	If second parameter is evaluated to FALSE, the for loop is TERMINATED.
+
+TOMAR EL ÚLTIMO VALOR DE UN ARREGLO
+	➡️ let lastPointer = arreglo.length - 1;
+
+COMPROBAR SI UN VALOR DENTRO DE UN ARREGLO NO EXISTE
+	➡️ let correctIndex = ...						//código de obtención de algún valor específico de un arreglo.
+	➡️ if (correctIndex === -1) { return false }	//<< false
+
+TOMAR UN CARÁCTER DE UN STRING
+	➡️ const x = "hola";
+	➡️ const char = x[1]	//<< 'o'
+
+SI EL CARÁCTER DE UN STRING EXISTE, INCREMENTA 1, DE OTRA MANERA ES IGUAL A 1
+	➡️ let letter = first[i]; 												// i es el incremental del bucle for
+	➡️ objeto[letter] ? (objeto[letter] += 1) : (objeto[letter] = 1);
+
+LOOP PARA CADA PROPIEDAD DE UN OBJETO
+	➡️  for(key in obj1){ console.log(obj1[key], ":", key) }	//key SI SE REFIERE al key del objeto
+
+CONDICIÓN PARA SABER SI UN DATO ESPECÍFICO SE ENCUENTRA DENTRO DE UN OBJETO
+	➡️ if (!(key ** 2 in objeto)) { return false }	//puedes usar "in" para ello
+
+CONDICIÓN PARA SABER SI EL *VALOR* DE LA *PROPIEDAD* DEL OBJETO 1 Y EL OBJETO 2 ES DISTINTO
+	➡️ for(let key in obj1){
+			if(countNum1[key] !== countNum2[key]) return true;   }	//Si es distinto el valor de la propiedad del obj1 y el obj2, regresa true
+

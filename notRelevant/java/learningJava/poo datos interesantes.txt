@@ -1,0 +1,41 @@
+a +=b; ----->  a = a + b;
+
+i++ ------> i += 1;
+
+N-=3; ------> N = N - 3;
+N*=77; ------> N = N * 77;
+
+a %= 2; //el residuo de la división de "a" entre 2
+
+api java: un montón de CLASES predeterminadas en java
+
+!= : es distinto de...
+
+!: Lo contrario //Lo viste en resultado = true -->> if(!resultado) = System.out.println("Es falso"); {imprimió lo contrario}  
+
+si estuviese el else, no se ocurrirá la primer condicional de arriba. "Si ocurre esto. O SI NO ocurrirá esto
+
+Bucle For
+Cuando tenemos claro un punto de inicio y 
+un punto de finalización.
+
+Bucle While
+cuando no sabemos cuando finalizará una condición dada
+
+Bucle DO WHILE
+Casi igual al anterior, con la diferencia de que 
+la condición dada se ejecuta al menos una vez.
+
+ 
+cuando queramos poner una condición en la que si no ocurre,
+se repita, utilizaremos un bucle do while
+
+F7 DEBUG LINEA POR LINEA
+F8 PARA SALTAR EL MÉTODO
+
+hay que aprender a ponernos zapatos en vez de
+alfombrar el mundo
+
+
+Bloque Java 3.5: Bucles Anidados
+https://dl.dropboxusercontent.com/u/58729019/Practica%202.pdf

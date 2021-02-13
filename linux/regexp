@@ -1,0 +1,29 @@
+remote: GitLab: Committer's email 'PL0F358@eagle.usaa.com' does not follow the pattern '@([^eE][a-zA-Z]+\.)?usaa\.com$'
+To https://testgitlab.usaa.com/PL0F358/testing.git
+
+PL0F358@eagle.usaa.com
+@([^eE][a-zA-Z]+\.)?usaa\.com$
+	
+	@([no empieza con e o E][tiene letras del abecedario mayúsculas y minúsculas].)(solo tomará un match)usaa.com
+	@PL0F358.usaa.com
+
+ \.
+	Match	cat.
+	Match	896.
+	Match	?=+.
+
+ [h]
+	Match	hog
+	Skip      dog
+	Skip      bog
+		//Hace match solo con las palabras que contenga los valores dentro y descarta los que no contengan el valor dentro.
+
+[^abc]
+	Skip abc
+		//Descarta la palabra completa [abc], más no descarta la letra a,b o c.
+
+[0-6]
+	//will only match any single digit character from zero to six
+
+ [^n-p]
+	//will only match any single character except for letters n to p.

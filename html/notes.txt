@@ -1,0 +1,176 @@
+TABLES
+
+<table>
+	Tabla
+<table border="1">
+	Table con contorno
+---------------------------
+<thead>  +__+__+_
+	Encabezado de tabla, en negrito (columna)
+	<th> (table head)
+		Encabezado de tabla, en negrito
+
+<tbody> |  |  |
+	Cuerpo, elementos de la tabla (fila)
+	<tr> (filas)
+		Table row
+		<td> (celda)
+			elements in the row
+
+<img width="x">
+	Establece ancho y largo de una imagen
+----------------------------------------------------
+SUBLIME TEXT HACK!!
+	Hold ctrl when you click and you
+	will get additional cursors!!!
+
+----------------------------------------------------
+FORMS
+
+<input>
+	<input type="text">
+		Ingresa texto en una caja
+	<input type="color">
+		Caja de seleccionar color (igual a paint)
+	<input type="checkbox">
+		Checkbox (permite select ir or unselected) 
+	<input type="radio">
+		Checkbox redondito (when the user has one choice)
+		(male, female)
+	<input type="password">
+		Ingresa texto en una caja (no se ve el texto)
+	<input type="submit">
+		Botón con texto en la caja "Enviar"
+	<input type="button">
+		El botón es un botón clickeable
+	<input name="username">
+		Se le añade un alias al input al cual
+		este asignado el nombre
+		(si se encuentra dentro de una tag
+		de formulario, al presionar "enviar"
+		(input submit) la url del html
+		aparecerán los ?datos
+<button>
+	Añade un botón (el texto de enmedio aparecerá
+	en el botón)
+		<button>Submit</button>
+	Aquí si puedes poner CONTENIDO DENTRO del botón
+
+<button type="button" style="color: red; font: bold 14px Arial;">holahola</button>
+	Este botón se declara usando ya css dentro del html
+
+
+placeholder
+	texto que es añadido temporalmente en las
+	cajas de texto (letras grises)
+		... placeholder="username"
+
+--------------------------
+<form>
+	Agrega todos los imputs en un solo div en conjunto (Formulario)
+	-Is a block element (jumps line)
+	-Utilizado junto con el input "submit"
+	(dentro de la etiqueta de <form>)
+	se ENVIARÁ los datos de entrada de tus imputs
+
+<iframe>
+	Muestra el contenido de un archivo html dentro
+	de otro html
+
+<form action="">
+	A donde el formulario envía datos
+
+	A qué página se dirige una vez se llene el form.
+		<form action="http://www.wikipedia.org">
+
+<form method="">
+	Que HTTP método se utilizará (GET/POST)
+
+<label>
+	Nombres que corresponden a inputs.
+	Conectar inputs con datos de entrada.
+for=""
+	Connect label to the input
+	(tiene que hacer match con el id)
+id=""
+	identificador de un input
+	(tiene que hacer match con el for)
+
+Como debe quedar un formulario con sus labels
+<form>
+<label for="username">Username:</label>
+	<input id="username type="text" placeholder="username">
+</form>
+
+----------------------------------------------------
+VALIDATIONS
+Don't leave your email blank, or your password must be
+greater than 10 characters, your email must follow a valid
+email syntax.
+
+required (attribute)
+	This input doesn't must be blank
+
+type="email"
+	Exigue el @ para corroborar que es un correo elect.
+
+name="" (nombrar a un input)
+	Aparecerá en el URL
+
+	Ponerle a dos inputs el mismo nombre, nos dará
+	la posibilidad de seleccionar solo uno
+
+	Alias, identificador (se utiliza para que varios
+	radio inputs sean nombrados con el mismo nombre
+	y así poder solo seleccionar UNO de ellos).
+		<form>
+		<label for="dogs">Dogs</label>
+		<input name="petChoice" id="dogs" type="radio">
+
+		<label for="cats">Cats</label>
+		<input name="petChoice" id="cats" type="radio">	
+		</form>
+	Se utiliza cuando quieres que dos imput tengan el mismo,
+	estén conectados. 
+	Is used behind the scenes to figure out how to send
+	the data what should we send the data in the request.
+
+Al final del formulario, justo antes de llegar a </form>
+el input que pongas al final será el que activará e
+formulario.
+	<button>Go!</button>
+
+value=""
+	Le da un valor al input, y aparecerá en la dirección
+	URL
+		Si un input no tiene ningún value, el nave
+		gador lo interpretará como ON o OFF, o garabatos
+		[ :) :| :( ]
+	Si lo usas en un input text o input email, aparecerá el value como
+	si fuese escrito por un tercero.
+
+select=""
+	Cuadro de opciones múltiples
+	<option>
+		Las opciones dentro del select
+
+<textarea>
+	Cuadro de texto
+		rows="" cols=""
+		filas y columnas, capacidad del textarea
+
+minlength="" maxlength=""
+	mínimo y máximos carácteres en un input
+
+pattern=".{5,10}"
+	Establece un rango de mínimos y máximos carácteres se necesitan
+
+required title="5 to 10 characters"
+	Aparece un globo con texto diciendo ese mensaje: "__"
+-------------------------------------------------------------------
+<label class="Age">Birthday:</label>
+		<!-- Month -->
+		<select class="Age" name="Month">
+
+...
+Esto lo ves a fondo en form_exercise.html

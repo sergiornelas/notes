@@ -1,0 +1,529 @@
+Min	Porcentaje TOTAL
+1260 -> 100  %
+350    -> 27.77%
+
+El curso de Cole Steele de CSS tiene 488 minutos (8.13 hrs). Este curso tiene una duración de 1260 min (21hrs).
+{Terminada la sección 6. Positioning...}	("hasta" fue el último video palomeado).
+
+Basic Track:
+	Getting started - Positioning.
+Advanced:
+	Background & Images - Working with Text & Fonts.
+Expert:
+	Flexbox - Sass Introduction
+
+HTML reminders:
+- Block-level elements are rendered as a block and hence take up all the available horizontal space. You can set margin-top and margin 
+   bottom and two block-level elements will render in two different lines.
+	Examples are: <div> , <section> , <article> , <nav>  but also <h1> , <h2>  etc and <p> .
+	<p> tag tiene un margen de 16 px por default.
+	<body> tag tiene un margen de 8 px por default.
+
+	Recordar que las listas desordenadas <ul> tienen un padding y margin left por defecto.
+
+- Inline elements on the other hand only take up the space they require to fit their content in. Hence two inline-elements will fit into the 
+   same line (as long as the combined content doesn't take up the entire space in which case a line break would be added).
+	+ They also use the box-model you learned about but margin-top  and margin-bottom  have no effect on the element.
+	+ padding-top  and padding-bottom  also have a different effect.
+	+ Setting a width or height  on an inline element also has no effect.
+	Examples:  <a> , <span> , <img>
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+⭐️ 1) Three ways of adding CSS onto a HTML file:
+		1) INLINE STYLE:
+			<section style="background: #red;">
+		2) STYLE TAG:
+			<style>
+				section {	// Esto afectará a todos los <section/> del html
+				    background: red
+				}
+			</style>
+		3) CSS FILE:	(recomended)
+			<link rel="stylesheet" href="main.css">
+
+⭐️ 2) SEMANTHICS
+	Selector
+		div, .blog-post, #main-title, [disabled], *
+
+	Property
+		background-color, width, color, margin ...
+
+	Values
+		red, 30%, #fa923f, 10px, block
+		- Values are tightly coupled to specific property.
+		- Types of values:
+			Pre-defined options
+				display: block;
+				overflow: auto;
+			Colors
+				background: red;
+				color: #fa923f;
+				color: #ccc;
+			Length, sizes & numbers
+				heigh: 100px;
+				width: 20%;
+				order: 1;
+			Functions
+				background: url (...);
+				transform: scale (...);
+
+	Declaration:
+		background: red;
+
+	Rule
+		section {
+			background: red
+		}
+
+⭐️ 3) USEFULL LINKS
+		GOOGLE FONTS
+			https://fonts.google.com/
+		WEB BROWSER COMPATIBILITY
+			https://caniuse.com/
+		CHECK THE PIXEL RATIO BETWEEN DEVICES AND FOR CREATING MEDIA QUERIES
+			https://www.mydevice.io/
+
+⭐️ 4) UNIVERSAL SELECTOR	(rarely you use this)
+	* {
+		//No funciona igual que body { } ya que applies on EVERY element on the page.
+		//Se suele usar para poner box-sizing: border-box; (el estilo afecte a la caja entera del tag, no solo el contenido de la caja).
+	}
+
+⭐️ 5) ATTRIBUTES
+	<button disabled>	//(disabled is attribute
+		Click
+	</button>
+
+	ADD STYLE TO AN ATTRIBUTE (applies on all elements that have that attribute)
+		[disabled] {
+			color: red
+		}
+
+⭐️ 6) PRIORITY SPECIFITY
+	1) Inline style 										(<div style="..." > )
+	2) id selectors									(#titulo { ... } )
+	3) class, :pseudo-class and [attribute] style	(.formulario { ... } )
+	4) tag and ::pseudo-element style				( h1 { ... } )
+	5) browser default								(at Google Chrome)
+	6) Inheritance									
+	
+	- If you use multiple selectors (combinator) you create a higher specifity.
+	- Tipically, the rule with more information wins over rules with less information.
+
+⭐️ 7) INHERITANCE
+	An element also inherits some styles of the parent element.
+	It's an important concept for passing styles down without explicitly selecting an element.
+		body {		//este estilo aplicará a toda la página.
+			font-family: 'Montserrat', sans-serif;
+		}
+
+	Si quieres utilizar la fuente que esta en herencia de la página, pero hay un selector que esta estorbando con otro rule:
+		font-family: inherit
+
+⭐️ 8) COMBINATOR
+	Allows us to combine multiple selectors to be more precise about what we want to select.
+	ADJACENT SIBLING
+		h2 + p { ... }
+			"Assigns it to all paragraphs that DIRECTLY follow a h2 tag":
+			<div>
+				<h2>Not applied</h2>
+				<p>CSS applied</p>
+				<h2>Not applied</h2>
+				...
+		Elements share the same parent.
+		Second element comes after first element
+		
+	GENERAL SIBLING
+		h2 ~ p { ... }
+			"All paragraphs get the same style, even though the second one doesn't directly follow a h2 tag"
+			<div>
+				<h2>Not applied</h2>
+				<p>CSS applied</p>
+				<h2>Not applied</h2>
+				<h3>Not applied</h3>
+				<p>CSS applied</p>
+				...
+			It's only important that there is a h2 sibling.
+		Elements share the same parent.
+		Second element comes after first element
+
+	CHILD
+		div > p { ... }
+			"Have a style on the first and last paragraph but not on the one which is nested inside the article"
+			<div>
+				<div>Not applied</div>
+				<p>CSS applied</p>
+				<div>Not applied</div>
+				<article>
+					<p>Not applied</p>
+				</article>
+				<p>CSS applied</p>
+				...
+			Any paragraph that is a DIRECT CHILD of a div should get that style.
+		Second element is a direct child of first element
+
+	DESCENDANT
+		The level doesn't matter if they are a direct child of the div or not.
+		div p { ... }
+			<div>
+				<div>Not applied</div>
+				<p>CSS applied</p>
+				<div>Not applied</div>
+				<article>
+					<p>CSS applied</p>
+				</article>
+				<p>CSS applied</p>
+				...
+		Second element is a descendant of the first element.
+
+⭐️ 9) MARGIN COLLAPSING (cuando se intersectan dos márgenes)
+	This is enforced by CSS to ensure that you don't get two big distances between the elements.
+
+	ADJACENT SIBLINGS
+	If you got two elements that are next to each other and with a certain margin, the margins between them are actually collapsed
+	TO ONE MARGIN. The bigger margin wins.
+	To lead with this, is recommended to use margin-top or margin-bottom
+
+	<div class="caja1"> Caja 1</div>						.caja1 {
+	<div class="caja2"> Caja 2</div>							  margin-bottom: 15px;
+															}
+
+															.caja2 {
+																margin-top: 30px;
+															}
+
+															/*
+																El margen aqui intersecta, pero el margen más chico (15px de caja1) se ignora
+																y solo se toma en cuenta el más grande (30px de caja2).
+															*/
+	
+	A PARENT WITH CHILDREN THAT HAVE MARGIN
+	To be precise, the first and/ or last or the only child has to have margins (top and/ or bottom). In that case, the parent elements margin 		will collapse with the child element(s)' margins. Again, the bigger margin wins and will be applied to the parent element.
+
+		<div class="caja1"> 								.caja1 {
+			<div class="caja2"> Caja 2</div>					margin-top: 15px;	
+		</div>												}
+
+															.caja2 {
+																margin-top: 30px;	
+															}
+
+															/* 
+																Si caja1 tuviese el margin-top:30px y caja2 margin-top:15px, el resultado
+																visual es el mismo ya que en ambos casos el margen más grande es 30 px.
+																Se ignora el margin-top más chico.
+															*/
+
+	AN EMPTY ELEMENT WITH MARGINS
+	This case probably doesn't occur that often but if you got an element with no content, no padding, no border and no height, then the
+	top and bottom margin will be merged into one single margin. Again, the bigger one wins.
+
+⭐️ 10) SHORTHAND PROPERTIES
+	Combine values of multiple properties in a single property (the shorthand property):
+		-> border: 5px black solid;
+		Es una manera corta de escribir:
+		{ 
+			border-style: solid; border-color: black; border-width: 5px;
+		}
+
+		-> margin: 5px 10px 5px 10px
+		Es una manera corta de escribir:
+		{ 
+			margin-top: 5px; margin-right:10px; margin-bottom: 5px; margin-left: 10px
+		}
+
+		-> margin: 5px 10px (OJO)
+		Cuando pones solo dos parámetros: (5px top & bottom, 10px left & right).	//funciona igual con padding.
+
+⭐️ 11) DEFAULT WIDTH & HEIGHT VALUES IN BLOCK ELEMENTS
+	WIDTH
+		- Block level elements always take the full available width by default (width: 100%)
+	HEIGHT
+		- 100% refers to the available height given by the parent container, <it is only as big as it needs to be>.
+		- Si quieres que un <div> tenga el tamaño de tu ventanta completa:
+			html,		//selecciona todas las tag adyacentes de tu div
+			body{
+				height: 100%;
+			}
+			div{
+				height: 100%;		//y ahora si ajustas la altura del div al 100%
+			}
+
+⭐️ 12) CONTENT BOX (REALLY USEFULL)
+	- (Cuando agregas width, height a un tag y en la página se muestra que rebasa el canvas del navegador, hay que mover un scroll bar)
+	- IF WE SET A WIDTH AND HEIGHT ON A TAG, WE SET WIDTH AND HEIGHT OF THE CONTENT, NOT OF THE ENTIRE BOX, INCLUDING 
+	   PADDING AND BORDER.
+	 -You can set the box using box-sizing: border-box. Ahora WIDTH & HEIGHT INCLUYEN PADDING Y BORDER, y no incluyen el margin.
+	- It's actually so common that you often overwrite the styling for all your elements to always use box-sizing: border-box because
+	   it's more convenient to think of the height and width refering to the entire box without margin than to just the content:
+		* { box using box-sizing: border-box; }
+
+	ES DECIR, SI TIENES:
+		.caja1 {
+			box-sizing: border-box;
+
+			width: 5000px;
+			padding-left: 300px;
+		}
+
+		Al momento de renderizar en el navegador, el contenido del tag en lugar de ser de 5000px (por el width establecido arriba), será
+		de 4700px porque con la declaración { box-sizing: border-box; } contabiliza el largo 5000px como TOTAL de la anchura del Tag.
+		Es decir los 300px del padding-left estan contabilizados dentro de width:5000px;
+
+⭐️ 13) CSS FUNCTIONS
+	They are property values.
+	CALC()
+		Makes a simple calculation:
+			width: calc(100% - 49px);
+
+	LINEAR-GRADIENT(X, Y)
+		background: linear-gradient(to top, rgba(80, 68, 18, 0.6) 10%, transparent)
+
+		X :   Direction of the gradiant. Si pones un color éste parametro será ignorado.
+				+ Default is Vertically, It  is a perfect line from top to bottom.
+				+ to bottom : Means that from top to bottom.
+				+ to left bottom: Ahora el resultado será en diagonal. de izquierda inferior a derecha superior.
+				+ 30deg : El gradiente tendrá un ángulo de 30 grados.
+		Y:	Another styles
+				+ transparent : Crea una transparencia que se va difuminando, es muy interesante.
+				+ <green> 70% : 70% del total del gradiente será verde puro.
+
+	RADIAL-GRADIENT(X, Y)
+		X:	Shape or position of the gradiant. Por default es un elipse.
+				+ circle : El gradiente es un círculo.
+				+ at top : El gradiente comienza en la parte superior.
+				+ 20% 50% : It's moved 20% from the left, and 50% from the top.
+
+		Y:	Size of the gradient.
+				+ 20px : El tamaño del gradient será de 20px.
+				+ farthest-side : Until it transitions to the outermost color, the ending shape touches the farthest-side.
+				+ closest-side : Lo opuesto a farthest-side, the outermost circle of the gradient apenas toca el side del container.
+				+ closest-corner: Hasta que el outermost circle toca la esquina más cercana.
+				+ <green> 70% : Igual que en linear-gradient. Al llegar al 70% realiza un alto de ese color.
+	RGB()
+		Selecciona un color utilizando este estándar:
+			rgb(24,53,77);
+
+	RGBA()
+		Lo mismo que rgb ahora con Alpha (transparencia)
+			rgb(24,53,77, 0.5);	//transparencia de 50%
+
+	URL()
+		Sirve para poner background images.
+		Allows us to reference an image file which will be loaded thereafter.
+			background: url("freedom.jpg");
+			background: url("https://...");
+
+			Si quieres que se visualize la imagen, debes también poner las propiedades width y height.
+
+⭐️ 14) VISUAL STUDIO CODE "BUG"
+	Si existen whitespaces entre las etiquetas HTML, el navegador las interpretará como carácteres y se mostrarán esos espacios
+	blancos en el browser. Intenta pegar las etiquetas para que este error no ocurra.
+
+⭐️ 15) PSEUDO CLASSES & PSEUDO ELEMENTS
+	PSEUDO CLASSES
+		Defines the style of a SPECIAL STATE of an element
+			tag:active
+	
+	PSEUDO ELEMENTS
+		Defines the style of a SPECIFIC PART of an element.
+			tag::first-letter
+
+⭐️ 16) CHAIN SELECTORS
+	<a href="#" class="active">
+	-----------
+	a.active { ... }	//anchor tag is next to the class (NO WHITE SPACE). We want to select an anchor tag that has the active class.
+	Útil cuando quieras crear clases con el mismo nombre pero en función al tag correspondiente realizará otras acciones.
+	Si lo pones separado: a .active { ... } se interpretará como Descendant Combinator.
+	
+	Otro ejemplo:
+		a:not(.active){	//seleccionará todas las anchor tag que NO tengan la clase ".active"
+			color:blue;
+		}
+
+⭐️ 17) CLASS SELECTORS VS ID SELECTORS.
+	- Using ID just to apply a style is not recommended.
+	- Use class selectors even when you have only one element desired to style (as id works) because ID introduces some other effects
+	   which are not "optimal".
+
+⭐️ 18) TELETRANSPORT inside web page
+	<a href="#intro">Intro</a>	//Al darle click a ese anchor, el navegador brincará a la section con ese id correspondiente.
+	...
+	<section id="intro">
+	
+	Esto es HTML, no CSS.
+
+⭐️ 18) !IMPORTANT
+	OVERRIDES SPECIFITY AND ALL OTHER SELECTORS. It would always be applied.
+	div { 
+		color: red !important;	//This declaration always wins.
+	}
+	In general, don't use !important because you create bad habits, instead of writing better CSS code.
+
+⭐️ 19) STACKING CONTEXT
+	Created when applying fixed/sticky or absolute/relative in combination with z-index.
+	Defines stacking behaviour of child elements.
+
+⭐️ 20) BACKGROUND SHORTHAND
+		background: url(...) position/size repeat origin clip attachment
+		➡️ background: url("freedom.jpg") left 10% bottom 20%/cover no-repeat border-box;	//border-box aplicará a origin y clip aqui.
+
+⭐️ 21) TRICK PARA HACER QUE UNA IMAGEN RESPETE EL ESTILO DE SU CONTENEDOR (la imagen como ícono en el navbar)
+		1) El tag del contenedor debe ser block element, o agregarle esa característica con CSS.
+		2) Agregas width o height al tag del contenedor.
+		3) Agregas width o height100% al tag de la imagen.
+
+		.main-header__brand{				//<a href="index.html" class="main-header__brand">
+			display: inline-block;	//1)		//Con inline-block la imagen si respetará el width del contenedor.
+			width: 20px;			//2)
+		}
+
+		.main-header__brand img{			//<img src="images/uhost-icon.png"	Es una imagen dentro del anchor tag ( <a><img></a> )
+			width: 100%;			//3)		
+		}
+		
+		Hacemos todo este "hacky" solution porque no podemos usar <background-image> properties de CSS en imágenes normales.
+		Pero si vas a hacer un estilo complejo sobre una imagen, es recomendable usar <background-image>, sin embargo lo malo es que
+		<background-image> no forma parte del document flow.
+
+⭐️ 22) STACKING MULTIPLE BACKGROUNDS
+	Solo puedes agregar UN solo color al background. Puedes agregar varias imágenes con url (...), linear-gradient cuenta como imágenes.
+
+	background: linear-gradient(), url("images/freedom.jpg")
+		linear-gradient() aparecerá primero que la imagen url, puesto que ha sido declarado primero.
+
+	background position and size should be separated by a slash: (center/cover).
+
+	Remember that you overwrite other properties when setting a shorthand, because a shorthand, even if you only use it to define a
+	URL, will also initialize default values for all the other subproperties. So if you add a shorthand as a last declaration in a rule and use
+	set background position earlier, this will actually be overwritten by the default implied by the shorthand notation.
+
+	SEPARAR POR CAPAS CON COMA
+		Si vas a agregar linear-gradient, url(image) con background properties y color, debes separar la sentencia con comas cada vez que 
+		te refieras a uno de esos puntos:
+			background: linear-gradient(), url("images/freedom.jpg") left 10% bottom 20%/cover, #ff1b68;
+			-> Ahora los background properties (left10% bottom 20%/cover) aplicarán a la imagen url gracias a las comas!
+
+⭐️ 23) THE 100% HEIGHT ISSUE (tema al que no presté mucha atención zZz)
+	If the element itself and the ancestors use { position : static/relative } y la declaración { height : 100% } no esta funcionando:
+	Añade { height : 100% } a TODOS LOS ANCESTROS arregla el problema.
+	Otra solución sería usar { position : fixed/absolute } o simplemente usar viewport units (vw/vh).
+
+⭐️ 24) WITH POSITION DECLARARTION, WHAT % WIDTH UNIT REFERS TO:
+	1) Element with declaration { position:fixed; } width % refers to -> Viewport
+	2) Element with declaration { position:absolute; } refers to -> Ancestor content + padding.	Ancestor debe tener { position : !static }.
+	3) Element with declaration { position:static/relative; } refers to -> Ancestor content.	Ancestor debe ser block level element.
+
+⭐️ 25) EM & REM
+	rem & em always refer to the font size.
+	Adjust to default font size (browser 16px font size)
+		EM (element itself)
+			Relative to the font-size of the element (2em means 2 times the size of the current font)
+			Is calculated based on the actual size of the element (which is inherited for some parent or the BROWSER settings).
+			El problema con em es que hereda los tamaños previos y multiplica el em * el previo em.
+				Tenemos 16px definidos en el browser por default.
+				En una clase del texto definimos { 1.2 em } -> (16 * 1.2 = 19.2px )
+				Este texto también hereda una clase con la declaración { 1.1em } -> (19.2 * 1.1 = 21.12px)
+
+		REM (root em)
+			Toma el root element del website, el cual es HTML element. Este es el que interpreta nuestro navegador como el font-size.
+			Justamente, este evita el problema de em. El único cálculo que realiza es tomar el font-size que esta setteado
+			en el browser settings (16px en Chrome) y múltiplica por 1.1rem
+
+⭐️ 26) VIEWPORT VALUES (vh & vw)
+	Viewport = Ventana gráfica del navegador. Espacio TOTAL.
+	Adjust to current viewport. Allows us to always refer out sizes to the actual viewport no matter which position we have.
+		vh = viewport height		(height: 100% equivale a height: 100vh)
+		vw = viewport width		(width: 100% equivale a width: 100vw)
+		 vmin = viewport minimum (RESPONSIVENESS para crear un modal)
+		vmax = viewport maximum ( RESPONSIVENESS para crear un modal)
+
+		width: 80vw;	//80 refers to 80% of the viewport width.
+		width: 80vmin;	//view min takes 80% of the smaller viewport
+		width: 80vmax;	//We take 80% of the larger distance between the width and height of the viewport.
+							//But as soon as the height becomes bigger than the width, it doesn't move anymore.
+
+⭐️ 27) WHICH UNIT SHOULD I CHOOSE?
+				Property			   |		"Recommended" Unit"
+	---------------------------------+-----------------------------------
+	font-size (root element)	   |		%	or nothing. Que se encarge el browser setting (16px)
+	font-size						   |		rem (em => Children only)
+	padding/border/margin		   |		padding/margin use rem   |	With border use px
+	width/height					   |		%	or vw/vh	
+	top/bottom/left/right		   |		%
+
+	This is not the deffinitive guide about which unit use, it is just a recomendation.
+
+⭐️ 28) VIEWPORT <META>
+	Sin esta tag no serás capaz de hacer un diseño para móviles en el website.
+	Si no tienes un diseño móvil programado, no añadir esta etiqueta puede ser una buena idea.
+	You will be able to display the website correctly or in a convenient and appropiate way on mobile devices.
+	<meta name="viewport" content="width=device-width, initial-scale=1.0>
+		name="viewport":
+			Should target the viewport
+		content="width=device-width:
+			Set the width of the page, so the page on the viewport (visible part of it) should be equal to the width of the device screen.
+			Tell to browser that our device is a mobile device, then, it should apply the pixel ratio conversion (https://www.mydevice.io/)
+			Le decimos al web que visualizamos la aplicación en un telefono y no una pantalla. Sin esto muestra el website comprimido
+				en el dispositivo móvil.
+		initial-scale=1.0
+			Define el nivel del zoom que tenemos.
+		user-scalable=yes
+			El usuario puede hacer zoom. Este es el valor default y puedes omitirlo.
+		maximum-scale=2.0
+			Maximum zoom level that is available for user.
+		minimum-scale=1.2
+			Restricts the amount of zooming out level that our user is allowed to apply.
+
+	Recuerda que al hacer un website SIEMPRE DEBES CREAR TU WEBSITE MOBILE FIRST. Porque la mayoría de los dispositivos en que
+	se visualizan los websites hoy en día es a través de smartphones.
+
+⭐️ 29) MEDIA QUERIES
+	➡️ @media (min-width: 40rem) {
+			#product-overview h1 {
+				font-size: 3rem;
+			}
+		}
+
+		Es conveniente declararlos hasta abajo en la hoja de estilos.
+
+		min-width: 640px 			(Se usa principalmente cuando desarrollas tu pagina: mobile first-desktop second)	//EL MEJOR
+			Después de 640px ocurre el efecto.
+										//Intenta utilizar lo más posible este.
+		max-width: 640px 			(Se usa principalmente cuando desarrollas tu pagina: desktop first-mobile second)
+			Antes de los 640px ocurre el efecto.
+
+		IMPORTANTE
+		Si tienes declarado en este orden:
+			@media (min-width: 60rem) { #product { color: green }...
+			@media (min-width: 40rem) { #product { color: red }...
+		Como el código CSS se interpreta de arriba a abajo, la segunda condición (40rem) es el estatus más actual, entonces solo
+		tomará esas declaraciones e ignorará las de la primer declaración.
+
+		Para que tome AMBAS declaraciones debes ORDENAR LOS VALORES (rem, px, vh...) de menor a mayor:
+			@media (min-width: 40rem) { #product { color: red }...
+			@media (min-width: 60rem) { #product { color: green }...
+			
+		LOGICAL OPERATORS and OTHER PROPERTIES
+		@media (min-width: 40rem) and (min-height: 40rem) { ... }	//AND
+		@media (min-width: 40rem), (min-height: 40rem) { ... }		//OR
+
+		orientation: portrait
+			Cuando la altura es más grande que el ancho (dispositivo en modo HORIZONTAL)
+			@media (orientation: portrait) { ... }
+
+		orientation: landscape
+			Cuando el ancho es más grande que la altura (lo que ocurre NORMALMENTE)
+			@media (orientation: landscape) { ... }
+
+⭐️ 30) DIFFERENCE BETWEEN VIEWPORT <META> AND CSS MEDIA QUERIES
+	VIEWPORT (just translate the pixels and that's it)						
+	Adjust site to device viewport
+	No design changes (if you want particular features on mobile for example)
+	
+	MEDIA QUERIES (dive into the design a specify features depending the device)
+	Change design depending on size
+	Design changes defined by you
+
+

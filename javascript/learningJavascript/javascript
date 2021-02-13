@@ -1,0 +1,1951 @@
+Min	Porcentaje TOTAL
+3150 -> 100%
+
+Pienso que tomaré hasta la sección 18 (Working with Http Requests), además se agregará la sección 20 (Modular Javascript) (51 min.).
+Min	 Porcentaje
+1953 -> 100%
+1464 -> 74.96%
+{Terminada la sección 20 Modular JavaScript}
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ctrl + shift + f = buscar keywords en todo el proyecto!
+ctrl + shift + g = cuando tienes un repositorio en github, puedes ver las diferencias del código aqui
+ctrl + x = borrar línea
+ctrl + d = siguiente ocurrencia.
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+⭐️ CONST
+	Use const variables as much as you can.
+
+⭐️ TEMPLATE LITERAL
+	'${var} lopez'
+		- Usar variables concatenadas con texto
+		- Permite escribir enters y en los strings sin que se impriman esos enters en el front, incluyendo + 1 espacio (Readibility).
+		- Existe porque los strings siempre deben estar en una misma linea, y con template literal puedes hacer enters.
+		- Las variables que esten dentro ${} se convertirán a String, aunque sean enteros
+
+⭐️ FUNCTION
+	Las funciones es posible usarlas primero y declarar después.
+	<RETURN> hace que la función terminé y si estamos hablando de una función que no devolverá nada
+	simplemente con puro <return> indica que se termine la función sin ejecutar nada.
+
+⭐️ SHADOWED VARIABLES
+	Es posible declarar variables con el mismo nombre sin que truene, siempre y cuando no esten en el mismo scope.
+		➡️ let userName  = 'Max'
+		➡️ function getUser(name){
+			➡️ let username = name;}
+
+⭐️ Podemos llamar variables de otros files.js
+
+⭐️ EVENTS
+	Typically transport Data.
+	✡️addEventListener()
+		1st parameter = action string ('click')
+		2nd parameter = result of the action from 1st parameter (event => ...)
+
+		- Btn.addEventListener('click', function)
+			Se activa cuando	se da click al btn
+		- window.addEventListener('mousemove', functionX)
+			Se activa cuando	se mueve el cursor a cualquier parte de la ventana (en este caso por window)
+			Es un hovercursor de CSS se podría decir.
+				const functionX = event => {
+					✡️ console.log(event.clientX)	-> Se imprimirá la coordenada de X en la consola (.clientX)
+					✡️ console.log(event.clientY)	-> Se imprimirá la coordenada de Y en la consola (clientY)
+				}
+
+	✡️ .removeEventListener(" ", function())
+		Remueve la acción o función de un evento específico sobre un elemento seleccionado:
+		➡️ window.removeEventListener('mousemove', functionX)
+		➡️ Btn.removeEventListener('mousemove', functionX)	//ahora con Btn para que esté más claro.
+
+	✡️.onchange
+		El evento onchange se produce cuando el valor de un elemento se ha cambiado.
+		Se produce el efecto cuando el elemento ha finalizado su cambio (no es inmediato)
+		➡️ <select onchange="myFunction()">
+
+	✡️.oninput
+		Este evento es lo mismo que onchange, solo que este es inmediato.
+		➡️ <input type="text" oninput="myFunction()">
+
+	✡️.onclick
+		The onclick event is used to trigger a function when an element is clicked on.
+		➡️ <button onclick="myFunction()">Click me</button>
+
+	✡️.currentTarget
+		The currentTarget event property returns the element whose event listeners triggered the event.
+		The currentTarget property always refers to the element whose event listener triggered the event, opposed to the target 
+			property, which returns the element that triggered the event.
+		➡️ function myFunction(event) { 
+				alert(event.currentTarget.nodeName);
+			}
+
+	✡️.preventDefault()
+		Cancela el evento si este es cancelable, sin detener el resto del funcionamiento del evento, es decir, puede ser llamado de nuevo.
+		En un form evita que la página se recarge cuando se da click al submit.
+			➡️ function myFunction (e) {
+					e.preventDefault()
+				}
+
+⭐️ INDIRECT VS DIRECT() FUNCTION
+	Cuando llamas a una función, los paréntesis () señalan que se ejecute la función al momento de cargar el script, o dicho
+	de otra manera al cargar la pagina.
+
+⭐️ var.value
+	✡️.value toma el valor que el usuario puso de entrada en el <input />
+	El valor que toma del usuario SIEMPRE será un STRING
+
+⭐️ PARSEINT
+	✡️parseInt(userInput.value) == +userInput.value; (en realidad el segundo puede tomar valores decimales)
+
+⭐️ MIXING NUMBERS & STRINGS
+	In Javascript:
+		3 + '3' = '33' (+ sign in javascript means  string concatenation)
+		3 * '3' = 9 (Javascript is pretty smart, take the multiplier sign to string as a number)
+		3 - '3' = 0
+
+⭐️ STRING METHODS
+	✡️.includes("substring")
+		Regresa true si el substring esta dentro del string, en cualquier posición
+
+	✡️.startsWith()
+		Regresa true si el substring esta dentro del string desde el principio. Acepta un segundo parámetro para indicar
+		la posición en donde debe comenzar el substring
+
+	✡️.toUpperCase()
+		Convertir texto a mayúsculas
+
+	✡️.toLowerCase()
+		Minúsculas
+
+	✡️.indexOf("") ó search("")
+		Busca una palabra en un string, y te dice en qué carácter comienza dicha palabra
+
+	✡️.lastIndexOf("")
+		Nos permite sacar la última coincidencia en caso que si tiene. Busca la última palabra "curso" del string.
+
+	✡️.match(//g);
+		Toda una biblioteca. Devuelve un array con las palabras que encuentra más su índice o posición
+
+	✡️.substr(,) (substraer)
+		.substr(14,5);
+		Extrae desde el carácter 14, 5 letras adelante
+
+	✡️.charAt();
+		Sacar una letra en una posición en concreto
+
+	✡️.startsWith(); (empieza con...)
+		Busca un texto y te dice si esta o no (true ó false)
+		desde el INICIO del string
+
+	✡️.endsWith();
+		Igual pero desde el FINAL del string
+
+	✡️.includes();
+		Busca una palabra (escríbela exactamente igual)
+		Si existe true, si no false.
+
+	✡️.replace()
+		Dentro de un string reemplaza un carácter con otro carácter:
+			➡️ const name = 'Hi my name is Flavio'
+			➡️ name.replace(/\s/g, '') //HimynameisFlavio
+				//The \s meta character in JavaScript regular expressions matches any whitespace character: spaces, tabs, newlines and 
+				//Unicode spaces. And the g flag tells JavaScript to replace it multiple times. If you miss it, it will only replace the first 
+				//occurrence of the white space.
+			
+			➡️ .replace(/ /g,"_");
+				//Replace space with underscore.
+
+	✡️.slice(,); (separar)
+		Corta el string a partir de un carácter dado y empieza desde ahí
+			.slice(14, 22); 
+
+	✡️.split(); (corta)
+		Mete todo un valor dentro de un array. Almacena cada uno en un lugar del array
+			.split(" ");
+			Los cortará y le dará un espacio en blanco a cada valor
+
+	✡️.trim();
+		Borra los espacios en blanco. Ideal para guardar el nombre del usuario, el email del usuario sin almacenar los espacios en blanco.
+
+⭐️ REGEXP
+	✡️.test()
+		 returns true if it finds a match, otherwise it returns false.
+		➡️ let char = string[i].toLowerCase();
+		➡️ if(/[a-z0-9]/.test(char)){ ...
+	
+	✡️ /[a-z0-9]/
+		Checa si el valor añadido contiene a-z (minúscula) y numeración del 0 al 9.
+
+⭐️ ASCII
+	✡️ charCodeAt()
+		Muestra la ubicación en código ASCII del elemento
+		➡️ "i".charCodeAt(0)		//0 se refiere al elemento. Si quisieramos saber el ASCII de la segunda letra del string sería: "".charCodeAt(1)
+		⬅️ 105
+
+⭐️ JSON.stringify()
+	Converts javascript object into a JSON string
+		➡️ JSON.stringify(task)
+
+⭐️ ++var && var++
+	++var añade el valor después del cambio (este es el bueno)
+	var++ añade el valor antes del cambio
+
+⭐️ Los ARRAYS[] son un tipo "especial" de objeto:
+	➡️ typeof [1, 2, 3]
+	⬅️ "object"
+
+⭐️ OBJECTS {}
+	Puedes meter cualquier tipo de variable en los objetos:
+		➡️ const logEntry = {
+				name: Sergio,
+				operation: 'ADD'
+			};
+				//name: Sergio = PROPERTY
+				//name		   = KEY (o PROPERTY NAME) -> es un string
+				//Sergio 		   = VALUE				      	        -> puede ser cualquier cosa
+
+Para acceder a un dato específico del objeto:
+	➡️ logEntry.operation
+
+ADDING OBJECT PROPERTIES (KEY / VALUE)
+	➡️ var obj = {
+					key1: value1,
+					key2: value2
+		};
+
+	Using dot notation:					(when you KNOW THE NAME of the property).
+		➡️ obj.key3 = "value3";
+	
+	Using square bracket notation:		(when the name of the property is DYNAMICALLY determined, for example inside a function).
+		➡️ obj["key3"] = "value3";
+
+CUANDO QUIERAS ACCEDER AL KEY DEL OBJETO DENTRO DE UNA FUNCIÓN (REACT COURSE)
+	➡️ const ingredients= {
+				salad: 1,
+				bacon: 0,
+				cheese: 3,
+				meat: 5
+		}
+	➡️ const X =(type) => {
+			return console.log(ingredients[type])		//<- SE UTILIZA [ ] PARA INDICAR EL KEY. Si utilizas punto (.) manda undefined
+		}
+	➡️ X("cheese")
+	⬅️ 3
+
+✡️ Objects.keys()
+	Devuelve un array cuyos elementos son strings correspondientes a las propiedades enumerables que se encuentran
+	directamente en el object.
+	➡️ var arr = ['a', 'b', 'c'];
+	➡️ console.log(Object.keys(arr)); // console: ['0', '1', '2']
+
+	Ahora aplicarlo hacia un objeto:
+	➡️ var obj = { 0: 'a', 1: 'b', 2: 'c' };
+	➡️ console.log(Object.keys(obj)); // console: ['0', '1', '2']
+
+✡️ Object.hasOwnProperty()
+	Returns a boolean value indicating whether the object on which you are calling it has a property with the NAME of the argument.
+		➡️ var x = {
+					y: 10
+			};
+		➡️ console.log(x.hasOwnProperty("y")); //true
+		➡️ console.log(x.hasOwnProperty("z")); //false
+
+⭐️ EMPTY VALUES
+	undefined: Default value of uninitalized variables
+		undefined es tipo "undefined"
+	null: Never assumed by default. You can assign this is a value if you want to "RESET" / "CLEAR" a variable
+		null es tipo "object"
+	NaN: Not a Number. If you input "Hello" in a calculator (waiting for a int input) te devolverá eso (3 * 'hi') 
+		NaN es tipo "number"
+
+⭐️ PERFORMANCE TIPS
+	Solo funcionan si tienes external scripts (script.js), no etiquetas en html (<script>) (porque estos siempre se ejecutan inmediatamente):
+	defer
+		Tells the browser to run the script to early as possible.
+		Tells the browser that it should download the scripts right away, but that should not block parsing html
+		only executes the script after everything has been parsed. (ejecuta el código js después de que se cargó todo el html)
+		Starts downloading early but it doesn't execute the script right away when its finished downloading.
+			<script src="assets/scripts/app.js" defer></script>
+			Entonces debes poner los <script> en el HEAD del html para ganar rendimiento.
+	async
+		Tells the browser to run the script to early as possible.
+		Cuando quieres correr el script antes de que corra el html (porque realmente ese script NO ESTA UTILIZANDO HTML)
+		It does not wait for all the html code to be parsed.
+			<script src="assets/scripts/app.js" async></script>
+
+----------------------------- CONTROL STRUCTURES ---------------------------------------------
+⭐️ EQUALS & SYMBOLS
+	==
+		Check for value equality only, doesn't care the type
+		➡️ 2 == "2"
+		⬅️ true	
+
+	===
+		Check for value AND type (in) equality
+		➡️ 2 === "2"
+		⬅️ false
+		ES MUCHO MAS RECOMENDABLE UTILIZAR ESTE
+
+		!
+		Check if NOT true, e.g (!a)
+		converts true to false
+
+⭐️ VARIABLE TRUE COMO CONDICIÓN
+	➡️ const isLoggedIn = true;
+	➡️ if (isLoggedIn) {
+			//if the isLoggedIn value is true
+		}
+
+⭐️ STRING COMPARISON
+	JavaScript compares strings based on standard lexicographical ordering, using Unicode values.
+	That means that b is greater than a for example.
+	JavaScript always looks at the first character and only considers other characters if the first character is similar. In addition, capital 
+	characters are considered to be smaller than lowercase characters.
+
+		➡️ 'ab' > 'aa' // true
+		➡️ 'a' > 'B' // true
+		➡️ 'a' > 'b' // false
+
+⭐️ ✡️ toString()
+	Convert a number to a string:
+		➡️ var num = 15;
+		➡️ var n = num.toString();
+
+⭐️ COMPARING OBJECTS & ARRAYS
+	➡️ { name: 'Max' } === or == { name: 'Max' }
+	⬅️ false!
+	-------------
+	const hobbies = ['Sports', 'Cooking']
+	const moreHobbies = ['Sports', 'Cooking']
+	➡️ hobbies === moreHobbies
+	⬅️ false
+		ESTO SE DEBE A QUE LOS OBJETOS SON VALORES POR REFERENCIA, ES DECIR SU = APUNTA A LA DIRECCIÓN DEL OBJETO, NO AL 
+		VALOR DE DICHO OBJETO! (PRIMITIVE VS REFERENCE VALUES).
+
+		ARRAYS ARE OBJECTS!
+	SOLO PUEDES COMPARAR VALORES ESPECÍFICOS DENTRO DE LOS OBJETOS
+	➡️ person1.name === person2.name
+	⬅️ true
+
+⭐️ FALSY AND TRUTHY VALUES
+	Javascript tries to convert values to a Boolean value if a Boolean is required:
+		const name = 'Max';
+		➡️ if (name){}
+		⬅️ TRUE
+			yields true if nameinput is a NON-EMPTY STRING
+
+0 -> FALSE (any other number including negative numbers are TRUE)
+	!enteredNumber ES LO MISMO QUE: enteredNumber === 0
+
+"" -> FALSE (any other non-empty string equals TRUE)
+	{}, [] -> TRUE (all objects and arrays are true, even if they are empty)
+	null, undefined, NaN -> FALSE
+
+⭐️ USER INPUT
+	➡️ prompt("Maximum life for you and the monster.", 100);
+		"100" will be the value that will be in the prompt by default
+		Always will be a string the input value
+
+⭐️ CHECK IF A VARIABLE IS A NUMBER
+	➡️ if (isNaN(chosenMaxLife)) {}
+
+⭐️ TERNARY OPERATORS
+	If you have short conditions and value assignments use ternary operators.
+	Si tienes condiciones complejas con muchas tareas entonces usa el if clásico (readibility).
+
+	➡️ let x;				Puede resumirse en:
+	➡️ let y = true;		➡️ let x = y ? 5 : 10
+	➡️ if (y){				
+		x = 5;				1) condition (y)
+	➡️ } else {				2) ?
+		x = 10;				3) value if condition is true/truthy
+		}					4) :
+							5) value if condition is false/falsy
+							//Solo funciona si existe un <else>, puro if no.
+
+⭐️ CONVERT TRUTHY/TRUE TO FALSY/FALSE
+	➡️ ""    (falsy) {en este caso es undefined}       falsy values: (undefined, null, NaN, 0)
+	➡️ !""  (true)
+	➡️ !!"" (false)
+
+⭐️ BOOLEAN TRICKS WITH LOGICAL OPERATORS (JUST SHORTCUTS)
+	➡️ const userName = 'Max';
+	➡️ const altName = '';
+
+	➡️ console.log(userName === 'Max'); // generates and prints a boolean => true
+	➡️ console.log(userName); // wasn't touched, still is a string => 'Max'
+
+	➡️ console.log(userName || null); // userName is truthy and therefore returned by || => 'Max'
+	➡️ console.log(altName || "Max"); // altName is falsy (empty string), hence 'Max' is returned => "Max"
+	➡️ console.log(altName || ""); // both altName and ''" are falsy but if the first operand is falsy, the second one is always returned => ""
+	➡️ console.log(altName || null || 'Anna'); // altName and null are falsy, 'Anna' is returned => 'Anna'
+		
+	➡️ console.log(userName && 'Anna'); // userName is truthy, hence second (!) value is returned => 'Anna'
+	➡️ console.log(altName && 'Anna'); // altName is falsy, hence first value is returned => ''
+	➡️ console.log(userName && ''); // userName is truthy, hence second value is returned => ''
+
+⭐️ SWITCH
+	➡️ switch(x){
+			case 1 (case === 1, it has to be the same value and type)
+			break;
+		}
+
+⭐️ LOOPS
+	for-of loop
+		Execute for evey element in an ARRAY (muy similar al de python):
+			➡️ for (const x of array){
+					console.log(x);
+				}
+		for loop BACKWARDS in an ARRAY:
+			➡️ for (let i = array.length -1; i >= 0 ; i--) {
+					console.log(array[i]);
+				}
+
+	for-in loop
+		Execute for every key in an OBJECT:
+			➡️ for (const key in obj){
+					console.log(key); //name of property
+					console.log(obj[key]); //value
+					//console.log(`${key} => ${logEntry[key]}`); //this is more readable
+				}
+		Destructuring for...in is deprecated. Use for...of instead.
+
+	for-each loop
+		Util cuando quieras crear un objeto a partir de un arreglo (te da acceso al index). //ALSO WORKS ON OBJECTS (creo).
+		➡️ const prices = [10.99, 5.99, 3.99, 6.59];
+		➡️ const tax = 0.19;
+		➡️ const taxAdjustedPrices = [];
+
+		//arguments: 1) Element, 2) Index, 3) Full array in case you need it:
+		➡️ prices.forEach((price, idx, prices) => {
+				const priceObj = { index: idx, taxAdjPrice: price * (1 + tax) };
+				taxAdjustedPrices.push(priceObj);
+			});
+
+		➡️ console.log(taxAdjustedPrices)
+		⬅️ [{...}, {...}, {...}, {...}]
+
+	while loop
+		Execute code as logn as a condition is true:
+			➡️ while (isLoggedIn){}
+		NO puedes declarar variables dentro del paréntesis como en el for loop
+
+	continue
+		Se salta a la siguiente iteración, no detiene el loop por completo como es el caso de break
+	break
+		El break statement solo rompe el ciclo del BUCLE ACTUAL, NO LOS EXTERIORES:
+
+	labeled statements (rarely you will need)
+		Le agregas una etiqueta o nombre a un loop para referirte a él (se utiliza mucho cuando quieres usar break en outer loops)
+		That allows you to break a different loop than you're currently in
+			➡️ outerWhile: do {
+					innerFor: for (){
+						if () {
+							continue outerWhile
+						}
+					}
+			➡️ } while ()
+		Es parecido a goto de C++
+
+⭐️ TRY, CATCH, THROW, FINALLY
+	Some errors can't be avoided, beyond your control as a developer
+	Error
+		Crea un nuevo error:
+		➡️ throw new Error("UH OH")
+
+	throw
+		- throws a new error, can be anything (string, number, object)
+		- Most throw-errors are objects that have a message:
+			➡️ if(){
+					throw { message: "Invalid user input, not a number!" };
+				}
+
+	try
+		- You put into try when you can't control wherever will be an error or not
+		- inside { } goes THE CODE THAT COULD THROW AN ERROR
+		- If try is successfull, catch will  not be executed
+	catch
+		- if try fails, catch will be executed
+		- The error (word into parenthesis) was caught and is available
+		- ERROR HANDLING AND FALLBACK LOG INSIDE { } 
+		- Error is the error which was thrown (lo que esta dentro de throw se llamará a eso el error.
+		- Hace que los errores no sean errores, sino regresa algo que tú quieres que haga.
+	finally
+		- after the try word
+		- To do any cleanup work if you for example have a case where another error inside your try, catch block.
+		- Executes even you do throw an error, (thats the magic of finally)
+
+----------------------------- BEHIND SCENES JAVASCRIPT --------------------------------------
+⭐️ VAR, LET, CONST
+	var -> function & global scope
+	let -> block scope {} 
+	const -> block scope {}
+	VAR
+		El valor puede ser reemplazado, no como let o const
+			➡️ var name = "Max";
+			➡️ var name = 'Anna';	
+		Puedes usar variables si estas fueron creadas dentro de un if //cosa que no puedes hacer con let o const
+		Significa que es declarada la variable como GLOBAL.
+			➡️ if(){
+					var x = 5;
+				}
+			➡️ console.log(x)
+
+		Only knows GLOBAL scope and FUNCTION scope, so a variable created in a function can't be used outside.
+		Ignora si es declarado dentro de corchetes (if, for loops, try/catch, etc.)
+
+⭐️ HOISTING
+	Cuando utilizas una variable que no ha sido declarada, en lugar de mandar error la consola le asigna el valor de 'undefined'
+		➡️ console.log(x)
+		➡️ var x = 5 //se declaró después
+		⬅️ undefined //Si hubieses usado let o const saldría error
+
+	Si creas una variable en JS asi:
+		➡️ userName = 'Max'  //sin añadir var/let/const keyword
+		La variable en JS por default será tipo var. ES MALA PRACTICA HACER ESTO, EVITALO
+
+	THERE IS NO USE CASE WHERE YOU WOULD NEED [VAR] ANYMORE IN MODERN JS!!
+
+⭐️ LET, CONST {}
+	- Lo que esté declarado dentro de corchetes {} se queda en ese scope (obviamente aqui descartamos los objetos{}, 
+	nos referimos a if, while, functions, for...
+	- Usar unicamente let & const nos fuerza a escribir codigo más limpio y entendible:
+		➡️ if(){			//Oh, esa variable x la quiere usar en todo el script	➡️ if(){           //Oh, esa variable x la usará solo dentro del if
+				var x = 5;																		let x = 5;
+			}																				}
+
+⭐️ BLOCK
+	➡️ {
+			const x = 5
+		}
+	➡️ console.log(x) //error (x is not defined
+
+⭐️ USE STRICT
+	"use strict";
+	Para forzar al desarrollador a escribir código limpio y entendible utiliza esta linea hasta arriba de tu script. Funciona solo en el file.js
+	donde fue añadido. Fuerza a:
+		- Escribir el tipo de variable que sería (var, let, const), nos impide declarar variables sin esas keywords
+		- No puedes utilizar keywords de javascript como nombre de variables: const undefined = 5;  -> Error
+
+⭐️ JAVASCRIPT IS SINGLE-THREADED: "ONE THING HAPPENS AT A TIME"
+	Can do one thing at a time
+
+⭐️ PRIMITIVE VS REFERENCE VALUES
+	Primitive:
+		- Strings, numbers, booleans, null, undefined, symbol.
+		- Stored in memory (normally on STACK), variable stores value itself
+		- No gastan mucha memoria
+		- COPYING A VARIABLE (= assign to different variable) COPIES THE VALUE:
+			➡️ let x = 5 //⬅️ 5
+			➡️ let y = x //⬅️ 5
+			➡️ let x = 9
+			➡️ let y //⬅️ 5 (still 5, porque copia el valor que tenía 'x'  antes de que  'y' fue declarada.
+		- EN RESUMEN, COPIA EL VALOR PRIMERO DE LA VARIABLE, Y PERMANECE ESE VALOR AUNQUE SE ACTUALICE POR OTRO EN LA 
+		VARIABLE ORIGEN
+	Reference:
+		- All other objects (arrays, objects, more expensive to create)
+		- Stored in memory (HEAP), variable stores a pointer (address) to location in memory
+			The value is stores somewhere in memory (somewhere in heap) and the variable stores the address of that place in memory
+		- COPYING A VARIABL E (= assign to different variable) COPIES THE POINTER/ REFERENCE (OR ADDRESS OF THE VARIABLE):
+			➡️ let hobbies = ['Sports']; //⬅️ ["Sports"]
+			➡️ let newHobbies = hobbies; //⬅️ ["Sports"]
+			➡️ hobbies.push('Cooking');
+			➡️ hobbies //⬅️ ["Sports", "Cooking"]
+			➡️ newHobbies //⬅️ ["Sports", "Cooking"]
+		- EN RESUMEN, COPIA EL VALOR ACTUAL DE LA VARIABLE, SI SE ACTUALIZA LA VARIABLE ORIGINAL DE IGUAL MANERA SE ACTUALIZA
+		LA OTRA VARIABLE.
+
+		- SI QUIERES EVITAR QUE OCURRA ESO EN OBJETOS, QUE SE ACTUALICE EL VALOR DE LA NUEVA VARIABLE ESTA ES LA SOLUCIÓN:
+			➡️ let moreHobbies = [ ...hobbies ];
+			
+		CHECK THIS OUT:
+			➡️ const hobbies = ['Sports']
+			➡️ hobbies.push('Cooking')
+			➡️ hobbies
+			⬅️ ["Sports", "Cooking"]		//Funcionó el añadido, a pesar de que es CONST el array, how?!:
+				This array gets created somewhere in memory and what's getting stored in hobbies is the ADDRESS of that array or object.
+				Address is getting stored in this constant.
+				Now when we call push, we certainly do manipulate the data in memory, but what do we not manipulate? The ADDRESS.
+				It's still the same address. The DATA in memory changed but it's still at the SAME ADDRESS. Now:
+			➡️ hobbies = ['Sports', 'Running']
+			⬅️ Error: Assignment to constant variable
+				Why? Because we used the EQUAL sign here and that means we try to assign a new array (its a constant)
+			SUMMARY: Usign constants with a single equal sign to assign a new value is never allowed in objects but changing the objects 
+			which might be stored in them, that is allowd as long as you use something like push.
+
+⭐️ GARBAGE COLLECTION
+	REMOVES UNUSED OBJECTS FROM heap MEMORY
+	(V8's) Google chrome garbage collection:
+		Periodically checks Heap of unused objects (objects without references (addresses)).
+		Removes unused objects from heap memory.
+			➡️ let person = {name: 'Max'}  ->  person = null
+		Beware of "Memory leaks":
+			When you still have a refference to one object and even if you are not interested anymore it still a reference there
+			and can be garbage collected (BUG)
+
+------------------------- MORE ABOUT FUNCTIONS---------------------------------
+Javascript reading scripts first goes for the entire script, finds all these function declaration, registers them and then it starts
+executing the script
+
+⭐️ METHOD
+	It's a function inside an object!!
+		➡️ const person = {
+				greetings: function greet(){
+					console.log('Hello there');
+				}
+			};
+
+		➡️ person.greetings()
+
+	Entonces el .addEventListener es un método -> significa que es una función prestablecido de JS, dentro de algún objeto que creaste.
+
+	➡️ const startGameBtn = document.getElementById("start-game-btn");
+			✡️document.getElementById -> Genera un objeto llamado startGameBtn, el cual genera métodos implicitos por JS.
+	➡️ startGameBtn.addEventListener("click", startGame);
+			Del objeto startGameBtn estamos usando el método implicito addEventListener, que se creo automáticamente cuando
+			creamos el objeto en el paso 1.
+
+⭐️ console.dir(function)
+	Muestra las propiedades especificas del parámetro
+
+⭐️ FUNCTIONS ARE OBJECTS!
+	With special preconfigured properties:
+		➡️ console.dir(function)
+		⬅️ if startGame()
+				arguments: null
+				caller: null
+				length: 0
+				name: "startGame"
+				...
+
+⭐️ DEFINING FUNCTIONS:
+	FUNCTION DECLARATION:
+		➡️ function multiply(a, b){
+				return a * b;
+			}
+			Hoisted to top, can be declared anywhere in the file (i.e, also after it's used)
+			If your code style is to have all the functions to the end in the file, then you have to use this approach.
+			Function declarations automatically create variables that hold the function objects.
+	FUNCTION EXPRESSION:
+		➡️ const multiply = function(a, b){
+				return a * b;
+			}
+			Hoisted to top but <not initialized>/ defined, can't be declared anywhere in the file (i.e, not after it's used)
+			You have to initialize the functions before calling them.
+			They return an object, it's your job to then do something with it.
+
+⭐️ ANONYMOUS FUNCTIONS
+	➡️function(){} //function without name
+					const start = function () {	//usually used when you store a function into a variable. You could put a name if you want.
+			console.log("Game is starting...");
+		};
+	➡️ startGameBtn.addEventListener("click", start);
+
+	Also used as a parameter inside addEventListener() method:
+		➡️ startGameBtn.addEventListener("click", function(){		//this will not inmediately execute the function (waiting for click)
+				console.log("Hello");
+			});																//its usefull when you just want to execute that function once.
+																			// You avoid memory leak (garbage collection).
+	De igual forma es ventajoso (aunque no sea obligatorio) agregarle un nombre
+		➡️ startGameBtn.addEventListener("click", function startGame (){});
+			//De esta forma cuando tengamos algún error dentro de esa función, el compilador nos indicará el nombre de la función
+			//donde estuvo el error.
+
+⭐️ STRING CONVERTION METHODS
+	Escencialmente hay algo extraño, ya que los strings no son objetos por lo tanto no tienen métodos, sin embargo aún puedes
+	acceder a ciertas propiedades y métodos en esos valores primitivos (string) y se podría decir que JS TEMPORALMENTE LOS USA COMO 
+	OBJETOS. JS lo hace detrás de escena.
+
+	✡️ .toUpperCase() -> Converts all string to mayus.
+
+⭐️ Math
+	✡️.random()
+		Generates a random number between 0 - 1 (const randomValue = Math.random();)
+	✡️.min()
+		Takes the smallest value
+
+⭐️ ARROW FUNCTIONS
+	La única ventaja es que es más rápido escribirlas (evitas escribir return, () {} dado el caso, hasta simplificar la función en una sola línea)
+	Las puedes crear SOLAMENTE si la función deseada tiene UN return de salida.
+
+	General syntax:				 						➡️ const x = (arg1, arg2) => { ... }
+	No arguments/Parameters:				 		➡️ const x = () => { ... }				//se ponen los paréntesis vacíos.
+	Exactly one (1) Argument/Parameter:				➡️ const x = arg => { ... } 				//paretheses can be omitted
+	Exactly one expression in function body:			➡️ const x = (a, b) => a + b 			//curly braces can be omitted, result is returned.
+	More than one expression in function body:		➡️ const x = (a, b) => {
+																	a * = 2;
+																	return a + b;					//curly braces and return statement required
+																}
+
+	You ALWAYS have to store it into a variable (porque sino de qué manera puedes llamar a esa función?):
+		➡️ const z = () => {}
+
+	Se utiliza especialmente en lugares donde solo necesitas pasar un anonymous function donde haga alguna calculación rápida:
+		➡️ const add = function(a, b) {			->				➡️ const add = (a, b) => a + b;
+				return a + b;
+			}
+
+	Arrow functions allows to have no more issues with the THIS keyword! When you use "this" inside an arrow function, it will
+	ALWAYS KEEP ITS CONTEXT and NOT CHANGE it surprisingly.
+	Las funciones flecha NO predeterminan "this" al ámbito o alcance de window object, más bien se ejecutan en el ÁMBITO o ALCANCE
+	en que se crean.
+
+⭐️ DEFAULT ARGUMENTS IN FUNCTIONS
+	Cuando en una función con dos parámetros al momento de invocarla utilizas un solo parámetro, JS va agregar el valor de undefined
+	en el parámetro restante.
+	Para evitar esto, puedes agregar un valor default al parámetro si faltó agregarlo en la invocación:
+		➡️ function hola (a,b){}									➡️ function hola(a, b = 5){}
+		➡️ hola(1)													➡️ hola(1)
+		⬅️ //salida de la función, con b como undefined		⬅️ //salida de la función, b utilizando el valor de 5 como default
+																	SOLO FUNCIONA CUANDO RECIBE UNDEFINED (NO INGRESÓ CAMPO EL USER)
+																	OTHER FALSY VALUES DOESN'T WORK
+
+⭐️ REST PARAMETERS (Rest Operator)
+	When you don't know how many arguments the function will get.
+		➡️ const X = (...numbers) => {   //...numbers agregará todos los parámetros que se introduzcan y los almacenará en un ARRAY
+				...
+			}
+		
+		X(1,2,3,4... parametros que tú quieras, de cualquier tipo)
+		SI QUIERES UTILIZAR UN ARREGLO COMO PARÁMETRO:
+		X(...array)
+
+	arguments (keyword) (ANOTHER ALTERNATIVE, BUT REST OPERATOR IS MORE CONVENIENT)
+		When the user doesn't know specific number of parameters, se almacenan en una especie de arreglo con este keyword.
+			➡️ const x = function(){
+					for (const num of arguments){
+						...
+					}
+					...
+				}
+			
+			x(1, 2, 4, 9, 5)
+		Gives you an array-like object (not a truly array) with all arguments this function got.
+
+⭐️ CALLBACK FUNCTIONS
+	A callback function is a function that is passed as an argument to another function, to be “called back” at a later time.
+	You can't control when exactly is called, its just coming back in some point in the future. In EVENTS it's the CORE pattern:
+		➡️ x.addEventListener('click', () => {..THIS FUNCTION...}
+	Basicamente es recibir como parámetro de una función... una función:
+		➡️ function createQuote(quote, callback){ 
+				const myQuote = "Like I always say, " + quote;		//quote = "eat your vegetables!"
+				callback(myQuote); //callback = logQuote
+			}
+
+		➡️ function logQuote(quote){
+				  console.log(quote);
+			}
+
+		➡️ createQuote("eat your vegetables!", logQuote);
+		⬅️  Like I always say, eat your vegetables!
+
+	Why use callbacks functions?
+		Most of the time we are creating programs and applications that operate in a synchronous manner. In other words, some of our 	
+		operations are started only after the preceding ones have completed.
+
+	A function that accepts other functions as arguments is called a higher-order function, which contains the logic for when the callback
+	function gets executed.
+
+⭐️ ✡️.bind()
+	Functions are objects, and they have special methods. One of them is .bind()
+	It will create a new function you reference which will be preconfigured regarding the argument it receives (CONSIDERANDO LOS 
+	ARGUMENTOS QUE RECIBE).
+	CREATES A FUNCTION THAT IS NOT INMEDIATLY EXECUTED, PREPARES for a future execution where a certain parameters.
+	Takes at least 2 arguments:
+		1) this (keyword)
+		2) the parameters you want to preconfigure
+
+		➡️ const X = (funcionRecibir) => {
+				...
+				let number = 5;
+				funcionRecibir(number)
+			}
+
+		➡️ const Y = (value1, value2) => {
+				alert(value1 + " " + value2)		//<< 5 hello (value1 toma el valor de la funcion X, value2 toma el valor del parámetro añadido
+			}										// 			    en bind ("hello"))
+
+		➡️ X(Y.bind(this, "hello"));
+
+	INSTEAD OF BIND(),NEW WAY OF AVOIDING INSTANT FUNCTION EXECUTION (LEARNED FROM REACT COURSE):
+		Classic binding use:
+		➡️ <button onClick={this.switchNameHandler.bind(this, 'Maximilian')}>Switch Name</button>
+
+		NEW BETTER USE:
+		➡️ <button onClick={() => this.switchNameHandler()}>Switch Name</button>
+		You add a new brand arrow function inside your statement, this will be NOT EXECUTED IMMEDIATLY, WILL BE EXECUTED
+		ONCE THE BUTTON IS CLICKED.
+		THIS IS AN INEFFICIENT APPROACH, remember that.
+		
+⭐️ ✡️.call() & ✡️.apply()
+	Similar to bind(), but they INMEDIATLY EXECUTES THE FUNCTION.
+
+⭐️ 
+
+----------------------------------------MORE ON ARRAYS & ITERABLES---------------------------------------
+⭐️ ITERABLE
+	Objects where you can use the for-of loop (arrays, NodeList, String, Map, Set)
+	ARRAY-LIKE OBJECT:
+	Objects that have a length property and use indexes to access items (NodeList, String)
+
+	Other ways to create arrays:
+		➡️ const X = Array(5)
+			5 is the array LIMIT CAPACITY
+
+		➡️ const moreNumbers = Array.from(Y)
+			//Allows you to CONVERT an iterable or an array-like object (which isn't an array yet) TO AN ARRAY
+			// returns: [li, li, li] Nodelist (document.query) object to an array
+
+⭐️ ARRAY METHODS
+	✡️.push(_)		-> ADDS new element at the END of the array
+	✡️.unshift(_)	-> ADDS new element at the BEGINNING of the array
+	✡️.pop()			-> REMOVES LAST ELEMENT of the array, returns a STRING (you can store the removed element into a variable)
+	✡️.shift()		-> REMOVES FIRST ELEMENT of the array (SHIFTS all elements in the array one place to the left)
+
+	✡️.splice()		-> (1.- INDEX, 2.- NUMBER OF DELETED ELEMENTS, 3- INSERT ELEMENT)
+		Only available en REAL ARRAYS.
+		El método splice() cambia el contenido de un array eliminando elementos existentes y/o agregando nuevos elementos.
+			Eliminar 1 elemento desde el índice 3
+				➡️ var myFish = ['angel', 'clown', 'drum', 'mandarin', 'sturgeon'];
+				➡️ var removed = myFish.splice(3, 1);
+
+				⬅️// removed is ["mandarin"]
+				⬅️// myFish is ["angel", "clown", "drum", "sturgeon"] 
+
+			Eliminar 1 elemento desde el índice 2 e insertar "trumpet"
+				➡️ var myFish = ['angel', 'clown', 'drum', 'sturgeon'];
+				➡️ var removed = myFish.splice(2, 1, 'trumpet');
+
+				⬅️// myFish is ["angel", "clown", "trumpet", "sturgeon"]
+				⬅️// removed is ["drum"]
+		.splice(0) -> CLEAR an array
+		.splice(2) -> DELETE EVEYTHING up from a specific element (2)
+		.splice(-1, 1) -> Go to the LAST ELEMENT and delete it.
+		RETURNS the removed elements (you can store into a variable (const X = Y.splice())
+
+	✡️.slice()		-> RETURNS A BRAND NEW ARRAY
+			➡️ var nombres = ['Rita', 'Pedro', 'Miguel', 'Ana', 'Vanesa'];
+			➡️ var masculinos = nombres.slice(1, 3);
+				//1 es el inicio donde empieza la extracción.
+				// extrae hasta 3, pero sin incluir el final.
+
+			// masculinos contiene ['Pedro','Miguel']
+
+		Util para cuando quieras crear una copia B del arreglo A, y el arreglo A se ha modificado y quieres que el arreglo B se mantenga
+		el A original (NO SE ADAPTE)
+			➡️ const A = [1,2,3]
+			➡️ const B = A.slice()
+			➡️ A.push(4)
+			➡️ console.log(A, B);
+			⬅️ [1,2,3,4]   [1,2,3]
+
+		Select a RANGE elements from an array:
+			➡️ const A = [1,2,3]
+			➡️ const B = A.slice(0, 1)
+			➡️ console.log(A, B);
+			⬅️ [1,2,3]   [1,2]
+			//If you put just one parameter (2), it's going to select index 2 to the end.
+	
+	✡️.concat()
+		Añade elementos de un array a otro array, uno por uno (evitando que se añade el arrego completo en un solo elemento).
+		RETURN a brand new array
+			➡️ const A = [1,2,3]
+			➡️ const B = A.concat([4,5])
+			➡️ console.log(A, B);
+			⬅️ [1,2,3]   [1,2,3,4,5] 
+		Useful when you want to COMBINE data from another EXISTING ARRAY
+
+	✡️.indexOf() && ✡️.lastIndexOf()
+		Te muestra la DIRECCIÓN del arreglo donde se encuentra el elemento del parámetro:
+			➡️ array.indexOf("sergio")
+		
+		Si no aparece el elemento buscado DEVOLVERÁ -1 (super useful in interviews).
+		Si tiene un elemento "sergio" repetido, te mostrará solamente el index del primer resultado de derecha a izquierda.	
+		El segundo parámetro sería el STARTING INDEX donde a partir de ahí comenzará a buscar:
+			➡️ array.indexOf("sergio", 2)
+		Just works in primitive data, if you are looking for objects into arrays doesn't work (reference values).
+		
+		.lastIndexOf() Starts SEARCHING from the RIGHT.
+
+	✡️.find() && .findIndex()
+		Es el indexOf para buscar reference values (OBJETOS). NO DEVUELVE UNA COPIA, devuelve el mismo objeto (refence values)
+		➡️ const personData = [{ name: "Max" }, { name: "Manuel }];
+		➡️ const findManuel = personData.find((person, idx, persons) => {		//(key, index of that single element, full array)
+				return person.name === "Manuel";								// el segundo y tercer parámetro no le veo utilidad aqui.
+			});																			// no es obligatorio ponerlos.
+		➡️ console.log(findManuel)
+		⬅️ {name: "Manuel"}
+
+		.findIndex() es lo mismo que find(), pero devuelve el index.
+
+	✡️.includes()
+		Returns TRUE or FALSE if the parameter is INCLUDED into the array.
+			➡️ console.log(arreglo.includes(5)
+			⬅️ TRUE
+		Returns -1 if the value doesn't exist. It's most useful in arrays with primitive values.
+
+	✡️.reverse()
+		Voltea los valores del arreglo: [a,b,c] -> [c,b,a]
+	
+	✡️.filter()
+		Crea un new brand array con los valores que hayas filtrado:
+			➡️ const prices = [10.99, 5.99, 3.99, 6.59];
+			➡️ const filteredArray = prices.filter((price, index, prices)=> {		//price = single element, index = index, prices = full array
+					return price > 6;													//in case you need it.
+				})
+			⬅️ [10.99, 6.59]
+
+			➡️ movies.filter((singlePelicula) => console.log("si esta");
+
+⭐️ map()
+	Developer.mozilla:
+	Crea un nuevo array con los resultados de la llamada a la función indicada aplicados a CADA UNO DE SUS ELEMENTOS.
+	Syntax:
+		array.map(function(element, idx){   //actions   });
+		array.map((element, index, array) => //actions );
+
+		➡️ var X = [1, 5, 10, 15];
+		➡️ X.map(element => {
+				return element*2;		
+			})
+		⬅️ [2, 10, 20, 30]	//Gives you a new brand array
+
+	TAKE AN ARRAY, run a function and RETURN A NEW ELEMENT FOR EVERY ELEMENT IN THE ARRAY. Returns a new brand array
+		➡️ const prices = [10.99, 5.99, 3.99, 6.59];
+		➡️ const tax = 0.19;
+		
+						//arguments: 1) Element, 2) Index, 3) Full array in case you need it:
+		➡️ const taxAdjustedPrices = prices.map((price, idx, prices) => {
+				const priceObj = { index: idx, taxAdjPrice: price * (1 + tax) };
+				return priceObj;
+			});
+
+		➡️ console.log(taxAdjustedPrices)
+		⬅️ [{...}, {...}, {...}, {...}]
+
+⭐️ ✡️.sort()
+	Developer.mozilla:
+	ORDENA los elementos de un arreglo (array) y devuelve el arreglo ordenado. El modo de ordenación por defecto responde a 
+	la posición del valor del string de acuerdo a su valor Unicode.
+
+	1) Converts everything to a string, then sorted string compares only the first character: 10 > 3   ->   "1" < "3"
+	2) Using a function inside sort, compares two NUMBERS elements from array IN PAIRS, then execute function that SWAPS values
+             dependiendo si A es mayor a B, A es menor a B o son iguales:
+		➡️ const prices = [10.99, 5.99, 3.99, 6.59];
+		➡️ const sortedPrices = prices.sort((a, b) => {
+			  if (a > b) {
+			    return 1;	//MOVE A TO FIRST ELEMENT
+			  } else if (a === b) {
+			    return 0;        //DEJALO DONDE ESTA
+			  } else {
+			    return -1;	//MOVE A TO LAST ELEMENT
+			  }
+			});
+
+		➡️ console.log(sortedPrices);
+		⬅️ [3.99, 5.99, 6.59, 10.99]
+
+		REALMENTE CON ESTO BASTA SI SOLO QUIERES ORDENAR ASCENDENTEMENTE:		//Javascript Algorithms Course.
+			const sortedPrices = prices.sort((a, b) => {
+				if (a > b) { 
+					return 1;
+				}
+			});
+
+		➡️ console.log(sortedPrices);
+		⬅️ [3.99, 5.99, 6.59, 10.99]
+
+		También ordena carácteres del abecedario: ['a', 'b', 'c', 'a']	->	['a', 'a', 'b', 'c']
+
+⭐️ ✡️.reduce()
+	REDUCES an array to a SIMPLER VALUE (en este caso sumar todos los valores del arreglo):
+		syntax:
+			array.reduce(function(prev, curr){		//regular function
+				//actions
+			});
+
+			array.reduce((prev, curr) => //actions)		//arrow function
+
+		➡️ const prices = [10.99, 5.99, 3.99, 6.59];
+		➡️ const sum = prices.reduce((prevValue, curValue, curIndex, prices) => {		//curIndex -> index actual, prices -> full array
+				 return prevValue + curValue;												// en caso de que los necesites.
+			}, 0);									//este cero es el inicial value, lo toma prevValue al iniciar la función.
+
+		➡️ console.log(sum);
+		⬅️ 27.56
+
+⭐️ ✡️.split() && ✡️.join()
+	Separa un string a elementos de un brand new array. Separa los elementos un delimitador que tú eligas:
+		➡️ const X = "new york;10.99;2000";
+		➡️ const Y = X.split(";");
+		➡️ console.log(Y);
+		⬅️ ["new york", "10.99", "2000"]
+			//puedes añadir un segundo parámetro en split(), que es para poner el número limite de elementos que tendrá el new array.
+
+	.join() hace lo opuesto a split: De array a string. En el parametro escoges el separador de cada "elemento" del nuevo string
+
+⭐️ SPREAD OPERATOR (...)
+	Used to SPLIT UP array elements OR objects properties.
+	Pulls out all elements of an array and gives to you as stand alone list of elements.
+		➡️ const X = ["hello", "apple"]
+		➡️ const Y = [...X]
+		➡️ X.push("Sergio")
+		➡️ console.log (X, Y)
+		⬅️ ["hello", "apple", "Sergio"]
+		      ["hello", "apple"]				//no se actualizó el X en Y (... crea un nuevo array con una nueva dirección, por eso.)
+
+	En funciones donde se necesita analizar cada elemento del array, y esta función solo acepta Numbers, no arrays:
+		➡️ const X = [4,6,9]
+		➡️ console.log(Math.min(X))
+		⬅️ Error (NotANumber)
+		➡️ console.log(Math.min(...X))
+		⬅️ 4	//Math.min = toma el valor minimo
+
+	Cuando agregas una PROPIEDAD que ya existe a un objeto, ESTA SE REEMPLAZARÁ:
+		➡️ const credentials = { name: 'Sergio', lastName: 'Lopez' }
+		➡️ const userInfo = { email: 'pukuman@hot.com', ...credentials, lastName: 'Gomez' }
+		➡️ console.log(userInfo)
+		⬅️ {					
+				'email': 'pukuman@hot.com',
+				'name': 'Sergio'
+				'lastName': 'Gomez'
+			}
+			When the result of spreading your key-value pairs will contain some props with the same name, the ONE DEFINED LAST will be
+			used.				
+
+	Con objetos no funciona tan bien, ya que con objetos estamos copiando las DIRECCIONES de cada key:value:
+		➡️ const persons = [
+			  	{ name: "Max", age: 30 },
+			 	 { name: "Manuel", age: 31 },
+			];
+		➡️ const copiedPersons = [...persons];
+		➡️ persons.push({ name: "Anna", age: 29 });		//este no se adapta
+		➡️ persons[0].age = 31;								//ESTE SE ADAPTA, porque editamos este objeto en esa dirección
+		➡️ console.log(persons, copiedPersons);
+		⬅️ {name: "Max", age: 31}
+			...
+			{name: "Max", age: 31}
+
+		La solución a eso sería utilizar map() (Returns a new brand array):
+			➡️ const copiedPersons = persons.map((person) => ({
+					name: person.name,
+					age: person.age,
+				}));
+
+⭐️ ARRAY DESTRUCTURING
+	Easily extract array elements and store them in variables
+	Para REFERIRTE A UNA POSICIÓN EN ESPECÍFICO del arreglo agregas un alias. En lugar de hacer esto:
+		➡️ const nameData = ["Sergio", "Lopez"];
+		➡️ const firstName = nameData[0];
+		➡️ const lastName = nameData[1];
+		➡️ console.log(firstName, lastName)		//⬅️ Sergio Lopez
+
+	HACES ESTO:
+		➡️ const nameData = ["Sergio", "Lopez"];
+		➡️ const [firstName, lastName] = nameData;		//Toma el valor de derecha a izquierda, el primero con el primero, etc...
+		➡️ console.log(firstName, lastName)		//⬅️ Sergio Lopez
+
+	El uso real para array destructuring es:
+		➡️ const nameData = ["Sergio", "Lopez", 'Mr', 28];
+		➡️ const [ firstName, lastName, ...otherInformation ] = nameData;
+		➡️ console.log(firstName, lastName, otherInformation)
+		⬅️ Sergio Lopez	//firstName = Sergio, lastName = Lopez
+			["Mr", 28]		//Con el SpreadOperator almacenamos el resto de los elementos en un array nuevo.
+
+	Si solo queremos el primer y tercer valor:
+		➡️ const numbers = [1, 2, 3];
+		➡️ [num1, , num3] = numbers;	//observa que hay un espacio en blanco en las comas (representando el segundo valor).
+		➡️ console.log(num1, num3);	//<< 1, 3
+
+⭐️ ARRAYS vs MAPS/SETS
+	Sets:
+		Order is NOT guaranteed
+		Duplicates are NOT allowed (usefull for IDs)
+		No index-based access
+	Maps:
+		Store key-value data (como los objetos) y puede usar cualquier cosa como key (array, object...) ofrece flexibilidad.
+		Duplicate keys are NOT allowed.
+		Access values by key.
+	
+⭐️ SETS:
+	Helps to manage UNIQUE VALUES!
+	const ids = new Set([1, 2, 3])
+	Special methods:
+		✡️.has()
+		➡️ console.log(ids.has(1))	//similar al includes() de arrays
+		⬅️ true
+	
+		✡️.add()
+		➡️ ids.add(2)		//añade el elemento 2 al set
+		⬅️ console.log(ids)	//<<ignora el añadido, ya que set solo puede tener ELEMENTOS NO REPETIDOS.
+
+		✡️.entries() && ✡️.values()
+		➡️ for (const entry of ids.entries()){		//entries() returns an iterable of arrays [v,v], and you receive the value twice.
+				console.log(entry)						//Si quieres recibir el valor una sola vez, utiliza .values()
+				}
+		⬅️ [1, 1]
+						[2, 2]
+						[3, 3]
+		
+		✡️.delete()
+		➡️ ids.delete(1)
+		⬅️ 2, 3
+	
+⭐️ MAPS:
+	- Use a map for LARGE QUANTITIES of FAST EXCHANGING DATA.
+	- Use a map if you HAVE SOME DATA (for example an object) where you kind of want to ATTACH
+		EXTRA DATA which you DON'T WANT TO MERGE INTO THE OBJECT. 
+	- Use a map TO USE SOME DATA (for example an object) AS A KEY and ADD THE EXTRA DATA as PART
+		OF THE MAP instead of  AS PART OF THE OBJECT.
+
+	➡️ const person1 = { name: "Max" };
+	➡️ const person2 = { name: "Manuel" };
+
+	Use a map if you want to attach some extra information to each person but you don't really want to merge it into this object
+	because you use this object in multiple places. To make sure that in other parts of the project where you work with this object,
+	you have a lean object to work with, without too many properties where you have to guess which one you need in this case.
+	Instead some extra information which you might need in another part of your application could be managed in such a map.
+
+	➡️ const personData = new Map( [ [ ] ] );
+		It's an ARRAY OF AN ARRAY because each array in that array is one key-value pair.
+	➡️ const personData = new Map( [ [ 'key', 'some value' ] ] );		//key and value can be any kind of value, so:
+
+	➡️ const personData = new Map( [ [ person1, [{ date: "yesterday", price: 10 }] ] ] );		//value here is an object inside an array
+
+	------------------------------------
+	Special methods:
+	✡️.get()
+	➡️ >> console.log(personData.get(person1))
+	//⬅️ Obtienes ese objeto dentro del mapa (ES LA MISMA DIRECCIÓN DE person1 tanto en el mapa como en el objeto (reference).
+
+	✡️.set()
+		Añade valor al key person2 (RECUERDA, NOS ESTAMOS REFIRIENDO AL OBJETO person2 de HASTA ARRIBA DENTRO DEL MAPA
+		PERO NO QUEREMOS "ENSUCIAR" ESOS VALORES, SOLO USARLOS COMO REFERENCIA.
+	➡️ personData.set(person2, [{date: 'two weeks ago', price: 100}])
+
+	✡️.entries()
+	➡️ for (const entry of personData.entries()){		//Tiene más sentido que en SETS, regresa dos values [v,v], el primero es el key
+			console.log(entry)							// y el segundo es el value.
+				}
+	
+		Como lo vimos en ARRAY DESTRUCTURING, podemos referirnos a un campo en específico (en este caso key & value), utilizando
+		un alias:
+			➡️ for (const [llave, valor] of personData.entries()){
+					console.log(llave, valor)
+				}
+			⬅️ {name: "Max"}
+							[ { ... } ]
+				...
+	✡️.keys() && ✡️.values()
+		Devuelve solo los keys dentro de un bucle:		//values() hace lo mismo solo que con los values.
+		➡️ for (const llave of personData.keys()) {
+				console.log(llave);
+			}
+		⬅️ {name: "Max"}
+							{name: "Manuel"}
+	
+	✡️.clear()
+		Deletes all data from the map.
+	✡️.delete()
+		Deletes a single entry by key from the map.
+	✡️.has()
+		Check whether a certain key is part of the map.
+	✡️size
+		Tells you how many items are in the map. It's a property not a method (no parenthesis)
+
+⭐️ MAPS vs OBJECTS
+	Maps:
+		Can use ANY values (and types) as keys.
+		Better performance for large quantities of data.
+		Better performance when adding/removing data frequently
+		
+	Objects:
+		Only may use strings, numbers or symbols as keys.
+		Perfect for small/medium-sized sets of data.
+		Has special methods for interacting with the data that's not possible with maps.
+		Easier/quicker to create (typically also with better perfomance)
+
+⭐️ WEAKSET && WEAKMAP (you rarely need this)
+	- Use it when you have an application where you store data in a set, you EVENTUALLY WILL LET GO OF DATA.
+		You want to make sure that THIS DATA CAN BE GARBAGE COLLECTED (converts to null) as long as NO OTHER PART OF 
+		YOUR CODE USES THESE ITEMS.
+	- Internally works such that it can only store objects so that it can actually clear these objects for you, release them to garbage
+	collection if you don't work with a certain piece of data anymore.
+	- They have less methods.
+
+----------------------------------------MORE ON OBJECTS---------------------------------------
+⭐️ WHAT'S AN OBJECT
+	- CORE DATA STRUCTURE IN JAVASCRIPT
+	- Typically reflect "real-world" entities
+	- Allow us to apply real-world logic to coding
+	You can put functions inside objects:
+		➡️ const person = {
+				saludo: function(){}	//arrow functions aren't allowed (creo).
+			}
+		➡️ person.saludo();
+	
+	The correct way of declaring functions (methods) inside objects:
+	 	saludo: function(){}		->		saludo(){}		//actually does a different thing
+
+ 
+⭐️ ADDING, MODIFYING & DELETING PROPERTIES
+	Cuando llamas una propiedad que no existe de un objeto, obtienes <undefined>, no error.
+	Le puedes AÑADIR propiedades asi:
+		➡️ person.isAdmin = true; //.isAdmin no existía, se le añadió.
+	Le puedes BORRAR propiedades asi:
+		➡️ delete person.age
+
+⭐️ SPECIAL KEY NAMES & SQUARE BRACKER PROPERTY ACCESS
+	Todas las keys se convierten a STRING:
+		➡️ const X = {
+				1.5: "hello"	//1.5 se convierte a string				
+			}
+
+	TWO WORDS AS A KEY
+	Entonces cuando quieras utilizar dos palabras o una palabra con guión como key, puedes hacer esto:
+		➡️ "first name": "Max",
+	Si quieres acceder a esa propiedad, utilizas [] como un arreglo (recordad que los arreglos son objetos al final de cuenta).
+		➡️ console.log(person["first name"])
+
+	ACCEDING KEY WITH TWO WORDS
+	Con square brackets [] puedes BUSCAR VALORES DINÁMICAMENTE:
+		➡️ const keyName = 'first name'
+		➡️ console.log(person[keyName])
+
+	CASE EXAMPLE
+	Cuando agregabas estilo con Javascript utilizando style
+		➡️ movieList.style.backgroundColor = 'red'
+	De igual forma puedes hacerlo asi, estamos actualizando a la propiedad backgroundColor:
+		➡️ movieList.style["backgroundColor"] = 'red'	//entonces style es un objeto
+
+	INTEGERS AS KEY
+	Puedes ACCEDER a una PROPIEDAD hecha con INTEGERS directamente:
+		➡️ console.log(person[1.5])	//JS automatically curses values to strings.
+	
+	JUST INTEGERS AS A KEY (ORDERS AUTOMATICALLY)
+	Si creas un objeto utilizando UNICAMENTE INTEGERS como KEYS:
+		➡️ const numbers = {5: 'hi', 1: 'true'};
+	y si lo mandas a llamar
+		➡️ console.log(numbers)
+		⬅️ {1: "true", 5: "hi"}		//recibirás el OBJETO con las keys ORDENADAS, tiene sentido ya que piensa sobre los arreglos.
+									//ARREGLOS son OBJETOS con keys númericas donde el ORDEN DEBE SER GARANTIZADO 
+									//(ASCENDENTE)!.
+
+	SETTING A VARIABLE VALUE AS A KEY:
+		➡️ const userChosenKeyName = "level";
+		➡️ let person = {
+				[userChosenKeyName]: "Hello"		//DINAMICAMENTE AÑADES VALORES AL OBJETO CON [ ]
+			}
+		➡️ console.log(person)
+		⬅️ {level: "Hello"}
+
+⭐️ KEY WORD IS THE SAME AS VALUE
+	➡️ title: "title"	->	title	//JS automaticamente interpreta title como key y value cuando solo hay un keyword.
+			
+⭐️ REFERING TO AN OBJECT INSIDE OBJECT (CHAINING)
+	➡️ const movie = { info: { title: "title", name: "name" }}
+	➡️ console.log(movie.info.title)
+
+⭐️ BUCLE FOR EN OBJETOS DENTRO DE OBJETOS
+	➡️ const movie = { info: { title: "title", name: "name" }}
+	➡️ for (const key in movie.info){}
+
+⭐️ COPYING AN OBJECT WITHOUT UPDATING THE PROPERTIES WHEN THE ORIGINAL CHANGES
+	Spread operator:
+		➡️ const person2 = { ...person };	//Copies all the values
+		➡️ const person3 = { ...person, age: 29, hobbies:[...person.hobbies] };	//Copia los valores e individualiza los que quiere.
+	Object.assign
+		➡️ const person2 = Object.assign({}, person);
+		
+⭐️ OBJECT DESTRUCTURING (usefull when you use the same property over and over again)
+	Easily extract object elements and store them in variables.
+	Si quieres evitar escribir una y otra vez chaining para referirte a unas propiedades de un objeto:
+		➡️ let text = movie.info.title + " - ";
+	Puedes hacer esto:
+		➡️ const user = {
+			    id: 42,
+			    is_verified: true,
+			    nombre: "Sergio"
+		};
+
+		➡️ const {id, is_verified} = user;		//LOS "SACAS" DEL OBJETO, LISTOS PARA SER DECLARADOS APARTE.
+
+		➡️ console.log(id); // 42
+		➡️ console.log(is_verified); // true 
+		➡️ console.log(nombre); // ERROR, YA QUE NO ESTA "SACADO" DEL OBJETO.
+
+	Collect all the REMAINING PROPERTIES (...otherProperties), into a new object:
+		➡️ const {id, ...otherProperties} = user
+		➡️ console.log(otherProperties)	//La salida es: {is_verified: true, nombre: "Sergio"}
+
+	Puedes añadir ALIAS a las propiedades de los objetos para referirte a ellas:
+		➡️ const { id: identificador, is_verified: verificado } = user;
+		➡️ console.log(identificador)	//La salida es 42
+		➡️ console.log(verificado)		//La salida es true
+
+	Puedes hacer destructuring en OBJETOS DENTRO DE OBJETOS
+		➡️ const {atributos} = user;
+		➡️ const {alto, ancho} = atributos
+		➡️ console.log(alto)
+
+	ES7 syntax:
+		➡️ {name} = {name: 'Max', age:28}
+		➡️ console.log(name)	//<< Max
+		➡️ console.log(age)		//<< undefined
+	
+⭐️ CHECK IF AN OBJECT HAS X PROPERTY:
+	➡️ if('info' in movie){}
+			
+⭐️ "THIS" KEY-WORD
+	Will refer to WHATEVER CALLED THAT FUNCTION, whatever was RESPONSIBLE FOR EXECUTING THE FUNCTION
+
+	➡️ const newMovie = {
+					info: {
+							title, //title: "title"
+				[extraName]: extraValue,
+										},
+						id: Math.random(),
+							getFormattedTitle: function () {
+						return this.info.title.toUpperCase();	//<- 'this'
+						},
+				};
+	'this' tell to Javascript: LOOK INTO THE OBJECT WHERE THIS FUNCTION IS PART OF, look at the THING WHICH IS RESPONSIBLE FOR 
+	EXECUTING THE FUNCTION (function part of the object), then dive into some info property, into some title property.
+		➡️let text = movie.getFormattedTitle()
+			IT'S THE THING IN FRONT OF THE FUNCTION (movie) THAT WILL BE THE this KEYWORD
+				<movie>.getFormattedTitle()	->	return <movie>.this.info.title.toUpperCase();
+
+⭐️ THIS KEY-WORD EXAMPLES:
+	"this" refers to different things, depending on where it's used and how (if used in a function) a function is called.
+	- this in a Function - Called in the global context
+
+		➡️ function something() {
+			    console.log(this);
+			}
+		 
+		➡️ something(); // logs global object (window in browser) in non-strict mode, undefined
+
+	- "this" in a Method - Called on an object
+		➡️ const person = { 
+			    name: 'Max',
+			    greet: function() { 			// or use method shorthand: greet() { ... }
+				console.log(this.name);
+			    }
+		      };
+			 
+		➡️ person.greet(); // logs 'Max', "this" refers to the person object
+
+	- "this" in a Method (Arrow Function) - Called on an object
+		➡️ const person = { 
+			    name: 'Max',
+			    greet: () => {
+				console.log(this.name);
+			    }
+			};
+		 
+		➡️ person.greet(); // logs nothing (or some global name on window object), "this" refers to global (window) object.
+
+
+⭐️ WHEN 'THIS' KEY-WORD ISN'T AN OPTION
+	✡️.bind()
+		➡️ const newMovie = {
+		    		info: {
+			      		title, //title: "title"
+					[extraName]: extraValue,
+	  	                },
+				id: Math.random(),
+				getFormattedTitle() {	//Check how function its declarated (no 'function' keyword)
+			    		return this.info.title.toUpperCase();	//<- 'this'
+				},
+		      };
+		➡️ getFormattedTitle = getFormattedTitle.bind(movie);	//se utiliza bind() (prepares for a future execution)
+		➡️ let text = getFormattedTitle()
+
+	.call() && .apply() both can be used to CALL AN OBJECT METHOD WITH ANOTHER OBJECT AS ARGUMENT
+	✡️.call()		////*C*all -> *C*ommas
+		A diferencia de bind(), esta se ejecuta en el momento:
+		// getFormattedTitle = getFormattedTitle.bind(movie);	->	Te ahorras declarar esto si usas bind()
+		Puede tener muchos argumentos .call(, , , , , )
+
+			➡️ var person1 = {
+			  fullName: function() {
+			    return this.firstName + " " + this.lastName;
+			  }
+			}
+
+			➡️ var person2 = {
+			  firstName:"John",
+			  lastName: "Doe",
+			}
+
+			➡️ var x = person1.fullName.call(person2); 
+			➡️ console.log(x)	//Will return "John Doe"
+
+	✡️.apply()
+		Muy similar a .call(), solo que éste puede tener hasta dos argumentos, el segundo es un array donde puede tomar
+		los argumentos adicionales.
+			➡️ var x = person1.fullName.apply(person2, []);  		//*A*pply -> *A*rray
+
+⭐️ WHAT THE BROWSER (SOMETIMES) DOES TO "THIS"
+	- IN NO ARROW FUNCTIONS
+		Cuando exista un 'this' key-word pero no haya algo que sea RESPONSABLE para EJECUTARLO (no bind, call, apply, 
+		trigger.function), the BROWSER BINDS "this" for  you (on event listners) to the DOM element that triggered the event.
+			this = <button id="search-btn">Search</button>
+
+	- IN ARROW FUNCTIONS
+		Arrow functions they DON'T KNOW "this" keyword, using them return the global window object
+		Doesn't change the binding of "this". Es muy útil en algunos  casos:
+			➡️ const members = {
+					teamName: 'Blue Rockets',
+					people: ['Max', 'Manuel'],
+					getTeamMembers(){
+						this.people.forEach(function(p) {				//function enlazará el "this" dentro de esa función.
+							console.log(this);							//mientras que => no enlazará el "this" dentro de esa función, por
+							console.log(p + ' - ' + this.teamName);		// lo que "this" representará al objeto en el que esta dentro la 
+						});													// función en su totalidad (ya puedes acceder a people y teamName).
+					}
+				};
+
+		En pocas palaras, FUNCTION key-word representa un SCOPE para "this". Mientras que => no enlaza nada, ya que no existe
+		ese key-word "this" en arrow functions.
+
+⭐️ GETTERS & SETTERS
+	(SETTER): Cuando quieres AÑADIR ciertas CONDICIONES o VALIDACIONES a las PROPIEDADES de tu OBJETO.
+	(GETTER): Cuando buscas añadir una extratransformación al obtener un valor.
+	- El NOMBRE del set/get debe ser el MISMO de la PROPIEDAD a referir.
+	- SE TIENE QUE USAR UN _ (GUIÓN BAJO) PARA REFERIRNOS A LAS PROPIEDADES DEL SET/GET.
+	
+		SET is TRIGGERED WHEN someone ASSIGN a value to a property.
+		<Ensure that the "price" property can only be set to a positive value>
+		➡️ constructor(coursePrice) {
+				this.price = coursePrice;
+			}
+
+		➡️	set price(value) {
+				if (value < 0) {
+					throw "Invalid value!";
+				}
+				this._price = value;
+			  }
+
+		➡️ flutterCourse.price = 5000;		//<- AQUI! SE ESTA ASIGNANDO UN VALOR, AQUI  se ACTIVA EL SET.
+
+		GET it's used when people are trying to ACCESS title:
+		<Ensure that the "price" is returned with a "$" in front of it.
+		➡️ get price() {
+				return "$" + this._price;
+			}
+		➡️ console.log(flutterCourse.price)		//<- AQUI! SE ESTA QUERIENDO OBTENER EL VALOR, se ACTIVA EL GET
+
+		Nota: Si quieres crear getters/setters a una propiedad privada, puedes reemplazar el guión bajo con el # sin problema.
+		
+-----------------------------------CLASSES & OBJECT-ORIENTED PROGRAMMING---------------------------------------
+⭐️ CLASSES
+	- Allow us to build objects based on a BLUEPRINT
+	- It's awesome work with classes when you have REUSABLE LOGIC.
+	- Defines how OBJECTS LOOK LIKE, which properties and methods they have.
+	- Objects (when working with classes) are INSTANCES of classes.
+	- ORDER that they are DECLARED DOESN'T MATTER (like functions with function key-word).
+	- Tienen que ser DEFINIDAS antes de ser INVOCADAS
+	- El cuerpo de una clase solo puede albergar métodos, constructores, campos de instancia (variables que no se
+		les asigna var, const, let).
+
+	Syntax:
+		➡️ class Product {
+				title = "DEFAULT";
+			}
+		➡️ new Product()
+		➡️ const X = new Product()	//this is another option
+	- FIELDS are the elements you declare FIRST in the class. NO ES OBLIGATORIO ESCRIBIRLOS (SOLO EN CASOS ESPECIALES).
+	- PROPERTIES are the elements you declare inside CONSTRUCTOR, and the elements you declare inside class.
+		FIELDS define PROPERTIES for classes!
+	- Is not necessary add a property if field has values. It is MAGICALLY added as a property during the construction
+	   process (you can ommit the fields)
+	- You can WRITE PROPERTIES WHEREVER YOU CAN. Doesn't have to be inside in the constructor. You can always add freely new 
+	   properties to the object (class)
+		➡️ this.totalOutput 😎️
+	- La DIFERENCIA entre declarar una PROPIEDAD a una VARIABLE normal, es que puedes ACCEDER a las PROPIEDADES
+		de la clase DIRECTAMENTE FUERA de la clase (is used for PUBLIC VARIABLE)
+
+⭐️ MÉTODOS
+	- Los métodos se crean sin la keyword "function"
+	- ES7 Javascript permite utilizar arrow functions como métodos, lo que nos permite utilizar "this" sin que cambie su referencia.
+		
+⭐️ CONSTRUCTOR
+	El método constructor es un metodo especial para crear e inicializar un objeto creado a partir de una clase.
+	Method which Javascript automatically calls when we create a new instance of the class.
+		➡️ class Product {
+			  title = "DEFAULT";
+			  imageUrl;
+
+			  constructor(title, image){
+			  	this.title = title,				//"this" refers to the current class
+				this.imageUrl = image		//El ORDEN en el que esta los parámetros, DEBEN ESTAR LAS PROPIEDADES.
+			  }
+	             }
+
+⭐️ USING "THIS" WHEN THERE IS INTERFERENCE
+	When you want to use "this" inside of a method for refering another property of the object/class, but "this" keyword
+	you are using is into an addEventListener, "this" will refer to the Event (because that triggers the function) instead of the property
+	of the class.
+	For avoiding this, you have to use bind():
+		X.addEventListener("click", this.methodClass())		->			X.addEventListener("click", this.methodClass.bind(this))
+
+⭐️ STATIC PROPERTIES, FIELDS & METHODS
+	Using static It's a good idea if you want to share some functionality across.
+	- They are accessible ONLY ON CLASS ITSELF, WITHOUT INSTANTIATION (NOT ON INSTANCE) (you don't need the "new" keyword)
+	- Typically used in helper classes, global configuration, etc.
+	- Always works on the same data.
+	- Util cuando quieres operar DENTRO de la CLASE MISMA, pero NO en INSTANCIAS, NI quieres trabajar con los OBJETOS.
+
+	Si quieres ACCEDER a los MÉTODOS STATIC de cualquier clase, puedes hacerlo DIRECTAMENTE:
+		➡️ class App{
+				static init(){...}	
+			}
+		➡️ App.init();			//en lugar de crear una variable que almacene la clase, y luego esa variable llame el método (PUBLIC).
+
+	➡️ static cart	
+	Puedes agregar STATIC FIELDS al principo de la clase para que sea más readible.
+
+⭐️ ACCEDER A UNA PROPIEDAD PUBLICA DESDE OTRA CLASE:
+	➡️ class Test {
+			metodo1() {
+				this.woops = 5;	// <-- with "this" you always will refer to the class itself, not to an object instance
+			}
+		}
+
+	➡️ class Test2 {
+			static metodo2() {
+				const x = new Test();
+				x.metodo1()		// <-- hay que invocar el método del objeto Test antes de utilizar alguna de sus propiedades.
+				console.log(x.woops)
+			}
+		}
+
+	➡️ Test2.metodo2()
+	⬅️ 5
+
+⭐️ DESTRUCTURING CLASS OBJECTS
+	As Classes instantiation (objects) are objects itself, you can destructure it:
+		➡️ const X = new Shop()
+		➡️ const { prop } = shop		// prop it's a Shop() property (this.prop)
+
+⭐️ ✡️.toFixed()
+	Convert the string/float to max DECIMALS LIMIT
+		➡️ const totalAmount = 15.99999996
+		➡️ totalAmount.toFixed(2)	//the number will be converted to 15.99
+
+⭐️ INHERITANCE
+	Parent class share methods and code to child classes. You can only extend for one class.
+		➡️ class Child extends Father {}
+	With CHILD class doesn't have a constructor, the constructor of the FATHER class is AUTOMATICALLY CALLED
+
+⭐️ SUPER()
+	- This will call the constructor of the father class. You want to use this in your child contructors if your parent class also has 
+	a constructor that should be executed.
+	- When you use super(), you always have to summon this function FIRST, before summoning new child constructor properties (this),
+	so that you make sure your base clase (parent) is fully initialized before start working your subclass.
+	- ES7 syntax you can omit super() keyword.
+
+⭐️ PRIVATE PROPERTIES
+	Use a hashtag:
+		➡️ #products = []
+	Si quieres utilizar una propiedad privada, debes DECLARAR QUE ES PRIVADA AL INICIO DE LA CLASE:
+		➡️ class Course {
+				#price;
+				...
+	There is also pseudo-private properties (previous versions of JS):
+		➡️ this._role = 'admin'
+		Or directly in an object:
+		➡️ _internalId: 'abc1'
+		It's just a convention, it does not techically prevent access.
+
+⭐️ instanceof
+	Checa si una instancia pertenece a una clase en especifico
+		➡️ const p = new Person();
+		➡️ p instanceof Person
+		⬅️ true
+
+----------------------------------- ADVANCED FUNCTIONS CONCEPTS ---------------------------------------
+⭐️ PURE FUNCTIONS
+	Same input always produces the same output
+	Does not trigger any side effects (does not change anything "outside" of the function
+	  
+	IMPURE FUNCTIONS
+	Functions that include Math.random() //you can't predict the output.	
+	If it has side effects: changes anything outside of the function: (http request, data to store in database)
+		➡️ let previousResult = 0;
+		➡️ function addMoreNumbers(num1, num2){
+				const sum = num1 + num2;	//<- this is not side effect, bc doesn't affect anything OUTSIDE of the function.
+				previousResult = sum;	//<- SIDE EFFECT, change a variable that is defined outside of the function.
+				return sum;	
+			}
+		// THEREFORE, THIS MIGHT BE SOMETHING YOU WANT AVOID.
+		// Also applies when you update an array values inside a function
+
+		Always try to use pure functions because they are PREDICTABLE
+
+⭐️ FACTORY FUNCTIONS
+	A FUNCTION that produces ANOTHER FUNCTION.
+		➡️ function createTaxCalculator(tax){
+				function calculateTax(amount) {
+					return amount * tax;	//outer parameter in the first function, can be accessed by the second function as well.
+				}
+				return calculateTax;		//<- don't return the result of it, instead return a pointer at this function.
+			}
+
+⭐️ CLOSURES
+	EVERY FUNCTION IN JS IS A FUNCTION
+	Each function has its own lexical environment
+
+	...Pending section...
+
+----------------------------------- ASYNCHROUNOUS CODE ---------------------------------------
+ASYNCHROUNOUS
+	Something is going on, but you don't want to wait until that thing is done to continue your program.
+SYNCHROUNOUS
+	Something happens and you wait until it's completely finished until you move on to the next.
+
+- Synchronous code executes line-by-line, asynchronous code executes once some operation (e.g a timer) completed.
+	➡️ console.log('Starting!);
+	➡️ setTimeout(() => {	//BROWSER API FUNCTION IS ASYNCHRONOUS CODE.
+			console.log('Timer completed!');
+		}, 10);
+	➡️ console.log('Finished!');
+	⬅️ Starting! >	Finished! > Timer completed!
+	Javascript it's single threaded but OFFLOADS longer-taking tasks (eg. timers) to the browser (which uses multiple threads).
+
+- JavaScript is Single-Threaded.
+- Ciertas operaciones toman más tiempo para ejecutarse. Las operaciones largas previenen que más código sea ejecutado.
+ 	For example if you have an event listener to listen for a button click, then this function event will be blocked until another
+	operation is running previously.
+- Algunas operaciones a lo largo del código, no necesitan esperar que termine una operacion previa, lo cual entorpece la ejecución.
+- Con Asynchrounous Code delegamos operaciones al NAVEGADOR, el cuál utiliza MULTIPLES HILOS.
+- El navegador necesita una manera para comunicarse de vuelta con nuestro JS code, para ello utilizamos CALLBACK() functions.
+- Event Loop is built into the browser, it's not part of the JS engine. It's job is to synchronize the call Stack in the Engine without
+	waiting messages. Runs basically all the time and always sees it's the Stack empty and do we have pending to-dos
+
+PROMISES 
+	Give you a more elegant way to handle asynchronous data (instead of callback hell). Is an object representing the eventual
+	completion or failure of an asynchronous operation.
+
+⭐️ GET USER LOCATION
+	➡️ navigator.geolocation.getCurrentPosition()	//<- built-in API which allows us reach out to the browser to get the user location
+		// takes three parameters: successCallback (function that is executed if the position was successfully fetched), errorCallback
+		// and options Object where you can configure how that should be fetched.
+		// There is no "Promise version" of getCurrentPosition, YOU HAVE TO BUILD YOUR PROMISES.
+
+⭐️ PROMISES
+	Promises are objects which "wrap" (asynchronous) code to make working with it easier.
+	Is a areturned object to which you ATTACH CALLBACKS, INSTEAD of PASSING CALLBACKS INTO A FUNCTION..
+	When you have callback hell (callbacks nested in callbacks nested in callbacks...) Promises allows to write CLEANER CODE.
+		➡️ const promise = new Promise( ( ) => { } );		//<-- 	Promise Its in the end an object.
+		The BROWSER executes the Promise function when it creates the Promise.
+
+	.then()
+		Method that executes whenever the PROMISE RESOLVES (obtuvo el resultado!!). Promise can also resolve MORE THAN ONCE.
+		Even if you don't add a return statement, then() always yield a new promise.
+
+	Promesifying a builtin API:
+		1) Takes a FUNCTION as an ARGUMENT. This function executes right away when this Promise its constructed.
+		This function it's a way for us to configure what this PROMISE SHOULD ACTUALLY DO.
+
+			2) That function takes TWO arguments (resolve, reject). Each argument itself actually is a FUNCTION.
+			These functions (resolve, reject) are coming from the BROWSER.
+
+				3) In the function body you define what should happen.
+
+					4) The value of resolve() could be anything, for example some text: "Done!"
+		
+		➡️ const setTimer = (duration) => {			      1)
+													   2)	       2)
+				const promise = new Promise((resolve, reject) => {
+						    3)
+					setTimeout(() => {
+									  4)
+						resolve("Done!");
+					}, duration);
+				});
+				return promise;
+			};
+
+		➡️ setTimer(2000).then(data) => {		//<-- .then() will execute whenever this promise RESOLVES: resolve("Done!");
+				console.log(data);		//<-- data = ("Done!")
+			}
+
+	A promise can be PENDING or RESOLVED (OR HAVE ERROR/REJECTED). 
+	It's Pending when we are waiting for it to be resolved.Once it's resolved, we can set it back to pending by returning 
+	something in the block:
+		➡️ .then((posData) => {
+				positionData = posData;
+				return setTimer(2000);	//<- Returning something.
+			})
+	
+	ERROR
+		When a promise failed it's execution, you can use the second parameter from .then -> error
+			➡️ .then((posData) => {
+					...
+				}, err => {
+					console.log(err)	//ERROR
+				})
+
+	.catch()
+		Catch ANY ERRORS, ANY REJECTIONS PRODUCED ANYWHERE IN YOUR PRIOR PROMISE CHAIN.
+		Doesn't NOT CANCEL THE ENTIRE PROMISE CHAIN, instead just does its thing, and you can even return something.
+		For avoiding "callbacking" too much
+			➡️ .then((posData) => {
+					...	//if there is an error, catch() executes and this promise will be rejected.
+				})
+
+				.catch(, err => {
+					console.log(err)	//ERROR
+				})
+				
+				.then((posData) => {
+					...	//if there is an error, catch() executes and this promise will continue the chain.
+				})
+		If you don't return anythin inside catch() you return 'undefined' and that sets the promise back to pending.
+		And if you have more then blocks thereafter, those will execute once the pending promise resolves again.
+		DOESN'T CANCEL THE PROMISE, IT ALLOWS IT TO CONTINUE.
+		Even if you don't add a return statement, catch() always yield a new promise.
+
+⭐️ PROMISES CHAINING (MAGIC OF THE PROMISES)
+	Multiple steps in Promise, where we WAIT for the FIRST PROMISE to FINISH, MOVE ON to the NEXT THEN STEP and execute
+	that with the DATA OF PREVIOUS PROMISE.
+		➡️ ...
+			.then((posData) => {
+				positionData = posData;
+				return setTimer(2000);	//you don't have to return a PROMISE in here, you can return any kind of data and it will be
+											//converted to a promise and wrapped into a promise
+			})
+			.then((data) => {		//data = return setTimer(2000); THIS ONE WILL ONLY EXECUTED ONCE STEP ONE IS DONE..
+				console.log(data, positionData);
+			});
+
+	Now you have a STEP after STEP, instead of step inside step which would lead to a lot of nesting.
+
+⭐️ ASYNC/AWAIT
+	You can use async/await only in functions.
+	ASYNC
+		With async(), the function AUTOMATICALLY RETURNS A PROMISE. Async wraps all the function content into on big promise.
+		If the function RETURNS a value, the promise will be RESOLVED with that value.
+			➡️ async function hello(){
+					//return new Promise (hace esto automáticamente)
+					return 'Hey guy!';
+				}
+			➡️ hello();
+			⬅️ Promise {<resolved>: "Hey guy!" }
+
+		If the function THROWS an exception, the promise will be REJECTED.
+			➡️ async function uhOh(){
+					throw new Error('oh no!');
+				}
+			➡️ uhOh();
+			⬅️ Promise {<rejected>: Error: oh no! }
+			
+	AWAIT
+		Await will PAUSE the execution of the function, WAITING FOR A PROMISE TO BE RESOLVED.
+		Await runs to the next line until as long as the previous line resolved.
+		Da una SENSACIÓN de que el código esta SYNCHROUNOUS
+
+		➡️ const posData = await getPosition()	//after the getPosition promise resolve, only thereafter next line executes.
+		➡️ setTimer(2000)
+
+	It looks like this is a synchronous code (line after line) with async/await, but in reality then(), catch() is written behind scenes in async/
+	await. Does not change the way Javascript executes, don't worry.
+
+	ASYNC/AWAT VS THEN/CATCH
+		- Async/await is not that great if you have a function in which you need execute or kick off multiple things simultaneously and
+		don't want to execute everything after each other.
+		- Async/await is only available on functions.
+
+	ERROR HANDLING
+		When you want to handle errors using async, usa el clásico try/catch
+		➡️ async function trackUserHandler() {
+				let posData;
+				let timerData;
+				try {
+					posData = await getPosition(); //returns a promise
+					timerData = await setTimer(2000);	//BOTH PROMISES HAVE TO RESOLVE, IN ORDER TO AVOID CATCH.
+				} catch (error) {
+					console.log(error);
+				}
+				console.log(timerData, posData);
+			}
+
+⭐️ PROMISE.ALL, RACE, ETC
+	✡️ Promise.race()
+		Takes an array of promises. .race() also returns a Promise with the result of the FASTEST promise you pass to it, and then you
+		can utilize .then keywords to continue the flow. Race only cares in the fastest promise!
+			➡️ Promise.race([getPosition(), setTimer(1000)]).then((data) => {
+					console.log(data);
+				});
+
+	✡️ Promise.all()
+		You get a normal promise as a result but the data of the promise will be the COMBINED DATA of your other promises.
+			➡️ Promise.all([getPosition(), setTimer(1000)]).then((promiseData) => {
+					console.log(promiseData);
+				});
+		If one of the promises fail, is rejected, then the other promise is not executed, its canceled. ERROR (you can handle with catch)
+
+	✡️ Promise.allSettled()
+		All succeeded or all failed. It does not cancel the execution of other promises if one of them is rejected, instead it still
+		completes or looks at all of them and then gives you a detailed summary of which promise failed and which promise succeded.
+			➡️ Promise.allSettled([getPosition(), setTimer(1000)]).then((promiseData) => {
+					console.log(promiseData);
+				});	
+			⬅️ (2) [{…}, {…}]
+					0:
+					reason: GeolocationPositionError {code: 1, message: "User denied Geolocation"}
+					status: "rejected"
+					1:
+					status: "fulfilled"
+					value: "Done!"
+
+----------------------------------- MODULAR JAVASCRIPT ---------------------------------------
+Modules are not supported on browsers directly, you have to use tools (server).
+Code in your modules runs when the module is imported FOR THE FIRST TIME (ONLY RUNS ONCE) EVEN NON-EXPORTED CODE EXECUTE.
+Javascript module is better than multiple <script src="..."> because each file specifies its dependencies,
+you don't need to manually micro-manage the correct order:
+	<script src="...">	//first
+	<script src="...">	//second
+	<script src="...">	//forth	
+	<script src="...">	//third		ERROR
+
+⭐️ export
+	Make the code file available to other files as well. Means that we can now import the exported thing, you can export 
+	classes, functions, variables, constants...
+		➡️ export class Component { ... }
+
+	You can export MULTIPLE classes/functions in the same script.
+	If you are exporting a function/class, you can access to that directly on the file that is imported.
+
+	➡️ export const myName = "Max";
+		It's a so-called "NAMED EXPORT" - exporting the constant with the value "Max" under the name myName.
+
+⭐️ import (static)
+	To start the import, you need to tell Javascript from where:
+		➡️ import { Component } from './Component.js'
+
+	NO importa TODO lo que pusiste export (don't work filewide), tienes que ESPECIFICAR lo que estas importando.
+		➡️ import { moveElement } from '../Utility/DOMHelper.js'	//moveElement es la funcion a importar.
+
+	Puedes importar MÚLTIPLES elementos en la misma linea con coma:
+		➡️ import { moveElement, DOMHelper } from '../Utility/DOMHelper.js'
+
+	Si quieres importar TODOS los exports:
+		➡️ import * as DOMH from '../Utility/DOMHelper.js'	//DOMH es un OBJETO con TODOS los EXPORTS (DOMH es un alias).
+		➡️ DOMH.moveElement(project.id);
+
+	Puedes asignar un ALIAS a lo importado:
+		➡️ import { ProjectItem as PrjItem } from "./ProjectItem.js";
+		Usefull in cases you have names clash (mismos nombres) y existan constantes con ese nombre.
+		Solo aplicará para el file que fue declarado ese alias.
+
+	Imports are automatically SORTED TO THE TOP FILE (es decir, si hay un import en el script, y arriba de ese import hay más código
+	de igual manera se ejecutará primero el import)
+
+⭐️ type ="module"
+	You add this atribute to the <script> tag at index.html
+	NECESITAS añadir este atributo para que export, import FUNCIONE.
+	It's NOT supported to the BROWSER directly
+	Para que puedas usar modulos, la web app debe estar montado en un server (CORS policy)
+		➡️ <script src="assets/scripts/App/Tooltip.js" defer  -> type ="module" <- ></script>		//el file que le pusiste import.
+
+⭐️ default
+	When you want to export a core element, or the ONLY element.
+	You can OMIT THE NAME of the element, because you are not importing by name, but just for POINTING IT.
+	You can add an ALIAS.
+	This tells to Javascript, this should be the default export of the file.
+		➡️ export default element
+		----
+ 		➡️ import Cmp from './Component.js'	//Cmp is an alias.	//CURLY BRACES ARE OMITED WHEN IT'S A DEFAULT IMPORT!
+		➡️ export class Tooltip extends Cmp { }
+
+	You can have ONLY ONE DEFAULT EXPORT for FILE.
+
+⭐️ import (DYNAMIC )
+	When you know the IMPORTED code ISN'T NEEDED.
+	When you want to run code that is IMPORTED WHEN IS NECESSARY TO RUN, instead of being able all the time using static import, that 
+		leads to consume more memory. MAKES YOUR APP FASTER.
+		➡️ import('./Tooltip').then(module => {
+				const tooltip = new module.Tooltip(	//Tooltip its a class that is being imported
+				...
+			});
+
+	This import function is BUILT INTO THE BROWSER, and gives you a PROMISE.
+	You can access to the imported classes/elements through the FUNCTION.
+
+⭐️ MODULE SCOPE & GLOBAL THIS
+	➡️ window.DEFAULT_VALUE = "MAX"
+		This will be added automatically to the window object, which act as a global object that expands across your "entire app".
+		Verifica que lo añadido al window object se ejecute antes la declaración que la utilización del elemento añadido.
+		Usalo como último recurso.
+
+	➡️ globalThis.DEFAULT_VALUE = "MAX"
+		Points to some "globally available object"
+		This is available on browser side javascript and node.js side javascript. window object is not available in both.
+			➡️ console.log(globalThis.DEFAULT_VALUE);		//in other script
+
+----------------------------------- OTHER STUFF ---------------------------------------
+⭐️ setTimeout()
+	Calls a function at specified time (in milliseconds). Only executes once.
+		➡️ setTimeout(function(){ alert("Hello"); }, 3000);
+
+⭐️ setInterval()
+	The setInterval() method calls a function or evaluates an expression at specified intervals (in milliseconds).
+	The setInterval()	will continue calling the function until clearInterval() is called, or the window is closed.
+		➡️ setInterval(function(){ alert("Hello"); }, 3000);
+
+⭐️ URLSearchParams
+	La interfaz URLSearchParams define métodos útiles para trabajar con los parámetros de búsqueda de una URL.
+	
+	✡️ .entries()
+		Returna un iterator que permite iterar a traves de todos los pares de LLAVE/VALOR que contiene el objeto.
+			➡️ const query = new URLSearchParams(this.props.location.search);		//react course
+			➡️ for (let param of query.entries()){
+				    console.log(param)
+				}
+				//      KEY					VALUE
+			⬅️ (2) ["title", "PWA - The Complete Guide"]
+
+⭐️ encodeURIComponent
+	Encodes elements such that they can be used in the URL.
+
+	➡️ const queryParams = [];
+	➡️ for(let i in this.state.ingredients){
+		      queryParams.push(encodeURIComponent( i ) + '=' + encodeURIComponent(this.state.ingredients[ i ]));
+	        }
+
+	➡️ const queryString = queryParams.join('&');
+	➡️ console.log(queryString)	//<< bacon=1&cheese=1&meat=1&salad=0
+
+	➡️ this.props.history.push({
+		      pathname: '/checkout',
+		      search: '?' + queryString
+	        });
+		//url: http://localhost:3000/checkout?bacon=1&cheese=1&meat=1&salad=0
+
+⭐️ HTTP REQUEST
+	FETCH
+		➡️ fetch('url')
+			Default will send a GET request.
+		➡️ fetch("url", 
+			{
+				method: 'POST',	//send a POST request
+				body: JSON.stringify({ object } )	//body: what you want to send
+													//JSON.stringify: class built in in browsers that convert object or array into json
+				headers: { 'Content-Type': 'application/json' }	//tell firebase that we got some incoming JSON data
+			});
+
+		Fetch return a PROMISE which eventually resolves once this request is succesfull. Osea que puedes utilizar .then
+			➡️ }).then(response => { 	//response its an object
+					return response.json()	//this will extract the body and convert it from json to normal javascript code. Returns a promise
+				 }).then(responseData => {	//responseData it's an object as well
+					//LO QUE QUIERAS HACER
+				}
+
+⭐️ performance
+	✡️ performance.now()
+		Muestra el tiempo en qué tardó la página en renderizarse.
+

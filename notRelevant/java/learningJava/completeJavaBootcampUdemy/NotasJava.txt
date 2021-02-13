@@ -1,0 +1,548 @@
+else if(){} Se ejecuta si falló el if de arriba. Si el if de arriba es true, ignora
+	los else if de abajo.
+break statement: Inside a if breaks 2 floors (if itself and the one 'if' is inside)
+	when the parameter is right.
+continue statement: Means that we should continue with the loop, but don't bother doing
+	anything below.
+label: Es agregarle una etiqueta a una sección de código, para hacer referencia.
+	(ve la imagen label.jpg)
+enum: Se declara como si fuera un método:
+	public enum Days{SUNDAY, MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY}
+	Enumera los objetos que esten dentro. (0,1,2,3...). 
+		- Cuando vayas a utilizar un valor del método enum, primero se invoca
+		escribiendo primero el tipo, que es el nombre del método, después el
+		nombre de la variable = nombre del método enum . elemento del método
+		enum:
+			Days today = Days.friday;
+		- Cuando vayas a utilizar un valor de los que estén dentro, simplemente
+		escribes su valor (FRIDAY):
+			case Days.FRIDAY (dentro de un switch).
+	
+/*************************************************************************************/
+Modifiers (public, static)
+- Modifiers must be to the left of the return type.
+	| public static | void main(String[] args)
+	      LEFT              RIGHT
+- Modify the method in some sort of way.
+- How this method should behave
+- How it's accessed and so on.
+	public = is available to all code in the program.
+	static = we can do it by sending the message to the class itself
+		rather than an object that has been made from the class.
+
+/*************************************************************************************/
+Main class rules:
+- Main class must be public and static.
+- The order of modifiers doesn't matter. You can write 'static public'.
+- The return type for the main method must be void.
+- 'main' must be in lower case.
+- The identifier for the String array may be named anything you'd like (though,
+by convention, it is typically "args").
+
+/*************************************************************************************/
+Java memory
+Heap
+	Large portion of memory and it's where all the objects
+	are going to live.
+Stack
+	Short term piece of memory where we have reference variables.
+		-Are defined within a given block of code (scope (global, methods)).
+		
+/*************************************************************************************/
+Objects
+Persona p1 = new Persona();
+Clase / name of objeto = 'new' keyword / método constructor (default o definido).
+- Cuando un objeto es instanciado significa que una COPIA DE LA REFERENCIA se ha hecho.
+ Esa referencia se va a el HEAP.
+
+/*************************************************************************************/
+Methods
+Syntax:
+	Modifiers / return type (void) / name of the method / (parámetros) / {acción}
+	
+	Method without return value:
+		public void start(){
+			System.out.println("Get Started!");
+		}
+
+	Method with return value:
+		String getDescription(){
+			String desc = "This is a "+color+" "+type;
+			return desc;
+		}
+			- After we execute these statements we will return a string
+			back to the caller. Whoever calls it can get a hold of that
+			string and store it in a NEW VARIABLE:
+				String NombreVariable = carrito.getDescription();
+			- The return statement TERMINATES a method. El código posterior
+			a return será ignorado.
+	
+	Method with paramétros:
+		void setDate(int x, int y, int z){
+			x = day;
+			y = month;
+			z = year;
+		}		
+Utilizar en objetos
+	carrito.start();
+- Cuando agregas variables a los parámetros del método(), no esta agregando las variab-
+ les sino una COPIA DEL VALOR de esas variables (no la variable).
+- Solamente con los métodos con return, pueden modificar el valor de la variable:
+	public static double discountLoan(double x){
+    		return x * 0.95;
+	}
+
+----------------------------------------
+.substring(4,10);
+	Cut a String.
+	4 -> String starts with the 4th character (eliminates first three chars)
+	10 -> String ends with the 10th character (eliminates eleventh and so on...)
+		Hello world -> o Worl
+.trim();
+	Remove extra spaces before and after that the beginning and at the end of the
+	string.
+		Hello World_ _ _ _ _-> Hello world
+
+.toUpperCase();
+	Convierte a mayúsculas
+
+.charAt(2);
+	Returns the character that are in the '2' position
+		Hello World -> l
+
+/*************************************************************************************/
+Constructors
+- Constructors allow you to initialize an object when it is created (instantiated).
+- Have the exact same name of the class itself.
+- It can't return any value. However you DON'T put 'void'.
+- Nos ayuda a no tener la necesidad de asignar atributos a los métodos, de forma autom-
+	ática agrega valores por default.
+- Can ONLY be called during instantiation (cuando declaras un objeto).
+- All objects have to have at least one constructor. But they can have many more.
+- Tener múltiples constructores nos da flexibilidad (MultipleConstructorAdvantages.jpg)
+- Are invoked only by using the 'new' keyword, not the dot notation like methods.
+- Son declarados sin necesidad de modifiers (static, public).
+- Si intentas pasar dos argumentos a un constructor que solo acepta uno, Error.
+- Default constructor is a no-arguments constructor that is provided by java if you
+ define a class without explicitly defining any constructors.
+
+/*************************************************************************************/
+Initialization block
+- They are executed before constructors.
+- They are executed in the order that they are listed (from top to the bottom).
+	{
+		color = "Green";
+	}
+- This will be executed every single time a new object is instantiated.
+- Always will be running for all of the constructors.
+
+/*************************************************************************************/
+Order that values of variables take place.
+1) Create variables or attributes, setting to NULL value (or 0 if it is a number var).
+	String color ="Green"; (value is NULL, ignoring the value assigned by developer.
+2) Initialization blocks set the value.
+	{
+		color = "Red"; (the value of color is set to "Red".
+	}
+3) Variables or attributes set the value that the developer assigned to them.
+	String color ="Green";
+4) Constructors set the new color value.
+	Car(){
+		color = "Blue"; (the value of color is set to "Blue".
+	}
+	- Even the constructor is above all that stuff, it's still going to be called
+		last.
+- The placement order of the instance variables importa (String color = "Red") 
+- The placement order of initialization blocks importa ({color = "Red";}) 
+- The placement order of constructors NO IMPORTA (Car(){color="Blue";})
+
+/*************************************************************************************/
+Static
+Static Variables (if you need an ID for each object)
+- Is a modifier which means this variable is tied to the class itself.
+- To access this variable, you use the name of the class and the class variable name.
+	Car.carCount = 1;
+	Class | .class variable name
+
+	Instead of the typical access through object:
+		Car myCar = new Car("Black", "Ranger");
+		myCar.carCount = 1;
+
+- No matter how many objects get created, there is still just ONE carCount.
+- Una variable static PERTENECE A LA CLASE, NO PERTENECE A NINGÚN OBJETO.
+- Para llamar una variable estática hay que utilizar el nombre de la clase.
+
+----------------------------------------
+Static Method (class methods)
+- A static method is associated with the class, not the objects.
+- To call a static method, you only need the name of the class.
+- Its possible to use a object name for refering the static method, but its confusing.
+- Static method do not have access to object data (because java doesn't know which
+	instance are you refering).
+  They are used because:
+- Access (update or extract) class variable data (is more appropiate).
+- In some cases you may not have an instance of an object created before the data is
+	needed.
+- You don't want to have to create an object just to be able to access class variables.
+- Provide functionality without the need for an object/instance.
+	For example: mathematical formulas!
+- Can only access static variables.
+
+----------------------------------------
+Static initialization block
+static{}
+- The code in this block will only be executed ONCE when the CLASS is loaded
+ (without creating objects).
+- Can only access static variables and static methods.
+
+/*************************************************************************************/
+This (variable)
+- Hace referencia a los atributos de la clase actual.
+- Se utiliza si coincide el nombre de la variable que da propiedad a la clase con el
+nombre del argumento que se le dará al método (constructor, setter, getter, general).
+           this.color = color;
+    instance variable | local variable 
+	(class)		   (method)
+----------------------------------------
+This (constructor)
+- Hace referencia al constructor que se encuentra en la clase actual.
+	this();
+- Inside a constructor, this(); has to be the first line ALWAYS.
+- You can't place this(); inside of methods. This is strictly for chaining constructors
+ together.
+
+/*************************************************************************************/
+Scope {}
+- Variables and methods have a certain range in which they exist and where they can
+ be accessed.
+- Can most easily be identified by curly brackets{}, in other words, a code block.
+- Locations scope for variables:
+	- Inside of a class.
+	- Inside of a class but defined as static.
+	- Inside of a method.
+		- Parameters().
+		- Actions of the method{}.
+	- Inside any code block (for{}, if{}...).
+- If the variables have the same name, the most local variable will win.
+ Method variable will have more revelance than instance variable (class).
+- Local scope have access to class scope variables. However, class scope doesn't have
+ access to local variables (methods, constructors). They go away once the method or
+ constructor has finished executing.
+
+/*************************************************************************************/
+Garbage collection (System.gc();)
+- The Java runtime environment deletes objects when it determines that they are no
+ longer being used.
+- Periodically searches memory for "free" objects that are no longer needed.
+
+/*************************************************************************************/
+Strings
+- Strings are Java objects.
+- Strings are INMUTABLE. Once we created, we can't change it.
+- Cuando utilizas el método .substring (devuelve carácteres es-
+ pecíficos del String), no modifica el string, sino crea uno nuevo, lo utiliza y des-
+ pués lo elimina de la memoria. Así trabaja con cualquier método.
+- Created Strings go to HEAP memory, not to STACK (where normal variables go).
+
+/*************************************************************************************/
+Encapsulation
+- Benefits: Provides flexibility to change the inner workings of the class and prevent
+ invalid state changes.
+- private: Its literally only available to the class itself. And that is different than
+ saying it's available to the object that's been built on this class. Nothing can read,
+ change or invoke this member unless from the class itself.
+- Default: when you don't use a class modifier. Can acces any classes that are in the
+ same package.
+- Getters declaration syntax: public int getDay(){return day;}
+- Setters declaration syntax: public void setMonth(int month){this.month = month;}
+- Setters invoke syntax: d.setMonth(12);
+
+/*************************************************************************************/
+Arrays
+- Members has to be the same type (int, string, char, etc).
+- When is declarated and without a specific size[], the values will be 0.
+- Syntax when declaring:
+	int[] intArrayOne;
+	int intArrayTwo[];
+- Syntax when you assing value:
+	intArrayOne[0] = 1;
+- Syntax when you assing multiple values (this aplies only when you declare the array
+ initially:
+	int[] intArray = {1,2,3,4,5,6,7,8,9,10};
+- Arrays can hold any Java Object type:
+	MyDate[] dates = new MyDate[3];
+	dates[0] = new MyDate(10, 26, 1999);
+	dates[1] = new MyDate(8, 25, 1969);
+	dates[2] = new MyDate(4, 21, 1968);
+Multi-dimensional arrays (arrays of arrays)
+- Syntax when declaring:
+	String[][] array = new String[5][2];
+	Each element inside array is an array.
+	In the first dimension we have 5 arrays.
+		We can store 5 people [5], we can store 2 different pieces of info [2]
+		of each people.
+- Syntax when you assing value:
+	array[0][0] = "Paul";
+- Syntax when you assing multiple values (this aplies only when you declare the array
+ initially (3x2 example):
+	String array[][] = {{"1","a"},{"2","b"},{"3","c"}};
+
+String[][][][] array = new String[2][2][3][3];
+
+Varargs cont (...)
+	- Indicates the method can take zero or more arguments of that type:
+		public void myMethodTakesLotsOfInts(int... manyInts){
+		  for(int i : manyInts){
+			// do work here}
+		}
+	- Has to be the last argument.
+----------------------------------------
+.length
+	Saves to memory the number of slots that an array have. Is a read attribute
+	IT'S NOT A METHOD.
+.arraycopy()
+	Allows to copy elements from one array to another array.
+	arraycopy(*array we're copying from*, *index we're starting at*, *array we're
+		 copying to*, *what index we're starting at*, *how far should we go*);
+.sort()	
+	Ordena números, letras, mayúsculas, minúsculas
+.binarySearch()
+	Busca in an array and returns the index of the searched element.
+		.binarySearch(letters, 'e');
+.fill
+	Llena all elements of an array with one value.
+		.fill(letters, 'z');
+
+/*************************************************************************************/
+Collections (Java API)
+ArrayList
+- You can find elements very quickly.
+- Is almosy as easy as working with an array.
+- Is slower adding and removing elements in the middle than Lists. If you want to add
+ some element on index(4), you have to move all elements forward.
+- The way they are linked is a set order of things in a SPECIFIED SPACE*.
+- Create a list:
+	ArrayList list = new ArrayList();
+	ArrayList list = new ArrayList(4); //create an ArrayList with an initial
+		//capacity of 4, but you can add more and remove more than 4 objects.
+.add
+- Add elements to the ArrayList
+	list.add("Bruce Banner");
+	list.add("Barry Allen");
+	    System.out.println(list); //[Bruce Banner, Barry Allen] (API ads commas).
+.size()
+	Access to an array list size.
+.remove()
+	Remove an specific element.
+		list.remove("Barry Allen");
+.remove()
+	Also Remove elements by index.
+		list.remove(1);
+.contains()
+	Es para checar si un elemento en específico esta dentro del arreglo (returns
+		true or false)
+	if(list.contains(Gotham City")){
+		System.out.println("Gotham City is a member");
+	}
+.clear()
+	To empty all elements out of an ArrayList.
+.isEmpty()
+	Is used to check whether the collection contains any elements.
+.get()
+	Find element in the list
+		list.get(27);
+.set
+- REPLACE elements to the list. You can only set things where something already exists.
+	list.set(0, "Roamed");
+
+.equals()
+	determine whether an object is a duplicate.
+
+Iterator
+- Allow for traversal of a collection in a way that is similar to using a for loop
+ to traverse all elements of an array.
+- Nos permite darle un pseudonombre a un arrego, para que con este sobrenombre podamos
+ hacer bucles while, for, etc. En pocas palabras nos permite hacer loops con arreglos.
+	Iterator i = arrayName.iterator();
+	while(i.hasNext()){
+		System.out.println(i.next());
+	}
+- Syntax:
+	Iterator i = arrayName.iterator();
+- Its an object that has three methods:
+	-.hasNext() Ask the iterator if there's any more objects (return a boolean).
+	-.next() (return a object value).
+	-.remove() (void).
+
+----------------------------------------
+Lists (linked list)
+- Behaves like an array too.
+- They maintain the order of the elements they contain.
+- You can find elements very slowly.
+- They can be manually sorted.
+- Much faster at adding and removing elements tham ArrayList.
+- The way they are linked its an OBJECT that refers to an OBJECT* and so on.
+- Allows duplicate objects.
+- Create a list:
+	List list2 = new ArrayList();
+ListIterator
+- Is ONLY available for lists.
+ListIterator i2 = arrayName.listIterator();
+- ListIterator interface defines unique methods:
+	-.hasPrevious() (return boolean).
+	-.previous();
+
+----------------------------------------
+Sets (conjunto)
+- No duplicate objects are allowed in a set.
+- Generally, the order of the elements are not maintained.
+- Therefore, the elements of a set are returned in no particular order when using an
+ iterator.
+- Sets do not have or use an index.
+- Most common implementations are hashSet and treeSet:
+
+- HashSet:
+	- A HashSet doesn't allow duplicate values, and doesn't return them in the way
+	they were added.
+	- Returns elements in the manner in which they are stored.
+- HashSet Syntax:
+	HashSet objectName = new HashSet();
+- Treeset:
+	- Its an ORDERED set. Order the elements in a "natural order":
+		[12 53 56 88 SERGIO Lopez ornelas]
+	- Use a tree organization to organize the set, but you have NO control over
+	links between parents and children in the tree.
+	- Only have control of saying 'how we want the objects to be handed off to us
+	 as we iterate through them'.
+	- They are ordered, but their items are not indexed. Therefore, you cannot
+	insert or fetch values and children in the tree.
+	- When we iterate through a tree set will return ordered results. //12 53 56 88
+	 That happens because treeSet relies on a method called comparedTo.
+- TreeSet Syntax:
+	TreeSet objectName = new TreeSet();
+
+---------------------------------------
+Queues (colas)
+- Defines a data structure with a head and tail.
+- They can have a capacity.
+Exception throwing method:
+	.add()
+	.remove()
+	.element()
+		Examine the head of a Queue
+Non-exception throwing method:
+	.offer() -returns false (add).
+	.poll() - returns null (remove). Remove the first one on the head.
+	.peek() - return null (Examine the head). Just checking the first one on the
+		head (no remove).
+Most common queues: ArrayBlockingQueue and PriorityQueue
+
+ArrayBlockingQueue:
+- Implements a first-in-first-out (FIFO) Queue.
+ The head of the queue is the element that's been there the longest time. Tail the
+ shortes time.
+- New elements are added to the tail.
+- Elements pulled out happens from the head.
+- Hold a fixed number of elements. The capacity cannot be changed.
+- Syntax:
+	ArrayBlockingQueue queue = new ArrayBlockingQueue(5);
+		queue.offer("Bruce Banner"); //could also call add.
+		queue.offer("Clark Kent"); //could also call add.
+PriorityQueue:
+Think about a restaurant:
+	- Allows "first-class" or premium diners to skip to the head of the line.
+- Elements with a "higher" order are moved to the head of the queue.
+- The elements are ordered according to their natural ordering (like trees):
+	[9,8,7,6,5,4,3,2,1,LOPEZ,ORNELAS,SERGIO,elbailador,torta]
+- No limits, you don't have to specify how many elements will be added.
+- As elements are added to the PriorityQueue, its capacity grows automatically.
+- Syntax:
+	PriorityQueue queue = new PriorityQueue();
+		queue.offer("Bruce Banner"); //could also call add.
+		queue.offer("Clark Kent"); //could also call add.
+
+---------------------------------------
+Deque (double ended queue)
+- Queues that allow elements to be inserted and removed at BOTH ends.
+- Usually, there is no capacity on the number of elements (it can grow by itself).
+- They also have exception and non-exception throwing methods. (add, offer, remove)
+Exception throwing method:
+	addFirst()
+	removeFirst()
+	getFirst()
+	addLast()
+	removeLast()
+	getLast()
+Non-exception throwing method:
+	offerFirst() - returns false
+	pollFirst() - returns null
+	peekFirst() - returns null
+	offerLast() - returns false
+	pollLast() - returns null
+	peekLast() - returns null
+
+ArrayDeque
+- Generally, null elements are not allowed.
+- Are not thread-safe.
+- Syntax:
+	ArrayDeque deque = new ArrayDeque();
+		deque.offerFirst("Bruce Banner");
+
+---------------------------------------
+Maps
+- Are not associated with the Collection Interface. Because maps has a unique structure
+- Collections of data in associated key and value pairs.
+- They have object keys instead of numeric indexes.
+- Adding, removing, sorting elements to a map is done by key.
+- No duplicate keys are allowed.
+- Keys can be any object, but they are tipically Strings or Integers.
+- Duplicate values are allowed, each associated with a different key.
+
+HashMap (sección amarilla)
+- When you're doing a lot of random access.
+- When we typically don't care how they're organized.
+Syntax:
+	Map map = new HashMap();
+	map.put('key','value'); 
+	map.remove('key');
+	Set s = map.keySet();
+	Collection c = map.values();
+
+put() -> its the same that add().
+remove() -> key-value pair to be removed by specifying the key.
+clear() -> removes ALL key-value pairs from the map.
+containsKey() -> check if there is a specific key. (return a boolean)
+containsValue() -> check if there is a specific value. (return a boolean)
+keyset() -> returns a set containing the key objects in the map.
+values() -> returns a collection of value objects in the map.
+
+Set is a collection where everything is unique, it doesn't allow duplicate objects.
+Vales there could be duplicates.
+
+-HashMap and TreeMap are analogous to HashSet and TreeSet.
+
+/*************************************************************************************/
+Java facts
+- You cant't really change a string. You can only make a new string out of some old
+ string. They are inmutable.
+- When you are referring to an object method there is parentheses().
+- When you are referring to an object attribute there is not parentheses.
+- Member of a class or an object:
+	A member is any piece of state or behavior that belongs to the class or object.
+	In general, a member refers to any field, method, or constructor in a class.
+	However, sometimes the term "class member" is used to specifically refer to
+	static methods and static variables.
+- An object is really an instance of a class.
+- You can only have one public top level class. There are not curly braces outside of
+ that class.
+- La clase public se llamará igual que el archivo.java en el que se encuentra.
+- Only instance and static variables have default values.
+- When the main method starts, the other classes are loaded.
+- Inside of a method, when you type the type of the variable, you are creating a new
+ variable.
+- Package statements must be list before any imports.
+- Package statement cannot use a wildcard (*).
+- You don't list a package statement if the class is in the default package.
+- You can also explicitly designate a classpath using:
+	javac-classpath c:/temp/myclasses;. Someclass.java
+- Solo puede haber un public class por clase.

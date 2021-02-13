@@ -1,0 +1,91 @@
+Uses of Docker:
+1) Compatibility with the underline operating system
+2) Check the compatibility between the services and the libreries and dependencies on the OS.
+
+With Docker you are able to run each component in a separate container, with their own libraries and dependencies.
+
+Container = complete isoleted enviroment: it can have their own processes, network and mounts (?) just like virtual machines except they all share the same operating system kernel. You can share the same container with different linux distributions (ubuntu, fedora, suze, debian) because they are operating on the same kernel (unix). You wouldn't be able to run a windows based container on a docker host. Docker is not meant to virtualize and run different operating systems and kernels in the same hardware. The main purpose of docker is to containerize applications, ship them and run them.
+
+Kernel is responsible for interacting with underlying hardware.
+
+With different linux distributions (ubuntu, fedora, suze, debian) the os kernel remains the same, is the software above it that makes operating system different.
+
+Docker image is a package or template, it is used to create one or more containers. (docker image = class that you can create multiple objects (containers))
+
+Containers are running instances of images that are isolated and have their own environments and set processes.
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+RUN - PORT MAPPING
+
+Docker host/engine
+	Underlying host where docker is installed. Dentro de ese espacio estan todos los contenedores.
+
+When we run a containerized web application it runs and we are able to see that server is running:
+	Running on http://0.0.0.0:5000/ (Press CTRL+C to quit)
+	^C^C
+
+How does the  user access the application?:
+	As you can see, the application is listening on port 5000, so you can access from there, but what IP do I use to access it from a web 
+	browser?  There is two options:
+		1) Using the IP for the docker container (every docker container gets an ID assigned). In this case IP is 172.17.0.2
+		REMEMBER THAT THIS IS AN INTERNAL PRIVATE BRIDGE NETWORK IP, is accessible within the docker host.
+
+		Para entrar al container desde Google Chrome: https://172.17.0.2:5000
+																	      IP address : PORT
+	
+		2) Mapping a port to my docker host and accesing it using the external IP
+		Users outside of the docker host can not access it using this IP. For this, we can use the IP for the local host which is 192.168.1.5
+		But for that task, you have to map the port inside the docker container to a free port to the docker host.
+		You could map the port 80 (USER) of  the local host to port 5000 (DOCKER CONTAINER) using -p parameter (terminal).
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+DOCKER IMAGES
+Why would you need to create your own images?
+	- You can not find a component or service that you want to use as part of you application on Docker Hub already.
+	- The application you are developing will be dockerized for ease (facilitar) to shipping and deployment.
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+DOCKER COMPOSE
+If you have large applications with a number of services that they are interacting each other.
+Instead of running separate docker commands to set up your environment, define your configuration in a docker compose file.
+is a file in a YAML format (yml)
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+DOCKER SWARM
+You can manage multiple docker machines (hosts) together as a single cluster, for high availability.
+You have to decide a host to be the master or the swarm manager, and the other as workers.
+
+docker swarm init (manager)
+docker swarm join (worker or nodes)
+
+Inside of docker-compose.yml
+	services:
+		web:
+			deploy:
+				replicas: 5 #will deploy 5 instances of applications across docker host.
+
+docker slack deploy -c docker-compose.yml
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+DOCKER NETWORKING
+When you install docker, it creates three networks automatically (Bridge, none and host)
+
+- Bridge is the default networka container get a attached to. Its a private internal network created by docker on the host. All the container
+	attached to this network by default and get an internal IP address usually in the range 172...
+	To access to this containers from the outside world you must map ports of this containers to the docker host.
+
+- none: use command network=none
+	>> docker run Ubuntu network=none
+	The containers are not attached to any network and doesn't have any access to the external network or other containers.
+
+- host: use command network=host
+	>> docker run Ubuntu network=host
+	To access to this containers from the outside world is to asociate the containers to the host network. This takes out in a network isola-
+	tion between the docker host and docker container. It is automatically accessible in the same port externally without requering any
+	port mapping. You will no able to run multiple containers in the same port (5000)
+

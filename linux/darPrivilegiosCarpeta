@@ -1,0 +1,4 @@
+chmod -R 777 radioBueno/
+
+Cuando quieras moverte, mover folders a otro directorio que contenga espacios:
+	 put a \ (backslash) before the space, e.g. cd ~/Library/Application\ Support.

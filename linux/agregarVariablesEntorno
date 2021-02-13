@@ -1,0 +1,5 @@
+Este es el bueno:
+	sudo vim ~/.bashrc
+
+gedit ~/.profile
+sudo vim /etc/environment

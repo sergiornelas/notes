@@ -1,0 +1,58 @@
+puntero
+	es una variable que contiene la dirección de otra 
+	variable
+
+
+*: Declarar variables de tipo puntero
+*: Coge el contenido de la dirección de memoria X
+
+&: Recibe la dirección de la memoria X
+
+&: se usa en la invocación de funciones, de forma
+que se pone delante de los parámetros E/S
+
+funcion con return 
+funcion sin return (void)
+
+
+/*/*/*
+paso de parámetros por valor: (copia de la informacion 
+contenida en esa variable)
+
+cuando se hace un pase de variables mediante valor,
+se utilizará una función normal, que retorne un valor.
+
+/////////////////////
+
+paso de parámetros por referencia:(&dirección de memoria)
+
+cuando se hace un pase de variable mediante referencia,
+se utilizará una función tipo void, que no retorne nada.
+*/*/*/
+
+
+En los vectores SIEMPRE hay paso de variables por 
+referencia. No necesitan ser empleados los punteros.
+/////////////////////
+
+			STRINGS
+
+fflush:
+
+fflush(stdin) es "limpiar" el buffer de entrada estándar
+del teclado. 
+
+"%*c" dentro de scanf("%f%*c",&n) lee el caracter '\n' 
+que se inserta al pulsar la tecla <Enter>.
+
+
+COMPARAR DOS STRINGS:
+
+if(c1==c2){ //los strings no pueden compararse. PROHIBIDO
+Esta comparando dos direcciones de memoria. Para 
+hacer eso se utiliza strcmp (string comparation)
+
+	if(strcmp(c1,c2)==0)
+
+int strlen-> devuelve el numero de caracteres de una cadena
+sin contar el \0 final.(string lenght)
