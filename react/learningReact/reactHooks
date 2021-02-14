@@ -16,6 +16,19 @@ REACT HOOKS
 			[1] FUNCTIONS that allows to UPDATE the CURRENT STATE (SETTER), and re-render the component (return). 
 			DOES NOT MERGE OR APPEND WHATEVER YOU PASSED TO IT WITH THE OLD STATE, INSTEAD IT REPLACES THE OLD STATE WITH 
 			IT.
+			
+			Si crean un state de un objeto con dos properties : title y amount, al momento de actualizar su valor desde inputs: 
+			➡️ const [ inputState, setInputState ] = useState({ title: "", amount: "" });
+
+				<input										<input
+					value={inputState[0].title}				value={inputState[0].amount}
+					onChange={(//igual que el de la izq	onChange={(event) => setInputState({ title: event.target.value })}
+				/>											/>
+
+			Cuando el user escribe en  alguno de los inputs, la otra propiedad del objeto (title o amount) DESAPARECERÁ puesto que en el 
+			input se actualizó el state a solo la propiedad en la que el user esta escribiendo en el input. La otra propiedad ya no existirá. 
+			Mandará ERROR el Chrome.
+
 			Whenever you are UPDATING the STATE with new values, you have to manually make sure YOU INCLUDE ALL OLD STATE DATA:
 		
 		NEW STATE VALUE DEPENDS on the PREVIOUS STATE VALUE? 
@@ -49,6 +62,19 @@ REACT HOOKS
 							}))}															})
 					      }															}
 					/>
+
+			MORE CASES:
+			TOGGLE A BOOLEAN
+				➡️ const [toggled, setToggled] = useState(false);
+				➡️ setToggled(toggled => !toggled);
+
+			INCREASE A COUNTER
+				➡️ const [count, setCount] = useState(0);
+				➡️ setCount(count => count + 1);
+
+			ADD AN ITEM TO ARRAY
+				➡️ const [items, setItems] = useState([]);
+				➡️ setItems(items => [...items, 'New Item']);
 
 		➡️ const [count, setCount] = useState(0)
 			setCount method accepts 2 kinds of arguments. 
@@ -159,7 +185,7 @@ https://www.youtube.com/watch?v=IHJ-TO_1nME&list=PLC3y8-rFHvwisvxhZ135pogtX7_Oe3
 			➡️ const X = useCallback(Y => {...actions(Y)}, [ ] )
 
 	⚛️ REACT.MEMO()
-		ONLY RE-RENDERS when the PROPS that depends on CHANGED, and not always when the parent component changed.
+		ONLY RE-RENDERS when the PROPS that depends on CHANGED, and not always when the PARENT component changed.
 		➡️ const IngredientForm = React.memo(props => {
 			...
 		

@@ -780,8 +780,6 @@ executing the script
 ⭐️ ✡️.call() & ✡️.apply()
 	Similar to bind(), but they INMEDIATLY EXECUTES THE FUNCTION.
 
-⭐️ 
-
 ----------------------------------------MORE ON ARRAYS & ITERABLES---------------------------------------
 ⭐️ ITERABLE
 	Objects where you can use the for-of loop (arrays, NodeList, String, Map, Set)
@@ -804,7 +802,7 @@ executing the script
 
 	✡️.splice()		-> (1.- INDEX, 2.- NUMBER OF DELETED ELEMENTS, 3- INSERT ELEMENT)
 		Only available en REAL ARRAYS.
-		El método splice() cambia el contenido de un array eliminando elementos existentes y/o agregando nuevos elementos.
+		El método splice() cambia el contenido de un array ELIMINANDO elementos existentes y/o AGREGANDO nuevos elementos.
 			Eliminar 1 elemento desde el índice 3
 				➡️ var myFish = ['angel', 'clown', 'drum', 'mandarin', 'sturgeon'];
 				➡️ var removed = myFish.splice(3, 1);
@@ -888,101 +886,104 @@ executing the script
 		Voltea los valores del arreglo: [a,b,c] -> [c,b,a]
 	
 	✡️.filter()
+		Returns a SUBSET OF THE ELEMENTS from the original array.
+		OBSERVA BIEN QUE FILTER YA POR SI MISMO EVALUA CADA ELEMENTO DEL ARREGLO, como map.
 		Crea un new brand array con los valores que hayas filtrado:
 			➡️ const prices = [10.99, 5.99, 3.99, 6.59];
 			➡️ const filteredArray = prices.filter((price, index, prices)=> {		//price = single element, index = index, prices = full array
-					return price > 6;													//in case you need it.
-				})
+					return price > 6;													//Con esa simple sentencia ya elimina los elementos que
+				})																		//no cumplen esa condición... MAGIA!
 			⬅️ [10.99, 6.59]
 
 			➡️ movies.filter((singlePelicula) => console.log("si esta");
 
-⭐️ map()
-	Developer.mozilla:
-	Crea un nuevo array con los resultados de la llamada a la función indicada aplicados a CADA UNO DE SUS ELEMENTOS.
-	Syntax:
-		array.map(function(element, idx){   //actions   });
-		array.map((element, index, array) => //actions );
+	✡️.map()
+		Developer.mozilla:
+		Crea un nuevo array con los resultados de la llamada a la función indicada aplicados a CADA UNO DE SUS ELEMENTOS.
+		Produces an array with NEW, DIFFERENT ENTRIES BASED ON THE ELEMENTS IN THE ORIGINAL ARRAY.
+		Syntax:
+			array.map(function(element, idx){   //actions   });
+			array.map((element, index, array) => //actions );
 
-		➡️ var X = [1, 5, 10, 15];
-		➡️ X.map(element => {
-				return element*2;		
-			})
-		⬅️ [2, 10, 20, 30]	//Gives you a new brand array
+			➡️ var X = [1, 5, 10, 15];
+			➡️ X.map(element => {
+					return element*2;		
+				})
+			⬅️ [2, 10, 20, 30]	//Gives you a new brand array
 
-	TAKE AN ARRAY, run a function and RETURN A NEW ELEMENT FOR EVERY ELEMENT IN THE ARRAY. Returns a new brand array
-		➡️ const prices = [10.99, 5.99, 3.99, 6.59];
-		➡️ const tax = 0.19;
-		
-						//arguments: 1) Element, 2) Index, 3) Full array in case you need it:
-		➡️ const taxAdjustedPrices = prices.map((price, idx, prices) => {
-				const priceObj = { index: idx, taxAdjPrice: price * (1 + tax) };
-				return priceObj;
-			});
+		TAKE AN ARRAY, run a function and RETURN A NEW ELEMENT FOR EVERY ELEMENT IN THE ARRAY. Returns a new brand array
+			➡️ const prices = [10.99, 5.99, 3.99, 6.59];
+			➡️ const tax = 0.19;
+			
+							//arguments: 1) Element, 2) Index, 3) Full array in case you need it:
+			➡️ const taxAdjustedPrices = prices.map((price, idx, prices) => {
+					const priceObj = { index: idx, taxAdjPrice: price * (1 + tax) };
+					return priceObj;
+				});
 
-		➡️ console.log(taxAdjustedPrices)
-		⬅️ [{...}, {...}, {...}, {...}]
+			➡️ console.log(taxAdjustedPrices)
+			⬅️ [{...}, {...}, {...}, {...}]
 
-⭐️ ✡️.sort()
-	Developer.mozilla:
-	ORDENA los elementos de un arreglo (array) y devuelve el arreglo ordenado. El modo de ordenación por defecto responde a 
-	la posición del valor del string de acuerdo a su valor Unicode.
+	✡️.sort()
+		Developer.mozilla:
+		ORDENA los elementos de un arreglo (array) y devuelve el arreglo ordenado. El modo de ordenación por defecto responde a 
+		la posición del valor del string de acuerdo a su valor Unicode.
 
-	1) Converts everything to a string, then sorted string compares only the first character: 10 > 3   ->   "1" < "3"
-	2) Using a function inside sort, compares two NUMBERS elements from array IN PAIRS, then execute function that SWAPS values
-             dependiendo si A es mayor a B, A es menor a B o son iguales:
-		➡️ const prices = [10.99, 5.99, 3.99, 6.59];
-		➡️ const sortedPrices = prices.sort((a, b) => {
-			  if (a > b) {
-			    return 1;	//MOVE A TO FIRST ELEMENT
-			  } else if (a === b) {
-			    return 0;        //DEJALO DONDE ESTA
-			  } else {
-			    return -1;	//MOVE A TO LAST ELEMENT
-			  }
-			});
+		1) Converts everything to a string, then sorted string compares only the first character: 10 > 3   ->   "1" < "3"
+		2) Using a function inside sort, compares two NUMBERS elements from array IN PAIRS, then execute function that SWAPS values
+		     dependiendo si A es mayor a B, A es menor a B o son iguales:
+			➡️ const prices = [10.99, 5.99, 3.99, 6.59];
+			➡️ const sortedPrices = prices.sort((a, b) => {
+				  if (a > b) {
+				    return 1;	//MOVE A TO FIRST ELEMENT
+				  } else if (a === b) {
+				    return 0;        //DEJALO DONDE ESTA
+				  } else {
+				    return -1;	//MOVE A TO LAST ELEMENT
+				  }
+				});
 
-		➡️ console.log(sortedPrices);
-		⬅️ [3.99, 5.99, 6.59, 10.99]
+			➡️ console.log(sortedPrices);
+			⬅️ [3.99, 5.99, 6.59, 10.99]
 
-		REALMENTE CON ESTO BASTA SI SOLO QUIERES ORDENAR ASCENDENTEMENTE:		//Javascript Algorithms Course.
-			const sortedPrices = prices.sort((a, b) => {
-				if (a > b) { 
-					return 1;
-				}
-			});
+			REALMENTE CON ESTO BASTA SI SOLO QUIERES ORDENAR ASCENDENTEMENTE:		//Javascript Algorithms Course.
+				const sortedPrices = prices.sort((a, b) => {
+					if (a > b) { 
+						return 1;
+					}
+				});
 
-		➡️ console.log(sortedPrices);
-		⬅️ [3.99, 5.99, 6.59, 10.99]
+			➡️ console.log(sortedPrices);
+			⬅️ [3.99, 5.99, 6.59, 10.99]
 
-		También ordena carácteres del abecedario: ['a', 'b', 'c', 'a']	->	['a', 'a', 'b', 'c']
+			También ordena carácteres del abecedario: ['a', 'b', 'c', 'a']	->	['a', 'a', 'b', 'c']
 
-⭐️ ✡️.reduce()
-	REDUCES an array to a SIMPLER VALUE (en este caso sumar todos los valores del arreglo):
-		syntax:
-			array.reduce(function(prev, curr){		//regular function
-				//actions
-			});
+	✡️.reduce()
+		REDUCES an array to a SIMPLER VALUE (en este caso sumar todos los valores del arreglo):
+			syntax:
+				array.reduce(function(prev, curr){		//regular function
+					//actions
+				});
 
-			array.reduce((prev, curr) => //actions)		//arrow function
+				array.reduce((prev, curr) => //actions)		//arrow function
 
-		➡️ const prices = [10.99, 5.99, 3.99, 6.59];
-		➡️ const sum = prices.reduce((prevValue, curValue, curIndex, prices) => {		//curIndex -> index actual, prices -> full array
-				 return prevValue + curValue;												// en caso de que los necesites.
-			}, 0);									//este cero es el inicial value, lo toma prevValue al iniciar la función.
+			➡️ const prices = [10.99, 5.99, 3.99, 6.59];
+			➡️ const sum = prices.reduce((prevValue, curValue, curIndex, prices) => {		//curIndex -> index actual, prices -> full array
+					 return prevValue + curValue;												// en caso de que los necesites.
+				}, 0);									//este cero es el inicial value, lo toma prevValue al iniciar la función.
 
-		➡️ console.log(sum);
-		⬅️ 27.56
+			➡️ console.log(sum);
+			⬅️ 27.56
 
-⭐️ ✡️.split() && ✡️.join()
-	Separa un string a elementos de un brand new array. Separa los elementos un delimitador que tú eligas:
-		➡️ const X = "new york;10.99;2000";
-		➡️ const Y = X.split(";");
-		➡️ console.log(Y);
-		⬅️ ["new york", "10.99", "2000"]
-			//puedes añadir un segundo parámetro en split(), que es para poner el número limite de elementos que tendrá el new array.
+	✡️.split() && ✡️.join()
+		Separa un string a elementos de un brand new array. Separa los elementos un delimitador que tú eligas:
+			➡️ const X = "new york;10.99;2000";
+			➡️ const Y = X.split(";");
+			➡️ console.log(Y);
+			⬅️ ["new york", "10.99", "2000"]
+				//puedes añadir un segundo parámetro en split(), que es para poner el número limite de elementos que tendrá el new array.
 
-	.join() hace lo opuesto a split: De array a string. En el parametro escoges el separador de cada "elemento" del nuevo string
+		.join() hace lo opuesto a split: De array a string. En el parametro escoges el separador de cada "elemento" del nuevo string
 
 ⭐️ SPREAD OPERATOR (...)
 	Used to SPLIT UP array elements OR objects properties.
@@ -1930,7 +1931,7 @@ you don't need to manually micro-manage the correct order:
 	FETCH
 		➡️ fetch('url')
 			Default will send a GET request.
-		➡️ fetch("url", 
+		➡️ fetch("url", 		//si utilizas firebase recuerda agregar ".../data.json" hasta el final del url
 			{
 				method: 'POST',	//send a POST request
 				body: JSON.stringify({ object } )	//body: what you want to send
@@ -1943,6 +1944,7 @@ you don't need to manually micro-manage the correct order:
 					return response.json()	//this will extract the body and convert it from json to normal javascript code. Returns a promise
 				 }).then(responseData => {	//responseData it's an object as well
 					//LO QUE QUIERAS HACER
+					// responseData.name es igual al ID de firebase
 				}
 
 ⭐️ performance

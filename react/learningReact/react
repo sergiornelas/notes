@@ -172,6 +172,21 @@ BABEL
 	✡️ onDoubleClick
 		Se actiiva cuando se da doble click.
 
+	React events: { (e) => e.target.value }, NO funcionan igual que con JS, (recordemos que dentro de render(<JSX/>) es solo synthatical
+	sugar para escribir HTML y pseudoJavaScript dentro), lo que hace React con esos events es que REUSA ESOS EVENTOS del EVENTO PA-
+	SADO (SUENA CONFUSO, LO SÉ). La solución a esto es almacenar el evento en una VARIABLE, para que ahora tome en cuenta
+	el nuevo evento ejecutado durante el nuevo rendereado:
+		En lugar de hacer esto (sale error)										Haces esto:
+		➡️ onChange={(event) =>												➡️ onChange={(event) =>
+																							const newTitle = event.target.value;
+				setState((prevInputState) => ({											setState((prevInputState) => ({
+					title: event.target.value,												title: newTitle
+					...																			...
+	Esta particularidad existe ya que gracias a ello es posible:
+	➡️ onChange={(event) => {					User inputs: a > r > b > o > l
+	               setState(event.target.value);			state="arbol"	//Los events dentro del JSX REUSAN EVENTOS PASADOS, por eso se concat-
+		}																//ena cada carácter, en lugar de reemplazar el valor.
+
 ⭐️ GOOD PROJECT STRUCTURE
 	- It's a good practice to CREATE AS MANY STATELESS COMPONENTS as possible. Easier to mantain, and avoids spaghetti code.
 	- Components that manage state, shouldn't be involved with the UI render too much. Making that split makes you keep your application 		   MANAGEABLE. Because you have a predictable flow of data, you know where your state changes, and other components will be
@@ -720,4 +735,7 @@ BABEL
 	➡️ npm run build	//console, create build folder
 	➡️ sudo npm i -g serve
 	➡️ serve -s build -p 8000	//production build of react
+
+⭐️ CUANDO QUIERAS GENERAR UN RANDOM ID PARA KEY PROPERTY
+	➡️ key= { Math.random().toString() }
 
