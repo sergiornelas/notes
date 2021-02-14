@@ -20,11 +20,6 @@ TABLES
 <img width="x">
 	Establece ancho y largo de una imagen
 ----------------------------------------------------
-SUBLIME TEXT HACK!!
-	Hold ctrl when you click and you
-	will get additional cursors!!!
-
-----------------------------------------------------
 FORMS
 
 <input>
