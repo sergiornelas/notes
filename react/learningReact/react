@@ -739,3 +739,23 @@ BABEL
 ⭐️ CUANDO QUIERAS GENERAR UN RANDOM ID PARA KEY PROPERTY
 	➡️ key= { Math.random().toString() }
 
+⭐️ PROPS DESTRUCTURING
+	Remember that props a
+	➡️ <Greet name="Diana" heroName="Wonder Woman" />
+
+	Instead of doing this:
+	➡️ const Greet = props => {
+			...
+			<h1> Hello {props.name} aka {props.heroName} </h1>			
+		}
+
+	WE DO THIS:
+	➡️ const Greet = ({name, heroName}) => {		//you are basically extracting those props from the props Object
+			...
+			<h1> Hello {name} aka {heroName} </h1>			
+		}
+
+	O puede ser así:
+		➡️ const { changeName  } = props		//you specify the names of the keys from the object props.
+
+

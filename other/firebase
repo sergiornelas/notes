@@ -1,0 +1,33 @@
+GETTING DATA & ID
+	➡️ fetch("url", 						//agrega ".../data.json" hasta el final del url
+		...
+	➡️ }).then(response => { 			//response its an object
+			return response.json()		//this will extract the body and convert it from json to normal javascript code. Returns a promise
+		 }).then(responseData => {		//responseData it's an object as well
+
+			responseData.name es igual al ID de firebase
+			responseData en firebase es un objeto, no un arreglo
+
+
+FILTRO DE DATOS CON FETCH GET
+	➡️ const [enteredFilter, setEnteredFilter] = useState("");
+	➡️ useEffect(() => {
+								//Agregaremos cierto texto en el URL para ello:
+			const query = enteredFilter.length === 0 ? '' : `?orderBy="title"&startAt="${enteredFilter}"&endAt="${enteredFilter}\uf8ff"`
+			fetch(
+      				"https://react-hooks-update-7487d-default-rtdb.firebaseio.com/ingredients.json" + query
+			)
+			...
+		}, [enteredFilter, ...]
+			
+	Ahora debes agregar REGLAS en el sitio web de Firebase:
+		{
+			"rules": {
+				".read": true,
+				".write": true,
+				"ingredients": {	// <-- Agregamos este. Eso lo puedes ver en el curso de React video 437
+					".indexOn": ["title"]
+				}
+			}
+		}
+

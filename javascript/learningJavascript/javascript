@@ -1893,6 +1893,11 @@ you don't need to manually micro-manage the correct order:
 	Calls a function at specified time (in milliseconds). Only executes once.
 		➡️ setTimeout(function(){ alert("Hello"); }, 3000);
 
+⭐️ clearTimeout()
+	Clean the selected timer
+		➡️ const timer = setTimeout(()=>{},8000);
+		➡️ clearTimeout(timer)	//si esos 8000 milisec. no han terminado, se cancela ese timer.
+
 ⭐️ setInterval()
 	The setInterval() method calls a function or evaluates an expression at specified intervals (in milliseconds).
 	The setInterval()	will continue calling the function until clearInterval() is called, or the window is closed.
@@ -1945,6 +1950,7 @@ you don't need to manually micro-manage the correct order:
 				 }).then(responseData => {	//responseData it's an object as well
 					//LO QUE QUIERAS HACER
 					// responseData.name es igual al ID de firebase
+					// responseData en firebase es un objeto, no un arreglo
 				}
 
 ⭐️ performance
