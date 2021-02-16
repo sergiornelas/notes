@@ -363,6 +363,12 @@ CUANDO QUIERAS ACCEDER AL KEY DEL OBJETO DENTRO DE UNA FUNCIÓN (REACT COURSE)
 							5) value if condition is false/falsy
 							//Solo funciona si existe un <else>, puro if no.
 
+	NEXT LEVEL TERNARY WITHOUT ELSE STATEMENT
+		Instead of:
+			x ? console.log("true") : null
+		YOU CAN:
+			x && console.log("true")	//console.log will execute it if x is true.
+
 ⭐️ CONVERT TRUTHY/TRUE TO FALSY/FALSE
 	➡️ ""    (falsy) {en este caso es undefined}       falsy values: (undefined, null, NaN, 0)
 	➡️ !""  (true)
@@ -1826,7 +1832,7 @@ you don't need to manually micro-manage the correct order:
 
 ⭐️ import (static)
 	To start the import, you need to tell Javascript from where:
-		➡️ import { Component } from './Component.js'
+		➡️ import { Component } from './Component.js'	//CUANDO ESTAS IMPORTANDO ALGO DESDE UN EXPORT SE PONE {  }
 
 	NO importa TODO lo que pusiste export (don't work filewide), tienes que ESPECIFICAR lo que estas importando.
 		➡️ import { moveElement } from '../Utility/DOMHelper.js'	//moveElement es la funcion a importar.

@@ -31,3 +31,11 @@ FILTRO DE DATOS CON FETCH GET
 			}
 		}
 
+ELIMINAR DATO DE FIREBASE
+➡️ const removeIngredientHandler = (ingredientId) => {
+	    fetch(
+	      `https://react-hooks-update-7487d-default-rtdb.firebaseio.com/ingredients/${ingredientId}.json`,
+	      {
+		method: "DELETE",
+	      }
+	    ).then((response) => { ...
