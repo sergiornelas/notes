@@ -237,6 +237,44 @@ BABEL
 			);
 		    }
 
+⭐️ CONTEXT (Avoid prop chain redundancy).
+	✡️createContext()
+	✡️ Provider
+	CREATE CONTEXT
+	- When you need certain state in multiple components and you DON'T WANT to PASS that STATE ACROSS MULTIPLE COMPONENTS,
+	   just to get it from component A at the top to component D at the very bottom, when the components B and C in between don't
+	   really care about it.
+		----------------------------------------------------------------- auth-context.js
+		➡️ const authContext = React.createContext( { 
+				  authenticated: false,
+			 } );
+			export default authContext;
+
+	SETTING UP THE CONTEXT
+	- It's a JS object that can be passed between React components without using props (just behind the scenes).
+	- It should wrap all the parts of your application that need access to this context:
+		----------------------------------------------------------------- App.js
+		➡️ import AuthContext from "../context/auth-context";
+		       ...
+		       return(
+				<AuthContext.Provider value={{authenticated: this.state.authenticated}}>	//HERE
+					  {this.state.showCockpit ? (
+						    <Cockpit
+						      title={this.props.appTitle}
+						      showPersons={this.state.showPersons}
+						      login={this.loginHandler}
+						    />
+					  ) : null}
+					  {persons}
+				</AuthContext.Provider>
+          		)
+
+	- The default value will apply when you don't set any other value (authenticated: false).
+	- This will not cause a re-render cycle.
+
+	CONSUME CONTEXT
+	You use the useContext hook.
+
 ⭐️ FRAGMENT
 	En lugar de usar children property para wrapping jsx elements, usa simplemente FRAGMENT:
 		➡️ import React, { Fragment } from "react";
@@ -259,7 +297,7 @@ BABEL
 		➡️ const layout = (props) => {
 			    <Aux>
 					<p>Sergio</p>
-					<p>Lopez</p>	
+					<p>Lopez</p>
 			    </Aux>
 			};
 
@@ -358,8 +396,6 @@ BABEL
 		-----------------------------	
 		<div className={classes.Logo} style={{height: props.height}}>		//Logo.js
 
-
-	
 ✡️ .defaultProps
 	Cuando el componente no recibe los props, se asignan unos por default.
 		➡️ Component.defaultProps = { title: "Default title" }

@@ -328,8 +328,18 @@ REACT HOOKS
 	- Está diseñado para compartir datos que pueden considerarse “globales” para un árbol de componentes en React, como el usuario 
 	autenticado actual, el tema o el idioma preferido.
 
-	CONSUME CONTEXT MORE ELEGANTLY (functional components) (Recomended)
+	<MyContext.Consumer>
+		{value => { }}						IT'S THE SAME AS:		let value = useContext(MyContext);
+	</MyContext.Consumer>
+
 	This allows you to get access to your context anywhere in your functional component function body.
+
+	➡️ const value = useContext(MyContext); 
+		Accepts a context object (the value returned from React.createContext) and returns the current context value for that context. 
+		The current context value is determined by the value prop of the nearest above the calling component in the tree.
+
+	When the nearest above the component updates, this Hook will trigger a rerender with the latest context value passed to that 
+	MyContext provider.
 
 	➡️ import React, { useContext } from "react";
 		import AuthContext from '../../context/auth-context'
@@ -363,3 +373,17 @@ Semántica:
 
 --------------------------------------------
 
+
+<index.js>
+	<AuthContextProvider>
+		<App>
+	<AuthContextProvider>
+			<Auth>
+				<Card>
+			|or|
+			<Ingredients>
+				<...all app>
+				
+1) HighOrderComponent
+2) Create Context
+3) useContext

@@ -204,7 +204,7 @@
 
 	➡️ ...
 	➡️ <input
-			  ref={( inputEl ) => { this.inputElementx = inputEl } } 	// Se almacena la propiedad  de la clase InputElement referenciando
+			  ref={( inputEl ) => { this.inputElementx = inputEl } } 	// Se almacena la propiedad de la clase InputElement referenciando
 			  type="text"											    	// este elemento input JSX. 
 			  value={this.props.name}
 		/>
