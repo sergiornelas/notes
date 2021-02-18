@@ -245,6 +245,8 @@ REACT HOOKS
 =======================================================================================================================
 																	⚛️ USEREDUCER
 =======================================================================================================================
+	https://codesandbox.io/s/ancient-cookies-prn1j
+
 	- It's an alternative to useState.
 	- useReducer a menudo es preferible a useState cuando:
 		- Se tiene una LÓGICA COMPLEJA que involucra múltiples subvalores.
@@ -298,9 +300,6 @@ REACT HOOKS
 		+ singleValue = reducer(accumulator, itemValue)				+ newState = reducer(currentState, action)
 		< reduce method returns a single value							< useReducer returns a pair of values: [newState, dispatch]
 
-	//Continuará:
-      https://www.youtube.com/watch?v=IHJ-TO_1nME&list=PLC3y8-rFHvwisvxhZ135pogtX7_Oe3Q3A&index=19&ab_channel=Codevolution
-
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------
 	USESTATE VS USEREDUCER
 	Use useState if you have:
@@ -322,34 +321,112 @@ REACT HOOKS
 		H) Need for a more predictable and maintainable state architecture
 
 =======================================================================================================================
-											⚛️ USECONTEXT (Avoid prop chain redundancy) (simplest hook to use)
+																	⚛️ USECONTEXT
 =======================================================================================================================
+	https://codesandbox.io/s/modest-dust-rx0nc?file=/src/App.js
+
 	- Provee una forma de pasar datos a través del árbol de componentes sin tener que pasar props manualmente en cada nivel.
 	- Está diseñado para compartir datos que pueden considerarse “globales” para un árbol de componentes en React, como el usuario 
-	autenticado actual, el tema o el idioma preferido.
+	   autenticado actual, el tema o el idioma preferido.
 
 	<MyContext.Consumer>
 		{value => { }}						IT'S THE SAME AS:		let value = useContext(MyContext);
 	</MyContext.Consumer>
 
-	This allows you to get access to your context anywhere in your functional component function body.
-
 	➡️ const value = useContext(MyContext); 
-		Accepts a context object (the value returned from React.createContext) and returns the current context value for that context. 
-		The current context value is determined by the value prop of the nearest above the calling component in the tree.
+		Accepts a context object (the value returned from React.createContext) and returns the CURRENT context value for that context. 
+		The current context value is determined by the VALUE PROP of the nearest above the calling component in the tree.
 
 	When the nearest above the component updates, this Hook will trigger a rerender with the latest context value passed to that 
 	MyContext provider.
 
-	➡️ import React, { useContext } from "react";
-		import AuthContext from '../../context/auth-context'
-		...
-		const authContext = useContext(AuthContext);
-		...
-		return(
-			<button onClick={authContext.login}>{authContext.name}</button>
-		)
-		//checa el ejemplo en youtube/src/components/useContext
+	EJEMPLO
+	1) CREAS EL HOC QUE CONTENDRÁ EL CONTEXT
+		➡️ export const AuthContext = React.createContext({ 		//<- context
+				isAuth: false,
+				login: () => { }
+			});
+
+		➡️ const AuthContextProvider = (props) => {
+				const [isAuthenticated, setIsAuthenticated] = useState(false);
+
+				const loginHandler = () => {
+					setIsAuthenticated(true);							//<- función sencilla
+				};
+
+				return (
+					<AuthContext.Provider								//usa .Provider para indicar que se trata de un proveedor de contexto.
+
+						value={{ login: loginHandler, isAuth: isAuthenticated }}	// En la propiedad "value" del Componente.Provider se 
+																						// almacenan los valores del contexto ( { isAuth, login } ) a 
+																						// través de apuntadores ({login : funcion, isAuth: state}) que
+																						// nos dirigen a los triggers del contexto (loginHandler() y el
+																						// state [isAuthenticated]). Usaremos estos apuntadores en
+																						// el paso 3 y 4.
+					>
+						{props.children}									//Indicar que tendremos componentes hijos dentro.
+					</AuthContext.Provider>
+				);
+			};
+
+		➡️ export default AuthContextProvider;
+
+	2) ENVUELVES TU COMPONENTE PROVEEDOR DE CONTEXT EN EL COMPONENTE DESEADO (<APP/> EN ESTE CASO)
+		➡️ import AuthContextProvider from "./context/auth-context";
+
+		➡️ ReactDOM.render(
+				<AuthContextProvider>
+					<App />					//<- De esta forma le heredas el contexto a <app/>
+				</AuthContextProvider>,
+				document.getElementById("root")
+			);
+
+	3) DENTRO DEL COMPONENTE DESEADO (<APP/> EN ESTE CASO) AGREGAS LA LÓGICA QUE NECESITAS UTILIZANDO EL CONTEXTO
+		➡️ import React, { useContext } from "react";
+		➡️ import { AuthContext } from "./context/auth-context";
+		➡️ import Auth from "./components/Auth";
+		➡️ import Ingredients from "./components/Ingredients/Ingredients";
+
+		➡️ const App = (props) => {
+				const authContext = useContext(AuthContext);		// <- Obtienes los datos del context ( { isAuth: false, login () => { } } )
+
+				let content = <Auth />;
+
+				if (authContext.isAuth) {		// <- Si el valor de la propiedad isAuth es true: cambia el contenido.
+					content = <Ingredients />;
+				}
+
+				return content;
+			};
+
+		➡️ export default App;
+
+	4) CAMBIAR EL VALOR DEL CONTEXTO (isAuth) AL DAR CLICK (login)
+		➡️ import React, { useContext } from "react";
+		➡️ import { AuthContext } from "../context/auth-context";
+
+		➡️ const Auth = (props) => {
+				const authContext = useContext(AuthContext);		// <- { isAuth: false, login () => { } }
+
+												//When the nearest above the component updates, this Hook will trigger a rerender with the
+												// latest context value passed to that MyContext provider.
+				const loginHandler = () => {
+					authContext.login();		 	//.login viene de la propiedad "value" y éste apunta a la función loginHandler( )
+														// Esta función loginHandler( ) actualiza el state [isAuthenticated] a true.
+				};
+
+				return (
+				    <div className="auth">
+					      <section>
+							<h2>You are not authenticated!</h2>
+							<p>Please log in to continue.</p>
+							<button onClick={loginHandler}>Log In</button>
+					      </section>
+				    </div>
+				);
+			};
+
+		➡️ export default Auth;
 
 =======================================================================================================================
  LEARNED SUMMARY:
@@ -373,17 +450,3 @@ Semántica:
 
 --------------------------------------------
 
-
-<index.js>
-	<AuthContextProvider>
-		<App>
-	<AuthContextProvider>
-			<Auth>
-				<Card>
-			|or|
-			<Ingredients>
-				<...all app>
-				
-1) HighOrderComponent
-2) Create Context
-3) useContext

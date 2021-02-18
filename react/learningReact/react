@@ -273,7 +273,7 @@ BABEL
 	- This will not cause a re-render cycle.
 
 	CONSUME CONTEXT
-	You use the useContext hook.
+		You use the useContext hook (Check reactHooks file)
 
 ⭐️ FRAGMENT
 	En lugar de usar children property para wrapping jsx elements, usa simplemente FRAGMENT:
