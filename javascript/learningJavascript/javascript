@@ -167,7 +167,7 @@ ctrl + d = siguiente ocurrencia.
 	✡️.trim();
 		Borra los espacios en blanco. Ideal para guardar el nombre del usuario, el email del usuario sin almacenar los espacios en blanco.
 
-⭐️ REGEXP
+⭐️ REGEX
 	✡️.test()
 		 returns true if it finds a match, otherwise it returns false.
 		➡️ let char = string[i].toLowerCase();
@@ -829,7 +829,7 @@ executing the script
 
 	✡️.slice()		-> RETURNS A BRAND NEW ARRAY
 			➡️ var nombres = ['Rita', 'Pedro', 'Miguel', 'Ana', 'Vanesa'];
-			➡️ var masculinos = nombres.slice(1, 3);
+			➡️ var masculinos = nombres.slice(1, 3);	//(1, 3) no se refieren al index del arreglo, sino al numero del elemento.
 				//1 es el inicio donde empieza la extracción.
 				// extrae hasta 3, pero sin incluir el final.
 
@@ -975,7 +975,7 @@ executing the script
 
 			➡️ const prices = [10.99, 5.99, 3.99, 6.59];
 			➡️ const sum = prices.reduce((prevValue, curValue, curIndex, prices) => {		//curIndex -> index actual, prices -> full array
-					 return prevValue + curValue;												// en caso de que los necesites.
+					 return prevValue + curValue;
 				}, 0);									//este cero es el inicial value, lo toma prevValue al iniciar la función.
 
 			➡️ console.log(sum);
