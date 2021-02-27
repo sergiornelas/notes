@@ -532,6 +532,7 @@ CUANDO QUIERAS ACCEDER AL KEY DEL OBJETO DENTRO DE UNA FUNCIÓN (REACT COURSE)
 	donde fue añadido. Fuerza a:
 		- Escribir el tipo de variable que sería (var, let, const), nos impide declarar variables sin esas keywords
 		- No puedes utilizar keywords de javascript como nombre de variables: const undefined = 5;  -> Error
+		- With strict mode, you can not, for example, use undeclared variables.
 
 ⭐️ JAVASCRIPT IS SINGLE-THREADED: "ONE THING HAPPENS AT A TIME"
 	Can do one thing at a time
@@ -1309,11 +1310,11 @@ executing the script
 	➡️ const newMovie = {
 					info: {
 							title, //title: "title"
-				[extraName]: extraValue,
-										},
+							[extraName]: extraValue,
+						},
 						id: Math.random(),
-							getFormattedTitle: function () {
-						return this.info.title.toUpperCase();	//<- 'this'
+						getFormattedTitle: function () {
+							return this.info.title.toUpperCase();	//<- 'this'
 						},
 				};
 	'this' tell to Javascript: LOOK INTO THE OBJECT WHERE THIS FUNCTION IS PART OF, look at the THING WHICH IS RESPONSIBLE FOR 

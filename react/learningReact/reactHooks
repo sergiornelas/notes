@@ -170,6 +170,8 @@ REACT HOOKS
 	Allows you to catch the function for you so that it survives re-render cycles.
 	Wrapped function is not recreated so it will not change. When you pass the function on a prop and the component re-render, the 		wrapped function will be the same function as on the previous render cycle.
 
+	Avoids generate new functions when the component read them.
+
 	Avoids infinite loops 
 		Syntax:
 		➡️ const X = useCallback(Y => {...actions(Y)}, [ ] )	//Inside [ ] van los dependencies.
@@ -429,6 +431,38 @@ REACT HOOKS
 		➡️ export default Auth;
 
 =======================================================================================================================
+																	⚛️ USE MEMO
+=======================================================================================================================
+	Avoid unnecessary re-render cycles
+	Lo mismo que useContext pero en lugar de salvar una función y evitar que se reinvoque, useMemo SALVA un valor y ese valor no es
+	recreado.
+
+	Es una alternativa a React.memo():
+		Si quieres salvar Componentes completos
+	Con useMemo puedes usarlo con cualquier tipo de dato el cual no quieres recrear en cada re-render
+
+	Syntax:
+	➡️ const x = useMemo( () => { // aqui va el dato que quieres que se almacene para evitar re-rendereado.
+						     			   // Puede ser componentes, state, lo que quieras.
+								          }, [ dependencias ]
+							     )
+
+	Empaqueta un dato para evitar que se vuelva a llamar.
+
+	En total para evitar virtual DOM re-rendering se utilizan estos 3 formas:
+		useCallback, useMemo & React.memo
+
+=======================================================================================================================
+																	⚛️ CUSTOM HOOKS
+=======================================================================================================================
+
+	You can use stateful features (useState, useEffect... any hook)
+	Any component that uses your custom hook it will run this hook AS IF YOU HAD WRITTEN THE CODE DIRECTLY IN THE COMPONENT.
+		That means the stateful login will be different for each component. You share the LOGIC, NOT THE DATA.
+	
+	Syntax:
+		➡️ const useHttp = () => { };
+
  LEARNED SUMMARY:
 
 -¿what happens if you UPDATE your STATE? THE COMPONENT RENDERS AGAIN!
