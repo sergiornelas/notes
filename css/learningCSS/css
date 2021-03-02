@@ -91,14 +91,68 @@ HTML reminders:
 	}
 
 ⭐️ 5) ATTRIBUTES
-	<button disabled>	//(disabled is attribute
-		Click
-	</button>
+	required: Útil para cuando necesites que el user ingrese cierto input:
+		<input type="email" id="email" required>
 
-	ADD STYLE TO AN ATTRIBUTE (applies on all elements that have that attribute)
-		[disabled] {
+	disabled: Se deshabilita el botón hasta que todos los inputs del form sean válidos:
+		<button disabled>
+			Click
+		</button>
+
+	ADDING STYLE TO AN ATTRIBUTE 
+		[disabled] {	(this applies on all elements that have that attribute)
 			color: red
 		}
+
+		ELEMENT WITH SPECIFIC ATTRIBUTE VALUE
+			[type="email"] {
+				color: red;
+			}
+			<input type="email">
+
+		ELEMENT WITH SPECIFIC ATTRIBUTE VALUE IN LIST (contains)
+			[lang~="en-us"]
+			{
+				color: red;
+			}
+			<p lang="en-us en-gb">Hi!</p>
+		
+		ELEMENT WITH SPECIFIC ATTRIBUTE VALUE/VALUE- (equal to "en" or start with "en")
+			[lang|="en"]
+			{
+				color: red;	
+			}
+			<p lang="en-us">Hi!</p>
+
+		ELEMENT WITH SPECIFIC ATTRIBUTE VALUE PREFIX (starts with a hash)
+			[href^="#"]
+			{
+				color: red;
+			}
+			<a href="#all">Link</a>
+
+		ELEMENT WITH SPECIFIC ATTRIBUTE VALUE SUFFIX (starts with ".de", we don't care about the next characters next to ".de")
+			[href$=".de"] 
+			{
+				color: red;		
+			}	
+			<a href="ab.de">Link</a>
+
+		ELEMENT WITH AT LEAST ONE ATTRIBUTE VALUE (all elements that have the source attribute and the source attribute holds some 
+																content which contains "cdn", just somewhere in the value)
+			[src*="cdn"]
+			{
+				color: red;
+			}
+			<img src="i.cdn.com">Link</img>
+
+		CHECK VALUES CASE-INSENSITIVELY
+			[src*="cdn" i]
+			{
+				color: red;
+			}
+			<img src="i.cdn.com">Link</img>
+			<img src="i.CDN.com">Link</img>
 
 ⭐️ 6) PRIORITY SPECIFITY
 	1) Inline style 										(<div style="..." > )

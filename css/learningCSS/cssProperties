@@ -107,8 +107,9 @@ max-width:	//Define un valor máximo para el ancho. Siempre usalo en combinació
 
 min-width:	//Define un valor mínimo que puede alcanzar el ancho de un elemento. Antes tiene que haber { width : x } declarado.
 
-outline:			//Un borde superficial alrededor del tag (no se refiere al border del box, este es uno con valores distintos).
-
+outline:		//Un borde superficial alrededor del tag (no se refiere al border del box, este es uno con valores distintos).
+				//Comes after the border, so you can have both. No counts in box-size
+			
 text
 	-align:			//Para alinear el texto de un tag a tu gusto.
 
@@ -178,9 +179,13 @@ width:				//Anchura del tag (afecta el contenido dentro del tag, no el box).
 
 :hover			//Al colocar el cursor en el tag, realiza alguna acción.
 
+:invalid		//Se activa cuando el input no corresponde con el value del input tag (input type="email" le falta el arroba)
+
 :last-of-type	//Selecciona el último tag de ese tipo en la página.
 
 :not(element)//Selects all elements that DOESN'T have the argument inside parenthesis.
+
+:valid			//Lo opuesto a invalid.
 
 ======PSEUDO ELEMENTS================================================================================================
 
