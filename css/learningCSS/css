@@ -83,6 +83,8 @@ HTML reminders:
 			https://caniuse.com/
 		CHECK THE PIXEL RATIO BETWEEN DEVICES AND FOR CREATING MEDIA QUERIES
 			https://www.mydevice.io/
+		CHECK FONTS COMPATIBILITY
+			https://www.cssfontstack.com/
 
 ⭐️ 4) UNIVERSAL SELECTOR	(rarely you use this)
 	* {
@@ -580,4 +582,29 @@ HTML reminders:
 	Change design depending on size
 	Design changes defined by you
 
+⭐️ 31) IMPORTING FONTS
+	- En lugar de este en HTML file
+		<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+	- Agregas este en el CSS file
+		@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
+		Es más intuitivo, y no tienes la necesidad de añadir la etiqueta <link href...> en cada file de HTML cuando necesites esa fuente.
+
+	- Cuando quieras poner la fuente en el servidor (de esa manera garantizas tener esa fuente siempre disponible).
+		@font-face{
+			  font-family: "AnonymousPro";
+			  src: url("AnonymousPro-Regular.woff2")	//la ubicación de la fuente
+				format("woff2");		//Que extension el file es
+  			  font-weight: 700;	//tienes que declarar ese valor 700 para que no exista interferencias cuando invocas este mismo font-face
+									//con otros valores (Anonymous weight, Anonymous  italics, etc)
+		}
+		Lo malo es que necesitas descargra el file de la fuente, y cuando quieras cambiar cierto grosor tienes que descargar otro file.
+
+⭐️ 32) FONT SHORTHAND
+	font: (weight) (size)/(line-height) (family) 			line-height = interlineado, variant = estilo loco, style = bold, italic.
+		     (style)
+		     (variant)
+		Necesita por lo menos el font-size y font-family para aplicar. No puedes utilizar este shortcut con solo font-size por ejemplo.
+
+	Ejemplo:
+		font: italic small-caps 700 1.2rem/2 "AnonymousPro", sans-serif;
 

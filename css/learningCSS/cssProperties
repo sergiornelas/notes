@@ -2,6 +2,8 @@
 																		CSS PROPERTIES
 =======================================================================================================================
 
+================================================BACKGROUND PROPERTIES================================================
+
 background	//El fondo del tag.
 	-clip:	//Habilita definir si el fondo se extiende por debajo de un borde potencial, o no. No depende de una imagen.
 			//Importante para bordes en puntos, donde puedes ver contenido debajo de ese borde punteado.
@@ -66,7 +68,10 @@ background	//El fondo del tag.
 		cover;			//Se asegura de cubrir todo el contenedor, aunque corta la imagen.
 
 		contain;		//Se asegura que la imagen completa es visible, pero no se asegura que el contenedor sea cubrido.
-	
+
+
+==============================================NORMAL PROPERTIES======================================================
+
 clear:			//Indicates which sides of an element's box(es) may not be adjacent to an earlier floating box.
 	both			//Clear left and right floats.
 
@@ -92,13 +97,30 @@ float:			//Overwrite the default positioning and tell the browser to push an ele
 	right			//Moves element to the right, take out of the document flow.
 
 font				//La fuente del texto.
+	-display		//Gestiona el rendimiento cuando la fuente deseada tarda en cargar. No tiene mucha compatibilidad con varios browsers.
+		
 	-family		//Selecciona la fuente desada del texto.
+					//Si colocas varias fuentes, localiza la primera, si no la encuentra la siguiente... 
+					//hasta seleccionar la genérica proporcionada por el navegador (fallback font).
 
 	-inherit		//Aplica los valores heredados. En lugar de usar browser default fonts utiliza los que agregamos en nuestra página.
 
 	-size			//Tamaño de la letra.
 
-	-weight		//Hacer "negritas" el texto.
+	-variant:		//Cambios especiales a la fuente.
+
+		small-caps// Convierte todo el texto a mayúscula, pero conservando la altura de los carácteres en minúscula.
+
+	-weight		//El grosor de la letra. Lo normal es 400.
+
+font:	//Se refiere a la fuente que estas utilizando en tu sistema operativo.
+	menu	//La fuente que utiliza tu SO en el menu.
+
+letter-spacing:	//Agrega espaciado entre los carácteres.
+
+line-height:	//Establece la distancia vertical que tienen dos lineas entre sí (interlineado). No considera los decimales.
+				//El valor cambia según el font-family que se está usando.
+	2	//El doble respecto al font-size.
 
 list-style:		//Pivotes de una lista.
 	 none			//Sin pivotes en cada elemento de la lista.
@@ -132,7 +154,14 @@ vertical-align:	//Alinear contenido de un tag con otro tag. (Hay que agregar est
 visibility:			//Visibilidad del tag.
 	hidden		//Tag is invisible, but it's not removed from document flow (a diferencia de display: none).
 
-======BOX MODEL PROPERTIES===========================================================================================
+white-space:		//Impacta la manera en que los espacios en blanco son tratados dentro del elemento.
+	nowrap		//Todo el texto se mostrará en una sola linea, sin importar los break lines.
+	pre			//Respeta los break line encontrados en el html file.
+	pre-wrap		//Lo mismo que el anterior, pero no sobrepasa el canvas (no scroll left-right bar).
+
+
+==============================================BOX MODEL PROPERTIES===================================================
+
 This properties can't be assigned on inline tags
 
 border:			//Borde del tag.
@@ -171,7 +200,8 @@ padding:			//Espacio entre el contenido interno y el borde del tag.
 width:				//Anchura del tag (afecta el contenido dentro del tag, no el box).
 	30%			//El ancho del tag será de 30% respecto al total del tag padre inmediato.
 
-======PSEUDO CLASSES==================================================================================================
+
+=================================================PSEUDO CLASSES=======================================================
 
 :active			//Cuando el tag recibe alguna acción concreta (click, enter...).
 
@@ -187,7 +217,8 @@ width:				//Anchura del tag (afecta el contenido dentro del tag, no el box).
 
 :valid			//Lo opuesto a invalid.
 
-======PSEUDO ELEMENTS================================================================================================
+
+=================================================PSEUDO ELEMENTS=====================================================
 
 ::after			//Insert some text after the content of each element:
 	{content}		//Content that will be added. Por ejemplo: {content: "Sergio;"}
@@ -197,7 +228,8 @@ width:				//Anchura del tag (afecta el contenido dentro del tag, no el box).
 
 ::first-letter	//Al primer carácter del tag, realiza alguna acción.
 
-======POSITIONING ELEMENTS============================================================================================
+
+================================================POSITIONING ELEMENTS==================================================
 
 position:			//Cambiar el posicionamiento de un elemento (X, Y y Z). Funciona igual tanto con inline elements como block elements.
 
@@ -241,4 +273,57 @@ z-index:			//Necesita position: no static para aplicar. Move an element above or
 	auto			//Valor por default que tiene cada el elemento en el website, equivale a 0.
 
 	-1				//El elemento se coloca por debajo del resto de elementos. Útil para background images. Puedes cambiar el número.
+
+
+=====================================================FLEX BOX==========================================================
+
+Parent (Flex Container)
+	display:
+		flex				//Se crea un container. Se aplica en automático: flex-direction: row; flex-wrap: nowrap;
+
+		inline-flex		//Igual que flex, se crea un container solo que aplica en automático: flex-wrap: wrap;
+
+	flex-direction:		//La dirección en la que va el flex container.
+		row					//Los hijos del container se vuelven inline elements y los ordena de izquierda a derecha.
+								//La altura del container lo declarará el elemento hijo que tenga mayor altura, y todos los hijos utilizarán
+								//esa misma altura y estan alineados en la parte superior.
+
+		row-reverse			// Lo mismo que row solo que invierta los hijos y los ordena de derecha a izquierda (aplica espejo).
+
+		column				//Los hijos se comportan como simples block level elements (abarcan todo el div). En responsividad los hijos
+								//que tengan establecido un ancho, mantendrán ese ancho aún así sobrepasen el canvas.
+
+		column-reverse		//Lo mismo que column solo que aplica espejo a los hijos.
+
+	flex-wrap:			//Decidir si el flex container se adapta o no a sus hijos.
+		nowrap				//El container abarca todo el elemento. Los children pueden sobrepasar el container.
+
+		wrap					//El container se adapta a su contenido (los hijos). Los hijos no sobrepasan el container. Pasan a la siguiente fila.
+
+		wrap-reverse		//Cuando exista responsividad, invierte el orden de los hijos. Los hjjos estarán alineados en la parte inferior.
+
+	flex-flow:				//Flex shorthand
+		flex-flow: row wrap;	-> flex-direction: row; flex-wrap: wrap;
+
+	align-items:			//Utiliza el Cross axis para manipular los hijos.
+		stretch				//Default. Todos los hijos comparten la misma altura: La mayor altura definida por alguno de los hijos.
+		center				// Los hijos estarán centrados respecto al Cross axis.
+		flex-start				// Los hijos estarán al comienzo del Cross axis.
+		flex-end				// Los hijos estarán al final del Cross axis.
+		baseline				// Alinea los hijos en función a su contenido.
+		
+	justify-content:		//Utiliza el Main axis para manipular los hijos.
+		center				//Centra los hijos respecto al Main axis.
+		flex-end				// Los hijos estarán al final del Main axis.
+
+	align-content:		//Alinea los hijos a lo largo del Cross axis.
+		center				//Concentra los hijos en el centro del contenedor.
+		flex-start				//Concentra los hjijos al comienzo del Cross axis.
+		space-between		//Los hijos que intenten sobrepasar el contenedor se dirigirán hasta el final del Cross axis.
+
+Children (Flex Items)
+	align-self:
+	flex:
+	order:
+
 

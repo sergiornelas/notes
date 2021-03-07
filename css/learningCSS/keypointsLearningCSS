@@ -30,4 +30,14 @@ Making our Website Responsive
 	2) media queries
 		@media
 
+Working with Text and Fonts
+	1) Generic families as fallback (browser families) in case font family is not available.
+	2) Importing font families
+		<link href...>	|	@import url(...)	|	@font-face{...}
+	3) Some font properties
+		size, style, weight, variant, letter-spacing, white-space, line-height...
+	4) font-display
+	5) font shorthand
+		font: italic small-caps 700 1.2rem/2 "AnonymousPro", sans-serif;
+
 
