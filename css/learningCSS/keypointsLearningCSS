@@ -40,4 +40,10 @@ Working with Text and Fonts
 	5) font shorthand
 		font: italic small-caps 700 1.2rem/2 "AnonymousPro", sans-serif;
 
+Flexbox
+	1) Flex-container, Flex items
+	2) display: flex, display: inline-flex
+	3) flex-direction, flex-wrap, align-items, justify-content, align-content
+	4) Main axis vs Cross axis
+	5) Flex items: order, align-self, flex-grow, flex-shrink, flex-basis.
 

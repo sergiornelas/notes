@@ -269,6 +269,8 @@ top/right... :		//Necesita position: no static para aplicar. Agrega margen-espac
 z-index:			//Necesita position: no static para aplicar. Move an element above or below every element on the page.
 					//Útil cuando existen varios elementos hermanos utilizando position: diferente de static.
 					//El elemento no puede ser movido below or above del parent element en el que se encuentra (stacking context).
+					//Applying the z-index  to flex-items (so the elements inside of the flex-container) will change the order of these items 
+					    even if no position  property was applied.
 
 	auto			//Valor por default que tiene cada el elemento en el website, equivale a 0.
 
@@ -281,7 +283,7 @@ Parent (Flex Container)
 	display:
 		flex				//Se crea un container. Se aplica en automático: flex-direction: row; flex-wrap: nowrap;
 
-		inline-flex		//Igual que flex, se crea un container solo que aplica en automático: flex-wrap: wrap;
+		inline-flex		//Igual que flex, solo que aplica en automático: flex-wrap: wrap;
 
 	flex-direction:		//La dirección en la que va el flex container.
 		row					//Los hijos del container se vuelven inline elements y los ordena de izquierda a derecha.
@@ -296,7 +298,8 @@ Parent (Flex Container)
 		column-reverse		//Lo mismo que column solo que aplica espejo a los hijos.
 
 	flex-wrap:			//Decidir si el flex container se adapta o no a sus hijos.
-		nowrap				//El container abarca todo el elemento. Los children pueden sobrepasar el container.
+		nowrap				//El container abarca todo el elemento. Responsibidad: Los children se adaptan al container, y cuando éste 
+								// sobrepasa las medidas de los children, ellos sobrepasan el container.
 
 		wrap					//El container se adapta a su contenido (los hijos). Los hijos no sobrepasan el container. Pasan a la siguiente fila.
 
@@ -312,9 +315,11 @@ Parent (Flex Container)
 		flex-end				// Los hijos estarán al final del Cross axis.
 		baseline				// Alinea los hijos en función a su contenido.
 		
-	justify-content:		//Utiliza el Main axis para manipular los hijos.
+	justify-content:		//Utiliza el Main axis para manipular los hijos. It helps distribute extra free space leftover
 		center				//Centra los hijos respecto al Main axis.
-		flex-end				// Los hijos estarán al final del Main axis.
+		flex-end				//Los hijos estarán al final del Main axis.
+		space-between		//Los hijos que intenten sobrepasar el contenedor se dirigirán hasta el final del Main axis.
+		space-around		//Items are evenly distributed in the line with equal space around them.
 
 	align-content:		//Alinea los hijos a lo largo del Cross axis.
 		center				//Concentra los hijos en el centro del contenedor.
@@ -322,8 +327,28 @@ Parent (Flex Container)
 		space-between		//Los hijos que intenten sobrepasar el contenedor se dirigirán hasta el final del Cross axis.
 
 Children (Flex Items)
-	align-self:
-	flex:
-	order:
+	order:					//Define el lugar en donde se encontrará ese hijo respecto a sus hermanos (main axis).
+							//Los números representan prioridad (similar a z-index).
+		0						//Default
+		1						//El hijo se posicionará hasta el final.
+		-1						//Se va al principio.
 
+	align-self:				//Un hijo se vuelve punk y establece su propio Cross-axis.
+		flex-start...
+
+	flex-grow:			//Define que hijos se adaptarán al container (responsividad), cuáles se alargarán y cuáles no. (con nowrap).
+							//Si utilizamos flex-wrap: wrap, los hijos que sobrepasen el cont. pasarána una siguiente linea. Si un solo hijo
+							//esta en esa nueva linea, abarcará todo el container puesto que flex-grow se encarga de eso.
+		0						//Default
+		1						// Si un hijo tiene 0 y otro 1, el que tiene 1 es el que se alargará para cubrir el container, el que tiene 0 no.
+		4						// Si un hijo tiene 1 y otro 4, el que tiene 4 llenará el 80% del espacio restante, el 1 llenará 20% (relación 1:4).
+							
+	flex-shrink			//Define la conducta cuando el hijo decrementa su width/height
+		1						//Default
+		0						//El hijo que contiene el mayor flex-shrink será el que se comprima.
+		4						//Si un hijo contiene 1 y el otro 4, el que tiene 4 se comprimirá cuatro veces más que el otro (ratio 4:1).
+	
+	flex-basis				//Define el tamaño de un elemento dependiendo del Main-axis.
+							//Cuando un hijo crece o se comprime, con esto definimos un tamaño que no rebasará.
+		auto					//Default. Buscará el valor ya definido previamente (como fallback) (width, height).
 

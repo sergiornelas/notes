@@ -608,3 +608,7 @@ HTML reminders:
 	Ejemplo:
 		font: italic small-caps 700 1.2rem/2 "AnonymousPro", sans-serif;
 
+⭐️ 33) FLEX SHORTHAND
+	flex: 0 1auto
+		(grow)(shrink) (basis)
+
