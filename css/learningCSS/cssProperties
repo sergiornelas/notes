@@ -192,13 +192,13 @@ box-sizing:		//Gestiona si el comportamiento de un box si permite sobrepasar el 
 height:			//Altura del tag (afecta el contenido dentro del tag, no el box).
 
 margin:			//Separación afuera del tag.
-	auto			//Will automatically fill the available space to the left and right equally to center the element.
-					//Solo funciona horizontalmente en block level elements con un width asignado explicitamente.
+	auto				//Will automatically fill the available space to the left and right equally to center the element.
+						//Solo funciona horizontalmente en block level elements con un width asignado explicitamente.
 
 padding:			//Espacio entre el contenido interno y el borde del tag.
 
 width:				//Anchura del tag (afecta el contenido dentro del tag, no el box).
-	30%			//El ancho del tag será de 30% respecto al total del tag padre inmediato.
+	30%				//El ancho del tag será de 30% respecto al total del tag padre inmediato.
 
 
 =================================================PSEUDO CLASSES=======================================================
@@ -281,7 +281,8 @@ z-index:			//Necesita position: no static para aplicar. Move an element above or
 
 Parent (Flex Container)
 	display:
-		flex				//Se crea un container. Se aplica en automático: flex-direction: row; flex-wrap: nowrap;
+		flex				//Se crea un container. Se aplica en automático:
+							//	flex-direction: row; flex-wrap: nowrap;
 
 		inline-flex		//Igual que flex, solo que aplica en automático: flex-wrap: wrap;
 

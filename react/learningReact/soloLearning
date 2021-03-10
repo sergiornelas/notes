@@ -1,0 +1,20 @@
+UseState es asíncrono!
+	¿Si sientes como cuando llama a useState, los cambios parecen estar un paso atrás?
+	En ese caso debes utilizar useEffect.
+
+Cuando utilizas un setState dentro de un useEffect, no invoques en la dependencia el state perteneciente a ese setState
+porque eso ocasiona un infinite loop:
+
+	❌️ useEffect(() => {
+			setTotal(prevValue => prevValue + total)
+		}, [setTotal, total])	// ... [total])   <-  También realiza infinite loop.
+
+		El useEffect se ejecutará cada vez que algún dato de la dependencia se actualice. El setTotal se encarga de actualizar el total
+		y al estar total dentro de las dependencias [ ] se ejecutará de nuevo el useEffect, lo que ejecutará el useEffect nuevamente.
+		Entonces otra vez ejecuta el setTotal, actualizando nuevamente el total, ocasionando que se vuelva infinite loop...
+
+	✔️ useEffect(() => {
+			setTotal(prevValue => prevValue + total)
+		}, [setTotal])
+
+
