@@ -87,6 +87,7 @@ display:			//Forma en que aparecerá el tag en la página. Nos permite cambiar l
 
 	inline-block	//Mixes the behaviour of both inline and block level tags:
 					//Tags go inline (next to each other) but they still behave like block level tags when it comes setting margins, paddings...
+					//It is similar to the inline element and follows the page flow. The only difference is that it will consider height and width.
 
 filter:			//Allows to change the visual appearance of an element by applying a filter.
 	blur(10px);	//Hace que el tag se vea borroso.
@@ -94,7 +95,7 @@ filter:			//Allows to change the visual appearance of an element by applying a f
 	grayscale(40%)	//Porcentage what defines how much you want to turn it to grey.
 
 float:			//Overwrite the default positioning and tell the browser to push an element to the left or the right of the page.
-	right			//Moves element to the right, take out of the document flow.
+	right			//Moves element to the right, take out of the document flow. No funciona con flex-level boxes.
 
 font				//La fuente del texto.
 	-display		//Gestiona el rendimiento cuando la fuente deseada tarda en cargar. No tiene mucha compatibilidad con varios browsers.

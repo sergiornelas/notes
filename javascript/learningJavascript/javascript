@@ -1964,3 +1964,7 @@ you don't need to manually micro-manage the correct order:
 	✡️ performance.now()
 		Muestra el tiempo en qué tardó la página en renderizarse.
 
+⭐️ eval()
+		Evalua strings matematicamente.
+		➡️ eval("2 + 2");             // devuelve 4
+

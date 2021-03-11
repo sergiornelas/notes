@@ -28,6 +28,39 @@ HTML reminders:
 	+ Setting a width or height  on an inline element also has no effect.
 	Examples:  <a> , <span> , <img>
 
+Crear tabla:
+	<table>
+		<tr>
+			<th>Header1</th>	
+			<th>Header2</th>
+			<th>Header3</th>
+		</tr>
+		<tr>
+			<td>Data1</td>
+			<td>Data2</td>
+			<td>Data3</td>
+		</tr>
+		<tr>
+			<td>Data5</td>
+			<td>Data6</td>
+			<td>Data7</td>
+		</tr>
+	</table>
+
+UX = User Experience. Como una persona se SIENTE mientras usa cualquier producto o servicio digital. Hacer la navegación agradable.
+UI = User Interface. La idea del UI es GUIAR al usuario por tu aplicación durante el tiempo que él la usa.
+	Un buen diseño UI te permitirá guiar a los usuarios por la navegación y los llevará a tomar dichas acciones de manera natural.
+
+Local storage: allows data storage with no expiration date
+Session storage stores the data associated with a session. When the user closes the tab or browser, the data disappears.
+Cookies are reserved mostly for server-side reading, storing data sent back to the server.
+
+Since it’s a front-end language, HTML doesn’t need a compiler.
+
+A window object has properties such as inner width, inner height, length. The window is the first thing loaded into the browser.  
+The document object is defined as any document that gets loaded inside the window object, such as HTML,
+
+
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 ⭐️ 1) Three ways of adding CSS onto a HTML file:
