@@ -97,7 +97,7 @@ filter:			//Allows to change the visual appearance of an element by applying a f
 float:			//Overwrite the default positioning and tell the browser to push an element to the left or the right of the page.
 	right			//Moves element to the right, take out of the document flow. No funciona con flex-level boxes.
 
-font				//La fuente del texto.
+font			//La fuente del texto.
 	-display		//Gestiona el rendimiento cuando la fuente deseada tarda en cargar. No tiene mucha compatibilidad con varios browsers.
 		
 	-family		//Selecciona la fuente desada del texto.
@@ -121,7 +121,7 @@ letter-spacing:	//Agrega espaciado entre los carácteres.
 
 line-height:	//Establece la distancia vertical que tienen dos lineas entre sí (interlineado). No considera los decimales.
 				//El valor cambia según el font-family que se está usando.
-	2	//El doble respecto al font-size.
+	2				//El doble respecto al font-size.
 
 list-style:		//Pivotes de una lista.
 	 none			//Sin pivotes en cada elemento de la lista.
@@ -150,15 +150,15 @@ text
 
 vertical-align:	//Alinear contenido de un tag con otro tag. (Hay que agregar esta regla en ambos tag para que se igualen verticalmente).
 					//Util para cuando quieras cubrir pequeños espacios en blanco.
-	middle		//Se alinea enmedio.
+	middle			//Se alinea enmedio.
 
 visibility:			//Visibilidad del tag.
-	hidden		//Tag is invisible, but it's not removed from document flow (a diferencia de display: none).
+	hidden			//Tag is invisible, but it's not removed from document flow (a diferencia de display: none).
 
 white-space:		//Impacta la manera en que los espacios en blanco son tratados dentro del elemento.
-	nowrap		//Todo el texto se mostrará en una sola linea, sin importar los break lines.
-	pre			//Respeta los break line encontrados en el html file.
-	pre-wrap		//Lo mismo que el anterior, pero no sobrepasa el canvas (no scroll left-right bar).
+	nowrap			//Todo el texto se mostrará en una sola linea, sin importar los break lines.
+	pre				//Respeta los break line encontrados en el html file.
+	pre-wrap			//Lo mismo que el anterior, pero no sobrepasa el canvas (no scroll left-right bar).
 
 
 ==============================================BOX MODEL PROPERTIES===================================================

@@ -200,6 +200,8 @@ BABEL
 			)
 
 ⭐️ VIRTUAL DOM
+	- React has a Virtual DOM called React DOM which is the intermediary between React library and the browser DOM. React DOM uses 
+	   the ReactDOM.render()
 	- React basically keeps two copies of the DOM. It has the old virtual DOM and then the re-rendered one (when render() it's called).
 	- Faster than "real" DOM. It's  a DOM representation in Javascript.
 	- React compares the old virtual DOM to the new one and it checks if there are any differences. If it can detect differences, it reaches
@@ -501,4 +503,16 @@ BABEL
 	BUT
 	if the state changes are triggered asynchronously (e.g. wrapped in a promise), they will not be batched; if they are triggered directly, 
 	they will be batched.
+
+⭐️ THE RECONCILIATION PROCESS
+	It's a series of steps to calculate the next state of the whole tree when it updates. First it check the differences in the node that
+	changed. Then it iterates over each child and checks recursively their changes.
+
+	If only the props changes, the children remain and will be recursively updated.
+	Aqui aplica el key keyword concept.
+
+⭐️ IMPORTING NAMED EXPORTS AS DEFAULT EXPORTS
+	➡️ export const NamedExport = () => {...}		//no tiene "default"
+	--------------
+	➡️ 	import { NamedExport } from '...'			//se soluciona encerrando en curlybraces { }
 

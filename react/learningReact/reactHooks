@@ -17,7 +17,8 @@ REACT HOOKS
 		[0] CURRENT STATE VALUE. Whenever the state updates, the whole component will rebuild, but the state survives.
 		[1] FUNCTIONS that allows to UPDATE the CURRENT STATE (SETTER), and re-render the component (return). 
 		DOES NOT MERGE OR APPEND WHATEVER YOU PASSED TO IT WITH THE OLD STATE, INSTEAD IT REPLACES THE OLD STATE WITH 
-		IT. It's an ASYNCHRONOUS action.
+		IT. 
+		It's an ASYNCHRONOUS action.
 
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------
 		Si crean un state de un objeto con dos properties : title y amount, al momento de actualizar su valor desde inputs: 
