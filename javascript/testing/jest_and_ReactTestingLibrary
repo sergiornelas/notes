@@ -5,6 +5,7 @@ git shortcut
 	https://testing-library.com/docs/queries/about/#priority
 	https://www.w3.org/TR/wai-aria/#role_definitions
 	https://github.com/testing-library/jest-dom
+	https://github.com/bonnie/udemy-TESTING-LIBRARY/tree/master/code-quiz
 
 ⭐️ JEST
 	Test runner that:
@@ -158,7 +159,7 @@ import { render, screen } from '@testing-library/react'
 				➡️ expect(element.textContent)
 
 	MATCHER METHODS
-		https://github.com/testing-library/jest-dom#tohavestyle
+		https://github.com/testing-library/jest-dom
 		Comes from JestDOM.
 
 		✡️.toBeInTheDocument()
@@ -169,6 +170,9 @@ import { render, screen } from '@testing-library/react'
 
 		✡️.toBeChecked()
 			For check box.
+
+		✡️.toBeEnabled()	✡️.toBeDisabled()
+			Checa si un botón esta habilitado o deshabilitado.
 
 		✡️.toBeVisible()
 			To be visible on the DOM.
