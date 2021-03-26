@@ -1,0 +1,184 @@
+git shortcut
+	git commit -am "Updated"
+
+⭐️ LINKS
+	https://testing-library.com/docs/queries/about/#priority
+	https://www.w3.org/TR/wai-aria/#role_definitions
+	https://github.com/testing-library/jest-dom
+
+⭐️ JEST
+	Test runner that:
+		- Finds tests.
+		- Runs tests.
+		- Determines whether tests pass or fail.
+
+	There is more tests runners such as Moka or Jasmine.
+
+	Comes with create-react-app.
+
+	➡️ npm test
+		runs an npm script that runs Jest in watch mode.
+
+	Watch mode
+		- Is a way that you can run just so that it will watch for any changes in files since the last commit.
+		- Only run tests that are related to files that have changed since the last commit. No changes? No tests.
+
+	How does Jest Work?
+		Global test method has two arguments:
+			- string description.
+			- test function.
+
+		Test fails if error is thrown when running function.
+			- assertion throw errors when expectation fails.
+
+		No error -> tests pass
+
+⭐️ REACT TESTING LIBRARY
+	- Uses { render and screen } methods.
+	- Creates virtual DOM for testing
+		and utilities for interacting with DOM
+	- Allows to testing without a browser!
+
+	Needs a test runner (find tests, run them, make assertions) in this case Jest.
+	It drives you towards best practices when it comes to react testing.
+
+⭐️ TYPES OF TESTS
+	- Unit tests ⭕️
+		- Tests one unit of code in isolation (a function or a react component).
+		- You don't want to test any interactions of this unit with any other units of code.
+
+	- Integration tests ⭕️ ↔️ ⭕️
+		- How multiple units work together.
+
+	- Functional tests ⭕️ ➡️ ⭕️ ↔️ ⭕️ 		 ⚛️ REACT TESTING LIBRARY use this!
+		- Tests a particular function of software (enter data in form and click submit).
+		- You are not testing your code, you are testing BEHAVIOUR.
+		- React Testing Library encourages testing how users use your software and not testing your internal code implementation.
+		- React Testing Library believes that the advantages of functional testing overpasses the disadvantages.
+
+	- Acceptance / End-to-end (E2E) Tests.
+		- Use actual browser and server (Cypress, Selenium).
+
+⭐️ UNIT TESTING VS FUNCTIONAL TESTING
+	Unit Testing:
+		- Isolated, you have to create fictional mock dependencies.
+		- With this you are often testing how your software is written.
+		- If you change how it's written, your tests might fail, even the behaviour hasn't changed.
+
+		👍️ Very easy to pinpoint failures.
+		👎️Further from how users interact with software. You could have tests passing even users interacting with your software have
+		      failures, or viceversa, your tests fails even though users would have no problem interacting with your software.
+		👎️ More likely to break with refactoring (changing how your software is written without changing the behaviour).
+	
+	Functional Testing:
+		Include all relevant units, test behaviour.
+		
+		👍️ Close to how users interact with software.
+		👍️ Robuste tests. Even you refactor how your code is written, as long as the behaviour stays the same, your tests should still pass.
+		👎️ More difficult to debug failing tests. It's not obvious which parts of your code are causing the tests to fail.
+
+⭐️ JEST-DOM
+	Comes with create-react-app
+	src/setupTests.js imports it before each test, makes matchers available.
+
+⭐️ TDD (Test-Driven Development)
+	1) Write tests before writing code. Tests fail before code is written.
+	2) Write code to make the tests pass.
+	It's also called "red-green" testing.
+
+	How to implement:
+		1) ➡️ Create a react component. This component don't do anything, is just an empty function.
+		2) ➡️ Write the test
+		3) ❌️ You expect that the tests fail, because your function doesn't actually do anything.
+		4) ➡️ Write code
+		5) ✔️Tests pass!
+
+	Why TDD?
+		Makes a huge difference in how it feels to write tests.
+			It becomes a part of the coding process itself, and not just a "chore" (routine task) to do at the end.
+		More efficient		
+			Re-run tests "for free" after changes.
+
+⭐️ WHICH QUERY SHOULD I USE.
+	https://testing-library.com/docs/queries/about/#priority
+	Priority order:
+		1) Queries Accessible to Everyone 
+			i) getByRole
+				- Checa los roles posibles: https://www.w3.org/TR/wai-aria/#role_definitions
+				 - If it's a link use getByRole: screen.getByRole('link', { name: /learn react/i });
+				- Asegurate de usar este lo más que puedas para asegurarte que los elementos son accesibles a la pantalla.
+				- <div role="article" ></div> Algunos elementos tienen roles predefinidos: button, anchor tag tiene role=link
+				
+			ii) getByLabelText
+			iii) getByPlaceholderText
+			iv) getByText
+			v) getByDisplaValue
+
+⭐️ IMPORT
+import { render, screen } from '@testing-library/react'
+
+⭐️ DECLARATIVE QUERIES
+	{ render }
+		Create virtual DOM for argument JSX:
+			➡️ render(<App />);
+
+	{ screen }
+		Access virtual DOM created by { render } :
+			➡️ const linkElement = screen.getByText(/learn react/i);
+
+	{ fireEvent }
+		Interact with the virtual DOM.
+			➡️ fireEvent.click(colorButton);
+
+	QUERIES METHODS
+		✡️.getByText()
+			Find element by display text.Find an element in the DOM based on WHATEVER text it's displaying.
+				✡️(/learn react/)
+					regular expresion. You could use a regular string too: 'Learn React'
+				✡️.../i)
+					case insensitive.
+
+		✡️.getByRole()
+			✡️ First parameter is the role: 'button'
+			✡️ Second parameter is the filter of the returned elements by their accessible name: { name: 'submit' }
+		
+⭐️ ASSERTION (a confident and forceful statement of fact or belief).
+	EXPECT(ARGUMENT).MATCHER(MATCHER_ARGUMENT).
+		➡️ expect(linkElement).toBeInTheDocument();
+
+	Causes test to succed or fail.
+
+	✡️ expect()
+		Jest global, starts the assertion.
+		Inside parenthesis (SUBJECT) is what Jest will examine to see if it meets our expectations.
+
+	ARGUMENT METHODS
+		✡️.textContent
+			Simply the text content of that element: <h1>Text content</h1>
+				➡️ expect(element.textContent)
+
+	MATCHER METHODS
+		https://github.com/testing-library/jest-dom#tohavestyle
+		Comes from JestDOM.
+
+		✡️.toBeInTheDocument()
+			When it's empty (), means either the element is in the document or not.
+
+		✡️.toBe()
+			Whatever is in the subject, we want to match this argument to our matcher.
+
+		✡️.toBeChecked()
+			For check box.
+
+		✡️.toBeVisible()
+			To be visible on the DOM.
+
+		✡️.toHaveLength(7)
+			Expects elements array to have length seven.
+
+		✡️.toHaveStyle({ })
+			Check if some element has an specific style.
+
+		✡️.toHaveTextContent()
+			Check if the content of the element contains specific text: <h1>Text!</h1>
+
