@@ -26,7 +26,10 @@ SI EL CARÁCTER DE UN STRING EXISTE, INCREMENTA 1, DE OTRA MANERA ES IGUAL A 1
 	➡️ objeto[letter] ? (objeto[letter] += 1) : (objeto[letter] = 1);
 
 LOOP PARA CADA PROPIEDAD DE UN OBJETO
-	➡️  for(key in obj1){ console.log(obj1[key], ":", key) }	//key SI SE REFIERE al key del objeto
+	➡️ for(key in obj1){ console.log(obj1[key], ":", key) }	//key SI SE REFIERE al key del objeto
+
+LOOP PARA CADA CARACTER DE UN STRING
+	➡️ for(let char of string){ ... }
 
 CONDICIÓN PARA SABER SI UN DATO ESPECÍFICO SE ENCUENTRA DENTRO DE UN OBJETO
 	➡️ if (!(key ** 2 in objeto)) { return false }	//puedes usar "in" para ello

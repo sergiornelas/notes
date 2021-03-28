@@ -1,3 +1,5 @@
+TESTING IS MORE AN ART THAN A SCIENCE.
+
 git shortcut
 	git commit -am "Updated"
 
@@ -132,6 +134,7 @@ import { render, screen } from '@testing-library/react'
 			➡️ fireEvent.click(colorButton);
 
 	QUERIES METHODS
+		https://testing-library.com/docs/queries/about/#priority
 		✡️.getByText()
 			Find element by display text.Find an element in the DOM based on WHATEVER text it's displaying.
 				✡️(/learn react/)
@@ -139,9 +142,10 @@ import { render, screen } from '@testing-library/react'
 				✡️.../i)
 					case insensitive.
 
-		✡️.getByRole()
+		✡️.getByRole()	<-- PRIORITY !!
 			✡️ First parameter is the role: 'button'
-			✡️ Second parameter is the filter of the returned elements by their accessible name: { name: 'submit' }
+			✡️ (only if it's necessary) Second parameter is the filter of the returned elements by their accessible name: { name: 'submit' }
+				Selecciona el texto que tiene un botón.
 		
 ⭐️ ASSERTION (a confident and forceful statement of fact or belief).
 	EXPECT(ARGUMENT).MATCHER(MATCHER_ARGUMENT).
@@ -185,4 +189,30 @@ import { render, screen } from '@testing-library/react'
 
 		✡️.toHaveTextContent()
 			Check if the content of the element contains specific text: <h1>Text!</h1>
+
+⭐️ UNIT TESTING FUNCTIONS
+	Functions separate from components used by several components or have complex logic.
+	Unit test if:
+		- Complex logic difficult to test via functional tests.
+		- Too many edge cases (espera un int, pero puede recibir un string, un array, etc) .
+		- When you want to be able to determine what caused your functional tests to fail.
+	
+	Issue with functional tests:
+		- Sometimes they are very high-level, which makes them resistant to failing when you've refactored the code (when you've
+		   changed how the code is implemented but not change the behaviour). That's great, it means your tests are resilient.
+		- Difficult to diagnose.
+
+⭐️ ESLINT and PRETTIER
+	ESLint
+		- Popular linter for JavaScript (Linter: analyzes static text and marks syntax that breaks rules).
+														       static refers to analyze code as written, not what happens when code is run.
+		- Linting keeps code style consistent, especially for multiple engineers projects.
+		- Also catches errors in code (using variable before defining, importing from nonexisting file, etc...)
+
+	Prettier
+		- Formatter, automatically format code (indents, spacing, spaces around curly braces...)
+		- Linters address format and style. Example: preferred assertion method:
+			expect (checkbox).toHaveAttribute(checked);		->		expect(checkbox).toBeChecked();
+	
+	➡️ npm install eslint-plugin-testing-library eslint-plugin-jest-dom
 
