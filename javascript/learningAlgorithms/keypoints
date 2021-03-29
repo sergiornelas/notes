@@ -10,6 +10,15 @@ OBJECT STRUCTURE
 FACEPALM MOMENT
 	If second parameter is evaluated to FALSE, the for loop is TERMINATED.
 
+CUÁNTO VALE .LENGTH
+	➡️ let x = [0,1,2]
+	➡️ x.length
+	⬅️ 3
+
+  	➡️ let y = "hola"
+	➡️ y.length
+	⬅️ 4
+
 TOMAR EL ÚLTIMO VALOR DE UN ARREGLO
 	➡️ let lastPointer = arreglo.length - 1;
 
@@ -21,12 +30,14 @@ TOMAR UN CARÁCTER DE UN STRING
 	➡️ const x = "hola";
 	➡️ const char = x[1]	//<< 'o'
 
-SI EL CARÁCTER DE UN STRING EXISTE, INCREMENTA 1, DE OTRA MANERA ES IGUAL A 1
-	➡️ let letter = first[i]; 												// i es el incremental del bucle for
-	➡️ objeto[letter] ? (objeto[letter] += 1) : (objeto[letter] = 1);
-
 LOOP PARA CADA PROPIEDAD DE UN OBJETO
 	➡️ for(key in obj1){ console.log(obj1[key], ":", key) }	//key SI SE REFIERE al key del objeto
+		➡️ console.log(key)			-> KEY
+		➡️ console.log(obj1[key])	-> VALUE
+
+COMPROBAR SI EL CARÁCTER DE UN STRING EXISTE, INCREMENTA 1, DE OTRA MANERA ES IGUAL A 1
+	➡️ let letter = first[i]; 												// i es el incremental del bucle for
+	➡️ objeto[letter] ? (objeto[letter] += 1) : (objeto[letter] = 1);
 
 LOOP PARA CADA CARACTER DE UN STRING
 	➡️ for(let char of string){ ... }
@@ -37,4 +48,21 @@ CONDICIÓN PARA SABER SI UN DATO ESPECÍFICO SE ENCUENTRA DENTRO DE UN OBJETO
 CONDICIÓN PARA SABER SI EL *VALOR* DE LA *PROPIEDAD* DEL OBJETO 1 Y EL OBJETO 2 ES DISTINTO
 	➡️ for(let key in obj1){
 			if(countNum1[key] !== countNum2[key]) return true;   }	//Si es distinto el valor de la propiedad del obj1 y el obj2, regresa true
+
+PROBLEMILLA TIPICO
+	for(let i = 1; i <= 100; i++){
+	    if(i%3===0 && i%5===0){
+		console.log("LOSDOS");
+		continue;
+	    }
+	    if(i%3===0) {
+		console.log("TRES");
+		continue;
+	    }
+	    if(i%5===0){
+		console.log("CINCO");
+		continue;
+	    }
+	    console.log(i);
+	}
 
