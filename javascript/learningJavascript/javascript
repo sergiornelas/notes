@@ -1304,8 +1304,8 @@ executing the script
 ⭐️ CHECK IF AN OBJECT HAS X PROPERTY:
 	➡️ if('info' in movie){}
 			
-⭐️ "THIS" KEY-WORD
-	Will refer to WHATEVER CALLED THAT FUNCTION, whatever was RESPONSIBLE FOR EXECUTING THE FUNCTION
+⭐️ THIS KEY-WORD
+	Will refer to WHATEVER CALLED THAT FUNCTION, whatever was RESPONSIBLE FOR EXECUTING THE CURRENT FUNCTION
 
 	➡️ const newMovie = {
 					info: {
@@ -1353,6 +1353,104 @@ executing the script
 		 
 		➡️ person.greet(); // logs nothing (or some global name on window object), "this" refers to global (window) object.
 
+⭐️ THIS KEY-WORD CLEAR USES EXAMPLES:	(https://www.youtube.com/watch?v=Pi3QC_fVaD0)
+	1):
+	➡️ console.log(this)
+	// << window {parent: Window, opener: null... }
+
+	2):
+	➡️ function testThis() {		//Since the function is BEING EXECUTED from the global object.
+			console.log(this);
+		}
+	➡️ testThis();
+	// << Window {parent: Window, opener: null... }
+
+	3):
+	➡️ "use strict";
+	➡️ console.log(this);			//even with use strict, 'this' refer to the global window object.
+	➡️ function testThis() {
+			console.log(this);	//use strict will prevent the binding of 'this' within the function
+		}
+	➡️ testThis();
+	// << Window {parent: Window, opener: null... }
+	// << undefined
+
+	4):
+	➡️ const user = {
+			firstName: "John",
+			lastName: "Doe",
+			fullName(){
+				console.log(this);	// ENTIRE OBJECT
+				console.log(`${this.firstName} ${this.lastName}`);
+			}
+		}
+	➡️ user.fullName();
+	// << {firstName, "John", LastName: "Doe", fullName: f}
+	// << John Doe
+
+	TIP FOR REMEMBERING WHAT 'THIS' REFERS TO:
+		WHATEVER IT'S TO THE LEFT OF THE FUNCTION OR METHOD WILL BE WHAT 'THIS' WILL BIND TO:
+			➡️ user.fullName()
+				⬆️ //user está en la izquierda de la función/método, entonces a esto se referirá 'this'
+
+	5):
+	➡️ const user = {
+			firstName: "John",
+			lastName: "Doe",
+			fullName: () => {
+				console.log(this);	//Arrow functions ALWAYS BIND TO THE GLOBAL OBJECT
+				console.log(`${this.firstName} ${this.lastName}`);
+			}
+		}
+	➡️ user.fullName();
+	// << Window {parent: Window, opener: null... }
+	// << undefined undefined
+	
+	6):
+	➡️ const user = {
+			firstName: "John",
+			lastName: "Doe",
+			pets: ["cat", "dog", "fish"],
+			listPets(){
+				this.pets.forEach(function(pet){
+					console.log(pet);
+				});
+			}
+		}
+	➡️ user.listPets();
+	// << cat dog fish
+
+	7):
+	➡️ const user = {
+			firstName: "John",
+			lastName: "Doe",
+			pets: ["cat", "dog", "fish"],
+			listPets(){
+				this.pets.forEach(function(pet){			// WE HAVE ANOTHER FUNCTION WHICH DOES NOT BIND TO THE ORIGINAL 
+					console.log(`${firstName}'s ${pet}`);	// OBJECT, BUT TO THE GLOBAL OBJECT
+				});
+			}
+		}
+	➡️ user.listPets();
+	// << Uncaught ReferenceError: firstName is not defined
+
+			...
+			listPets(){
+					this.pets.forEach(function(pet){
+						console.log(`${firstName}'s ${pet}`);
+					}, this);	//YOU CAN ADD A SECOND ARGUMENT TO FOREACH, 'THIS' WILL REFER TO THE OBJECT
+				}
+			...
+	➡️ user.listPets();
+	// << John's cat John's dog John's fish		// NOW WORKS AS EXPECTED
+
+	8):
+	➡️ function User(name){	//CONSTRUCTOR FUNCTION
+			this.name = name;
+			console.log(this);
+		}
+	➡️ const newUser = new User("John");	//CREATING AN OBJECT
+	// << User {name: "John"}					// RETURNS THAT OBJECT WITH THE NAME THAT WE PASSED IT
 
 ⭐️ WHEN 'THIS' KEY-WORD ISN'T AN OPTION
 	✡️.bind()

@@ -216,3 +216,7 @@ import { render, screen } from '@testing-library/react'
 	
 	➡️ npm install eslint-plugin-testing-library eslint-plugin-jest-dom
 
+-------------------
+EXTRA
+⭐️ También puedes hacer queries utilizando el querySelector directamente del DOM
+	➡️ expect(document.querySelector('h1')).toBeInTheDocument();
