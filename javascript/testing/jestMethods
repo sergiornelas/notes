@@ -1,0 +1,82 @@
+DECLARATIVE { screen } ===================================================================================================
+	GETBY {descriptive error }
+		✡️.getByRole()	<-- priority
+			First parameter is the role: 'button'
+			(only if it's necessary) Second parameter is the filter of the returned elements by their accessible name: { name: 'submit' }
+				Selecciona el texto que tiene un botón.
+
+		✡️.getByText()
+			Find element by display text.Find an element in the DOM based on WHATEVER text it's displaying.
+				✡️(/learn react/)
+					regular expresion. You could use a regular string too: 'Learn React'
+				✡️.../i)
+					case insensitive.
+				✡️ ...scoop$ }
+					at the end of the string, matches 'scoop' keyword
+
+	QUERY {null }
+		Returns the first matching node for a query, and return NULL if no elements match.
+		Useful for asserting an element that is not present, like modals.
+		Throws an error if more than one match is found
+		✡️ queryByText()
+			Self explanatory.
+
+	FINDBY {Promise }
+		When you are waiting for something to appear asynchronously on the page, you must use: await, findBy
+
+	GETALLBY
+		Returns an array [ ] of all matching nodes for a query, and throw an error if no elements match.
+
+	QUERYALLBY
+
+	FINDALLBY
+
+ACTIONS ===============================================================================================================
+	userEvent
+		✡️.click()
+			Self explanatory.
+
+		✡️.hover() / .unhover()
+			Self explanatory.
+
+	fireEvent
+		✡️.click()
+			Self explanatory.
+		
+ASSERTION { expect } ====================================================================================================
+	ARGUMENT METHODS
+		✡️.textContent
+			Simply the text content of that element: <h1>Text content</h1>
+				➡️ expect(element.textContent)
+
+	MATCHER METHODS
+		✡️.toBeInTheDocument()
+			When it's empty (), means either the element is in the document or not.
+
+		✡️.toBe()
+			Whatever is in the subject, we want to match this argument to our matcher. Numbers and strings.
+
+		✡️.toBeChecked()
+			For check box.
+
+		✡️.toBeEnabled()	✡️.toBeDisabled()
+			Checa si un botón esta habilitado o deshabilitado.
+
+		✡️.toBeNull()
+			Verifica si un valor es nulo. Útil para trabajar con query... y seleccionar un modal.
+
+		✡️.toBeVisible()
+			To be visible on the DOM.
+
+		✡️.toEqual()
+			.toBe() for arrays and objects
+
+		✡️.toHaveLength(7)
+			Expects elements array to have length seven.
+
+		✡️.toHaveStyle({ })
+			Check if some element has an specific style.
+
+		✡️.toHaveTextContent()
+			Check if the content of the element contains specific text: <h1>Text!</h1>
+

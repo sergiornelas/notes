@@ -5,9 +5,11 @@ git shortcut
 
 ⭐️ LINKS
 	https://testing-library.com/docs/queries/about/#priority
+	https://testing-library.com/docs/react-testing-library/cheatsheet/
 	https://www.w3.org/TR/wai-aria/#role_definitions
 	https://github.com/testing-library/jest-dom
 	https://github.com/bonnie/udemy-TESTING-LIBRARY/tree/master/code-quiz
+	https://testing-library.com/docs/ecosystem-user-event
 
 ⭐️ JEST
 	Test runner that:
@@ -104,6 +106,9 @@ git shortcut
 
 ⭐️ WHICH QUERY SHOULD I USE.
 	https://testing-library.com/docs/queries/about/#priority
+
+	GET
+	Expect element to be in DOM.
 	Priority order:
 		1) Queries Accessible to Everyone 
 			i) getByRole
@@ -113,9 +118,13 @@ git shortcut
 				- <div role="article" ></div> Algunos elementos tienen roles predefinidos: button, anchor tag tiene role=link
 				
 			ii) getByLabelText
-			iii) getByPlaceholderText
-			iv) getByText
-			v) getByDisplaValue
+			...
+
+	QUERY
+	Expect element NOT to be in DOM
+
+	FIND
+	Expect element to appear ASYNC
 
 ⭐️ IMPORT
 import { render, screen } from '@testing-library/react'
@@ -133,20 +142,6 @@ import { render, screen } from '@testing-library/react'
 		Interact with the virtual DOM.
 			➡️ fireEvent.click(colorButton);
 
-	QUERIES METHODS
-		https://testing-library.com/docs/queries/about/#priority
-		✡️.getByText()
-			Find element by display text.Find an element in the DOM based on WHATEVER text it's displaying.
-				✡️(/learn react/)
-					regular expresion. You could use a regular string too: 'Learn React'
-				✡️.../i)
-					case insensitive.
-
-		✡️.getByRole()	<-- PRIORITY !!
-			✡️ First parameter is the role: 'button'
-			✡️ (only if it's necessary) Second parameter is the filter of the returned elements by their accessible name: { name: 'submit' }
-				Selecciona el texto que tiene un botón.
-		
 ⭐️ ASSERTION (a confident and forceful statement of fact or belief).
 	EXPECT(ARGUMENT).MATCHER(MATCHER_ARGUMENT).
 		➡️ expect(linkElement).toBeInTheDocument();
@@ -156,39 +151,6 @@ import { render, screen } from '@testing-library/react'
 	✡️ expect()
 		Jest global, starts the assertion.
 		Inside parenthesis (SUBJECT) is what Jest will examine to see if it meets our expectations.
-
-	ARGUMENT METHODS
-		✡️.textContent
-			Simply the text content of that element: <h1>Text content</h1>
-				➡️ expect(element.textContent)
-
-	MATCHER METHODS
-		https://github.com/testing-library/jest-dom
-		Comes from JestDOM.
-
-		✡️.toBeInTheDocument()
-			When it's empty (), means either the element is in the document or not.
-
-		✡️.toBe()
-			Whatever is in the subject, we want to match this argument to our matcher.
-
-		✡️.toBeChecked()
-			For check box.
-
-		✡️.toBeEnabled()	✡️.toBeDisabled()
-			Checa si un botón esta habilitado o deshabilitado.
-
-		✡️.toBeVisible()
-			To be visible on the DOM.
-
-		✡️.toHaveLength(7)
-			Expects elements array to have length seven.
-
-		✡️.toHaveStyle({ })
-			Check if some element has an specific style.
-
-		✡️.toHaveTextContent()
-			Check if the content of the element contains specific text: <h1>Text!</h1>
 
 ⭐️ UNIT TESTING FUNCTIONS
 	Functions separate from components used by several components or have complex logic.
@@ -216,7 +178,30 @@ import { render, screen } from '@testing-library/react'
 	
 	➡️ npm install eslint-plugin-testing-library eslint-plugin-jest-dom
 
+⭐️ USER EVENT
+	➡️ npm install @testing-library/user-event @testing-library/dom
+	...
+	➡️ import userEvent from '@testing-library/user-event';
+	More closely resemble how the user would interact.
+	In general, it's recommended to use user event over fire event, provides mor advanced simulation.
+
+⭐️ ACT WARNING
+	⬅️ test not wrapped in act (...) warning
+	How to fix this:
+		Determine what is happening asynchronously that's causing the component to update after the test is finished and then
+		account for that in your tests.
+
+⭐️ MOCK SERVICE WORKER SETUP
+	Mimics response from server.
+	➡️ npm install msw
+	1) Create handlers
+		Functions that will determine what is returned for any particular URL and route.
+	2) Create server
+		use that handler to send the response
+	3) update setupTests to listen for requests
+
 -------------------
 EXTRA
 ⭐️ También puedes hacer queries utilizando el querySelector directamente del DOM
 	➡️ expect(document.querySelector('h1')).toBeInTheDocument();
+

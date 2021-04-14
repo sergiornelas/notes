@@ -17,4 +17,25 @@ porque eso ocasiona un infinite loop:
 			setTotal(prevValue => prevValue + total)
 		}, [setTotal])
 
+What does useEffect do? 
+	By using this Hook, you tell React that your component needs to do something after EVERY render 
+	(after the first render and after every update).
 
+SE PUEDE AGREGAR FUNCIONES, OBJETOS SIMPLES EN EL DEPENDENCY ARRAY?
+	Si!, pero hay que agregar esos dentro de states nuevos.
+	➡️ const [videos, setVideos] = useState({...});
+	...
+	➡️ ...
+		,[ videos ]);
+
+COMPONENT CLEANUP
+	Whenever the component unmounts, the return function will execute:
+	useEffect(() => {
+		...
+		return () => {
+			console.log("unmount");
+		}
+		...
+
+props vs state
+If a Component needs to alter one of its attributes at some point in time, that attribute should be part of its state, otherwise it should just be a prop for that Component.

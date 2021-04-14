@@ -264,6 +264,7 @@ overflow:			//Acciones que tomar cuando los hijos del elemento se desbordan del 
 					//Si el parent es body, entonces debes poner la regla overflow: hidden; en html { } y body { }.
 	
 	scroll			//Si se desborda el elemento aparecerá scroll bar.
+					//No olvides agregar height property (height: 300px;) para que marque el punto en el que funciona el scroll bar
 
 top/right... :		//Necesita position: no static para aplicar. Agrega margen-espacio utilizando la propiedad deseada.
 
