@@ -1,18 +1,5 @@
 DECLARATIVE { screen } ===================================================================================================
 	GETBY {descriptive error }
-		✡️.getByRole()	<-- priority
-			First parameter is the role: 'button'
-			(only if it's necessary) Second parameter is the filter of the returned elements by their accessible name: { name: 'submit' }
-				Selecciona el texto que tiene un botón.
-
-		✡️.getByText()
-			Find element by display text.Find an element in the DOM based on WHATEVER text it's displaying.
-				✡️(/learn react/)
-					regular expresion. You could use a regular string too: 'Learn React'
-				✡️.../i)
-					case insensitive.
-				✡️ ...scoop$ }
-					at the end of the string, matches 'scoop' keyword
 
 	QUERY {null }
 		Returns the first matching node for a query, and return NULL if no elements match.
@@ -30,6 +17,36 @@ DECLARATIVE { screen } =========================================================
 	QUERYALLBY
 
 	FINDALLBY
+
+	QUERY FLAVORS
+		✡️.ByRole()	<-- priority
+			First parameter is the role: 'button'
+			(only if it's necessary) Second parameter is the filter of the returned elements by their accessible name: { name: 'submit' }
+				Selecciona el texto que tiene un botón.
+
+		✡️ ByLabelText
+			Queries by the <label> element text
+
+		✡️ ByPlaceholderText
+			Queries by the placeholder attribute text
+
+		✡️ ByText
+			Queries by an element innerText (can't be split into multiple tags)
+			✡️(/learn react/)
+				regular expresion. You could use a regular string too: 'Learn React'
+			✡️.../i)
+				case insensitive.
+			✡️ ...scoop$ }
+				at the end of the string, matches 'scoop' keyword
+
+		✡️ ByAltText
+			Queires by the alttext attribute
+
+		✡️ ByTitle
+			Queries by the title attribute
+
+		✡️ ByDisplayValue
+			Queries by the value attribute of an <input>, <textarea> or <select> elements.
 
 ACTIONS ===============================================================================================================
 	userEvent
