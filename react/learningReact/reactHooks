@@ -332,6 +332,12 @@ REACT HOOKS
 	- Está diseñado para compartir datos que pueden considerarse “globales” para un árbol de componentes en React, como el usuario 
 	   autenticado actual, el tema o el idioma preferido.
 
+	Consists of two key parts:
+		1) Provider
+			Wraps our presentational component and stores data in its state.
+		2) Consumer
+			Is a descendant of the presentational component and allow us to grab values from the provider.
+
 	<MyContext.Consumer>
 		{value => { }}						IT'S THE SAME AS:		let value = useContext(MyContext);
 	</MyContext.Consumer>

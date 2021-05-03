@@ -248,3 +248,26 @@ REACT ROUTING
 						<Rutas más generales (/courses)>	(orden es importante).
 		- For routing error 404 components, deben estar hasta el final de <Switch>
 
+-----------
+WIZELINE REACT BOOTCAMP
+
+React Router: The core library, contains all common components
+React router dom: A variant of the core library meant to be used for web apps.
+	BrowserRouter
+		It's used for application which have a dynamic server that knows to handle ANY TYPE of URL
+		No request for the server
+		Navigate through the page without
+		When you update the page, it won't work
+	HashRouter
+		It's used for static websites that only responds to requests for FILES that it knows about.
+		El servidor no interpreta lo que esta después del hash /#/
+
+	Route Component
+		It's one of the most important building blocks in the React Router package. It renders the appropriate user interface
+		WHEN THE CURRENT LOCATION MATCHES THE PATH.
+	SwitchComponent
+		It's used to wrap multiple Route components. The switch component ONLY PICKS THE FIRST MATCHING ROUTE among all 
+		its children routes. Asi ya no se imprimen en lapagina al mismo tiempo: /books & /books/:id
+
+	Redirect
+		It will send the routing to a different route when you try to render it.

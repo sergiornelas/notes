@@ -112,7 +112,7 @@ font			//La fuente del texto.
 
 		small-caps// Convierte todo el texto a mayúscula, pero conservando la altura de los carácteres en minúscula.
 
-	-weight		//El grosor de la letra. Lo normal es 400.
+	-weight		//El grosor de la letra. Lo normal es 400. Bold es negritas.
 
 font:	//Se refiere a la fuente que estas utilizando en tu sistema operativo.
 	menu	//La fuente que utiliza tu SO en el menu.
