@@ -316,6 +316,7 @@
 ⭐️ REDUX (Because State Management Can Be Hard)
 	It's a library often used in react projects though to make state management easier.
 	It's about having a clearly defined process of how your state may change.
+	Make state changes predictable, imposing certain restrictions on how and when updates can occur.
 
 	CYCLE:
 	1) COMPONENT dispatches:

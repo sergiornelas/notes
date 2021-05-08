@@ -1,0 +1,114 @@
+HOISTING
+	Hoisting is JavaScript default behavior of moving declarations to the top
+	of the current scope (to the top of the current script or the current function).
+	
+-------------
+➡️ console.log('Starting!);
+➡️ setTimeout(() => {
+		console.log('Timer completed!');
+	}, 10);
+➡️ console.log('Finished!');
+⬅️ Starting!, Finished!, Timer completed!
+
+How does JavaScript handle asynchronous code execution?
+	Its single-threaded but offloads longer-taking tasks (e.g. timers) to the browser (which
+	uses multiple threads).
+
+The browser communicates with JS via the Event Loop and the Message Queue to let
+it know once a longer-taking task finished.
+
+-------------
+PROMISE
+	Promise takes a function as an argument. And this function takes two functions as parameters.
+								fn
+							fn1       fn2
+	const promise = new Promise((resolve, reject) => {
+		setTimeout(() => {
+			resolve('Done!');
+		}, 5000);
+	});
+
+	Promises vienen con el .then method, el cual interactúa con el resultado 'resolve'.
+	promise.then(data => console.log(data));
+	// << Done!
+
+	If the Promise is in PENDING state, neither then() nor catch() executes at this moment.
+
+	.then and .catch always return a new Promise.
+
+.then KEYWORD
+	It has two arguments:
+		1) Function that handles Promise RESOLVED object.
+		2) Function that handles Promise REJECTED object.
+		   Handles the rejections produced ANYWHERE in the UPPER promise chain.
+		   (But most of the time this is handled by catch, does the exact same thing).
+
+		Example:
+		functionThatReturnsPromise()
+		    .then((data) => {	// 1
+			   console.log(data);
+		    }, err => {		// 2
+			   console.log(err);
+		    });
+		    
+.catch KEYWORD
+	It has one argument:
+		1) Function that handles Promise REJECTED object.
+		
+	The positioning of the catch block MATTER:
+		- The catch method does not cancel the ENTIRE promise chain (.then().then().then()), only if
+		you have the catch block at the END of all .then blocks.
+						❌️
+			.then(✅️).then(❌️).then(❌️).then(❌️)catch(✖️)
+		
+		- The .then blocks THEREAFTER WILL CONTINUE TO EXECUTE:
+						❌️    
+			.then(✅️).then(❌️).catch(✖️).then(✅️).then(✅️)
+			That happens because catch sets the Promise back to 'pending'
+		    
+CHAINING PROMISES
+	functionThatReturnsPromise()
+		.then(data => {
+			console.log(data);
+    			return functionThatReturnsPromise2(); *
+		});
+	
+	The first functionThatReturnsPromise will be resolved, then by using another promise inside
+	of .then function*, we SET IT BACK TO PENDING the first promise.
+
+	If one of the promise fails, all the promise chain will be rejected:
+			          ❌️  
+		.then(✅️).then(❌️).then((❌️).then((❌️)
+
+	How .then pass resolved/rejected data throughout the promise chain:
+		functionThatReturnsPromise()
+			.then(data => {	//This data refers to the functionThatReturnsPromise resolved object.
+				console.log(data);
+			})
+			.then(data2 => {	//This data2 refers to the previous .then resolved object.
+				console.log(data2);
+			})
+			.catch(data3 => {	//This data3 refers to the last .then rejected object.
+				console.log(data3);
+			})
+
+FINALLY (clean up work).
+	 Only if there are no more then() blocks left, it enters a new, final mode: SETTLED.
+	 Once SETTLED, you can use a special block - finally() - to do final cleanup work.
+	 finally() is reached no matter if you resolved or rejected before.
+	 finally() will NOT return a new promise.
+	 You do not have to add a finally() block.
+	 
+	functionThatReturnsPromise()
+		.then(firstResult => {
+			return 'done with first promise';
+		})
+		.catch(err => {
+		   // would handle any errors thrown before
+		   // implicitly returns a new promise - just like then()
+		})
+		.finally(() => {
+		   // the promise is settled now - finally() will NOT return a new promise!
+		   // you can do final cleanup work here
+		});
+
