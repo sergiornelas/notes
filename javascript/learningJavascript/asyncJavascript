@@ -65,7 +65,7 @@ PROMISE
 						❌️    
 			.then(✅️).then(❌️).catch(✖️).then(✅️).then(✅️)
 			That happens because catch sets the Promise back to 'pending'
-		    
+
 CHAINING PROMISES
 	functionThatReturnsPromise()
 		.then(data => {
@@ -93,12 +93,12 @@ CHAINING PROMISES
 			})
 
 FINALLY (clean up work).
-	 Only if there are no more then() blocks left, it enters a new, final mode: SETTLED.
-	 Once SETTLED, you can use a special block - finally() - to do final cleanup work.
-	 finally() is reached no matter if you resolved or rejected before.
-	 finally() will NOT return a new promise.
-	 You do not have to add a finally() block.
-	 
+	 - Only if there are no more then() blocks left, it enters a new, final mode: SETTLED.
+	 - Once SETTLED, you can use a special block: finally() to do final cleanup work.
+	 - finally() is reached no matter if you resolved or rejected before.
+	 - finally() will NOT return a new promise.
+	 - You do not have to add a finally() block.
+
 	functionThatReturnsPromise()
 		.then(firstResult => {
 			return 'done with first promise';
@@ -111,4 +111,60 @@ FINALLY (clean up work).
 		   // the promise is settled now - finally() will NOT return a new promise!
 		   // you can do final cleanup work here
 		});
+
+ASYNC/AWAIT
+	Just for write shorter code. Still uses Promises behind.
+	More consice way to write/handle Promises. Does not change the JavaScript behaviour.
+	Automatically returns Promise (no return keyword needed).
+	Only available in functions.
+	Wraps all function content into one Promise.
+
+	AWAIT
+		Can only be used in functions which are marked with async.
+		Wait for the Promise to resolve or fail and the next line thereafter will only execute.
+		We add this keyword in front of any Promise.
+		Similar to .then block.
+	
+	Example:
+	async function trackUserHandler(){
+		const x = await functionPromise();
+		const y = await anotherFunctionPromise();
+		//automatically returns resolved/rejected Promise.
+	}
+
+	❌️ HANDLING ERRORS
+	We use try{} catch {} for managing errors with Async statements.
+	try {
+		const x = await functionPromise();	//if this fails, it is not going to execute next Promise y.
+		const y = await anotherFunctionPromise();
+	} catch (error) {
+		console.log(error);
+	}
+
+	🙅‍♂️️ ASYNC/AWAIT VS RAW PROMISES	
+	A downside (bad feature) of using async/await is that you can NOT run tasks SIMULTANEOUSLY
+	inside of the same function:
+	async function functionPromise() {
+		try {
+			x = await anotherFunctionPromise();
+			y = await anotherFunctionPromise2();
+		} catch (error) {
+			console.log(error);
+		}
+		console.log('hi!');	//This will not execute first (JS delegate to browser API nature), this
+						//will be execute THEREAFTER the try/catch upper statements.
+						//It's like we have added console.log inside an .then() block.
+	}
+		Summary:
+		Use async functions if you are going to execute this:
+			1) then(()=>{})
+			2) then(()=>{})
+			3) catch(){}
+		Do not use them if you are looking for execute something like this:		
+			2) then(()=>{})
+			3) catch(){}
+			1) console.log(...)	//this is supposed to execute first (Javascript nature).
+
+	Another downside is that you need to implement this into a function.
+
 
