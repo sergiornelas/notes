@@ -1,8 +1,3 @@
-HOISTING
-	Hoisting is JavaScript default behavior of moving declarations to the top
-	of the current scope (to the top of the current script or the current function).
-	
--------------
 ➡️ console.log('Starting!);
 ➡️ setTimeout(() => {
 		console.log('Timer completed!');
@@ -17,7 +12,7 @@ How does JavaScript handle asynchronous code execution?
 The browser communicates with JS via the Event Loop and the Message Queue to let
 it know once a longer-taking task finished.
 
--------------
+--------------------------------------------------------------------------------------------------------
 PROMISE
 	Promise takes a function as an argument. And this function takes two functions as parameters.
 								fn
@@ -25,6 +20,9 @@ PROMISE
 	const promise = new Promise((resolve, reject) => {
 		setTimeout(() => {
 			resolve('Done!');
+			//Inside resolve(...) you store the data that you got from the Promise (http request,
+			//user input data, etc.)
+			//In this example we just stored 'Done' string.
 		}, 5000);
 	});
 
@@ -124,7 +122,7 @@ ASYNC/AWAIT
 		Wait for the Promise to resolve or fail and the next line thereafter will only execute.
 		We add this keyword in front of any Promise.
 		Similar to .then block.
-	
+
 	Example:
 	async function trackUserHandler(){
 		const x = await functionPromise();
@@ -141,7 +139,7 @@ ASYNC/AWAIT
 		console.log(error);
 	}
 
-	🙅‍♂️️ ASYNC/AWAIT VS RAW PROMISES	
+	🙅‍♂️️ ASYNC/AWAIT VS RAW PROMISES
 	A downside (bad feature) of using async/await is that you can NOT run tasks SIMULTANEOUSLY
 	inside of the same function:
 	async function functionPromise() {
@@ -167,4 +165,114 @@ ASYNC/AWAIT
 
 	Another downside is that you need to implement this into a function.
 
+--------------------------------------------------------------------------------------------------------
+WORKING WITH HTTP REQUESTS 🦍️
+const x = new XMLHttpRequest();
+	This object will allow you to send HttpRequests, it is built into the browser.
+
+Steps towards configuring the request:
+	1) x.open('GET', 'https://jsonplaceholder.typicode.com/posts');
+		Takes two arguments:
+		1) HTTP method ('GET', 'POST', etc).
+		2) URL ('it is a string')
+		
+	2) x.onload = () => console.log(x.response);
+		Handles the incoming response.
+		You receive JSON data. You can manage this in two ways:
+			1.- Before x.onload... declare x.responseType = 'json';
+			2.- JSON.parse(..) the data.
+			
+	3) x.send();
+		You can check the request into the Network browser tools.
+		Inside parenthesis() you can PUSH NEW DATA to current data request. Useful when you
+		use POST method in httpRequests. The data has to be JSON.
+			x.send(JSON.stringify(newPushData));
+
+	👽️) x.responseType = 'json';
+		The response data will be parsed from JSON to JavaScript.
+
+	👁️‍🗨️️) x.status;
+		Returns the status of the HTTP request (200(✅️), 201, etc.).
+	
+	👴️) x.setRequestHeader('Content-Type', 'application/json');
+		Sets the header.
+
+	❌️) x.onerror = () => console.log(x.response);
+		This will trigger whenever you have an error when you send a HTTP request.
+		This error function will kick in if you have for example a network error.
+		For another errors like non-success status codes (x.status >= 200 && x.status < 300),
+		you handle them in x.onload.
+
+JSON (JavaScript Object Notation)
+	Typically, data is transferred as "JSON" data between your client-side code and
+	your backend ("the server").
+
+	- You can not have methods.
+	- Property names have to be wrapped between double quotes.
+	- Values you can use numbers, booleans, strings (with double quotes), other objects or arrays.
+
+	Actually, the whole JSON "object" is wrapped in quotes itself because JSON data in the end
+	is just a string that contains data in the format shown above.
+
+	✡️Methods
+	JSON.parse(data)
+		Converts JSON data to Javascript.
+
+	JSON.stringify(data)
+		Converts Javascript objects and arrays to JSON data.
+
+	data.json()
+		Usefull when you use fetch API().
+		Parse the body of the response and transform it from JSON to JavaScript. Also turns the
+		'streamed' response body into a 'snapshot' with which you can work.
+
+		This method yields a Promise. Useful when you expect an error body data from the API:
+			...
+			return response.json().then((errData) => {
+				console.log(errData);
+				throw new Error("Something went wrong - server-side!");
+			});	//error handling with access to the response body at the same time.
+
+--------------------------------------------------------------------------------------------------------
+FETCH API () MODERN WAY TO HANDLE HTTP REQUESTS
+😍️ Globally available function in modern JavaScript.
+👎️ It is not supported by Internet Explorer.
+👎️ Error handling can be clunky using this feature.
+
+GET METHOD
+	fetch(url)..then(response => response.json());
+	
+	It will send a GET request by default.
+	Fetch is Promise based (you don't have to "promesify" anything).
+	Returns a 'streamed' response, which means that response object does not hold the body in a way
+	that would be ready to be used. You have to use data.json() method.
+	
+POST/DELETE/... METHODS
+	fetch(url, {
+		method: 'POST',
+		body: data,//binary data, JSON, form data.. you have to check the type of body in the API doc.
+		headers: {	//This says to server: 'Hey, my request has JSON data
+			'Content-Type': 'application/json'
+		}
+	}).then(response => response.json());
+
+	In the second parameter object you configure the request method, body, header.
+
+❌️ HANDLING ERRORS
+	fetch(url)...
+		.then(response => response.json())
+		.catch(error => console.log('bad!', error));
+		//THIS WILL APPLY IF THERE IS TECHNICAL ISSUES LIKE NETWORK CONNECTIVITY. IF YOU WANT
+		//TO MANAGE STATUS ERRORS (STATUS 404, ETC.) MUST BE HANDLED INSIDE .THEN BLOCK:
+
+		fetch(url)...
+		.then((response) => {
+			if(response.status >= 200 && response.status < 300){
+			  return response.json()
+			} else {
+			  throw new Error("Something went wrong - server-side!");
+			}
+		})
+		//if you want error handling with access to the response body at the same time (some APIS
+		//have this feature), check data.json() above.
 
