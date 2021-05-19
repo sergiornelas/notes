@@ -173,7 +173,7 @@
 			Puedes escribir código que se necesite correr justo antes de que algún componente es REMOVIDO
 
 ⭐️ PURECOMPONENTS
-	The Pure Component is similar to a Component where PureComponent has it's own implementation of shouldComponentUpdate and 
+	The Pure Component is similar to a Component where PureComponent has it's own implementation of shouldComponentUpdate and
 	it only compares shallow props and state and you cannot implement your own shouldComponentUpdate in it.
 
 	- If you have a scenario where you check all the props of a given component for changes, if you are checking ALL PROPERTIES

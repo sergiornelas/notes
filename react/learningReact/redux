@@ -1,0 +1,272 @@
+REDUX
+Flux state management library.
+A state management system for cross-component or app-wide state
+	Types of state
+	Local state:
+		State which belongs to a single component
+		E.g user input in a input field.
+		Managed by useState(), useReducer()
+		
+	Cross-component state
+		State that affects multiple components.
+		E.g open/closed state of a modal overlay.
+		Managed by useState(), useReducer() and "props chains" (bad idea) ❌️
+		Managed by React Context or Redux (good idea) ✅️
+		
+	App-wide State
+		State that affects the entire app (most/all components).
+		E.g user authentication
+		Managed by useState(), useReducer() and "props chains" (bad idea) ❌️
+		Managed by React Context or Redux (good idea) ✅️
+	
+	REACT CONTEXT VS REDUX
+		POTENTIAL disadvantages in React Context:
+			- You can have a very complex setup and managing state with React Context can
+			become quite complex (in large aplications). A lot of deeply nested JSX Providers.
+			- Performance. React context is great for low-frequency updates (states that doesn't
+			update alot like auth or theme). But not great if your data changes a lot.
+
+CORE REDUX CONCEPTS
+		REDUCER FUNCTION => MUTATES
+			We use REDUCERS functions that are responsible for mutating the store data (state).
+			The concept it's very similar to reduce() function: [1,2,3] => [6].
+		
+		ONE CENTRAL DATA (STATE) STORE IN YOUR APPLICATION
+		
+		COMPONENTS => SUSCRIPTION
+			Components NEVER directly manipulate the store data.
+		
+		ACTION => DISPATCH
+			Components trigger certain actions. It is a simple JS object which describes the kind
+			of operation the reducers should perform. Then Redux forwards actions to the reducer
+
+		COMPONENTS DISPATCH ACTIONS which describe what should be done but don't do it directly, 
+		then these actions are forwarded to the REDUCER which does what action wants, and then
+		the REDUCER spits out a new state which effectively will replace the existing state in 
+		CENTRAL DATA STORE. When the state in the data store is updated, SUSCRIBED COMPONENTS are
+		notified so they can update their UI.
+		
+INSTALL REDUX
+	>> npm install redux react-redux
+
+	Providing global state.
+	at index.js
+		import { Provider } from "react-redux";
+		import store from './store/index'	//store data
+
+		ReactDOM.render(<Provider store={store}><App /></Provider>, document.getElementById("root"));
+
+REDUX HOOKS
+	at Counter.js:
+	🔯️ useSelector
+		import { useSelector } from 'react-redux';
+											
+		More convenient to use because allows us to select a PART of the state managed by the
+		store.
+		
+		Using useSelector, React Redux will automatically set up a subscription to the Redux
+		store for the component.
+		So your component will be updated and will receive the latest counter automatically
+		whenever that data changes.
+
+	🔯️ useStore
+		import { useStore } from 'react-redux';
+		Get access to the store.	
+
+	🔯️ useDispatch
+		import { useDispatch } from 'react-redux';
+		const dispatch = useDispatch();
+	
+		Hook that access the redux dispatch function.
+		Get access to the dispatch function, which we use to dispatch actions.
+
+	connect
+		Redux on Class-based components.
+		import { connect } from 'react-redux';
+		...
+		
+		const mapStateToProps = state => {
+		  return {
+		    counter: state.counter
+		  };
+		}
+
+		const mapDispatchToProps = dispatch => {
+		  return {
+		    increment: () => dispatch({ type: 'increment' }),
+		    decrement: () => dispatch({ type: 'increment' }),
+		  }
+		}
+
+		export default connect(mapStateToProps, mapDispatchToProps)(Component);
+		
+		It is a high order component. Manage a subscription for you.
+
+ATTACHING PAYLOADS TO ACTIONS
+DISPATCHING EXTRA VALUE (powerfull flexibility)
+	const increaseHandler = () => {
+		dispatch({ type: 'increase', amount: 5 })
+		//In dispatch you add extra property: amount
+	}
+
+	reducerFunction = (..., action) => {		
+		if (action.type === 'increase'){
+		    return {
+		    							//you can pick up the amount property from action obj.
+			 counter: state.counter + action.amount
+		    }
+		}
+	}
+	
+❌️ In Redux, YOU SHOULD NEVER MUTATE THE STATE.
+	Never change the original state which you are getting, this can lead to bugs.
+
+	...
+	if (action.type === 'increment'){
+		state.counter++;
+		return state;
+	}
+	Instead always override it by returning a new state object.
+
+REDUX TOOLKIT
+	It was mainly created to solve the THREE MAJOR ISSUES with Redux:
+		- Configuring a Redux store is too complicated
+		- Have to add a lot of packages to build a large scale application
+		- Redux requires too much boilerplate code which makes it cumbersome to write efficient and 
+		  clean code.
+
+	>> npm install @reduxjs/toolkit
+	you can uninstall redux (it is already included on @reduxjs/toolkit
+	
+	CREATE SLICE
+		import { createSlice } from '@reduxjs/toolkit'
+		
+		const initialState = { counter: 0, showCounter: true };
+
+		//Prepares a slice of global state
+		const counterSlice = createSlice({
+			name: 'counter',
+			initialState: initialState,
+			// methods that receive the latest state:
+			reducers: {
+				increment(state) {
+					//you are allowed to MUTATE the state, but it is not recommended.
+					state.counter++;
+				},
+				decrement(state) {...},
+				// also receives PAYLOAD:
+				increase(state, action) {...},
+				toggleCounter() {}
+			}		
+		})
+
+	ADDING SLICE TO STORE (.reducer)
+		//Creates a store, but it makes merging multiple reducers into one reducer easier.
+		//Merge all reducers into one big reducer.
+		import { configureStore } from '@reduxjs/toolkit'
+		
+		//Creates a map of reducers.
+		const store = configureStore({
+			reducer: { counter: counterSlice.reducer }
+			... //multiple reducers
+		});
+	
+	DISPATCHING ACTIONS USING SLICES (.actions)
+		export const counterActions = counterSlice.actions;
+			//will create action objects where these objects already have a type property
+			//with a unique identifier per action (created behind the scenes).
+			//So you do not have to create those action objects on your own.
+		
+		...
+		import { counterActions } from '../store/index'
+		const incrementHandler = () => {
+			dispatch(counterActions.increment());
+			//we get a full action object automatically created.
+		};
+		const increaseHandler = () => {
+							//payload data inside parameters
+			dispatch(counterActions.increase(10))
+		}
+		
+			Behind scenes it will create the action object:
+				{ type: SOME_UNIQUE_IDENTIFIER, payload: 10 }
+			
+			IMPORTANT, in order to get the payload inside parameter, you have to refer to payload
+			like this:
+				increase(state, action) {
+					state.counter = state.counter + action.payload;	//name of property 'payload'
+				},
+				
+CREATING REDUX STATE STEP BY STEP
+	>> npm install @reduxjs/toolkit
+
+	At index.js
+	1) CREATE STORE PROVIDER
+		import { Provider } from "react-redux";
+		import store from './store/index'	//CHECK STEP #5
+		...
+		<Provider store={store}>
+			<App />
+		</Provider>
+		.../
+
+	At another index.js
+	2) IMPORT CREATESLICE AND CONFIGURE STORE
+		import { createSlice, configureStore } from "@reduxjs/toolkit";
+
+	3) CREATE INITIAL STATE
+		const initialCounterState = { counter: 0, showCounter: true };
+
+	4) CREATE SLICE (IT HAS INITIAL STATE AND REDUCERS)
+		const counterSlice = createSlice({
+			name: "value",
+			initialState: initialCounterState,
+			reducers: {
+				increment(state) {
+				 state.counter++;
+				},
+				increase(state, action) {
+				 state.counter = state.counter + action.payload;
+				}
+			},
+		});
+
+	5) ADD THE REDUCER TO THE STORE
+		const store = configureStore({
+			reducer: {
+				counter: counterSlice.reducer,
+			},
+		});
+	
+	6) EXPORT STORE AND ACTIONS
+		export const counterActions = counterSlice.actions;
+		export default store;
+		
+	At Component.js
+	7) IMPORT USEDISPATCH USESELECTOR AND ACTIONS
+		import { useDispatch, useSelector } from 'react-redux';
+		import { counterActions } from '../store/index'
+	
+	8) CREATE USEDISPATCH AND USESELECTOR VARIABLES
+		const dispatch = useDispatch();
+		const counter = useSelector(state => state.counter.counter);
+	
+	9) CREATE FUNCTIONS THAT DISPATCH THE REDUCER ACTIONS
+		const incrementHandler = () => {
+			dispatch(counterActions.increment());
+		};
+
+		const increaseHandler = () => {
+			dispatch(counterActions.increase(10))
+				// returns this:
+				// { type: SOME_UNIQUE_IDENTIFIER, payload: 10}
+		}
+	
+	10) ENJOY!, YOU CAN MANAGE THE REDUCER ACTIONS ON JSX
+		return(
+			<div>
+				<button onClick={incrementHandler}>Increment</button>
+				<button onClick={increaseHandler}>Increase by 10</button>
+			...
+		)
+
